@@ -188,5 +188,5 @@ if __name__ == '__main__':
 
     regtab_std = (regtab - regtab.apply(np.mean))/regtab.apply(np.std)
     res = sm.OLS(regtab_std['alpha'],regtab_std[['oib2','ret_d2','ret_o2','oib:ret_d','oib:ret_o','ret_d:ret_o']]).fit()
-    print res.summary()
+    print(res.summary())
     

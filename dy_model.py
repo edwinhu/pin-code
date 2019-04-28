@@ -208,8 +208,4 @@ if __name__ == '__main__':
     
     res = run_regs(regtab)
 
-    print est_tab(res.results, est=['params','tvalues'], stats=['rsquared','rsquared_sp'])
-
-        
-        
-        
+    print(est_tab(res.results, est=['params','tvalues'], stats=['rsquared','rsquared_sp']))

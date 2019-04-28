@@ -67,8 +67,8 @@ def status(res):
     js = Javascript("$('div#%s').width('%i%%')" % (divid, prog/nsim*100))
     display(pb)
     display(js)
-    print '{0} of {1}, {2:.2f} hours elapsed, {3:.2f} hours left'\
-        .format(prog, nsim, res.elapsed/3600, (remain)*(res.elapsed/3600))
+    print('{0} of {1}, {2:.2f} hours elapsed, {3:.2f} hours left'\
+        .format(prog, nsim, res.elapsed/3600, (remain)*(res.elapsed/3600)))
 
 def stdize(x):
     if x.name!='Intercept':

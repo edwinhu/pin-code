@@ -1,3 +1,4 @@
+from __future__ import print_function
 from numpy import exp, log
 import numpy as np
 from scipy.special import gammaln

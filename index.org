@@ -56,3 +56,11 @@ proc print data=taqdf_&yyyy.(obs=25) width=min;
 var date symbol_15 cusip permno buy: sell: ret: oprc ccprc total_vol_m shrcd exchcd;run;
 
 #+END_SRC
+
+#+BEGIN_SRC python
+import pandas as pd
+import ipyparallel as ipp
+import os
+
+os.chdir('/home/sec/eddyhu/git/pin-code')
+#+END_SRC
