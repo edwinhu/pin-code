@@ -1,0 +1,58 @@
+#+BEGIN_SRC sas :dir /ssh:wrds:/home/sec/eddyhu/ 
+    
+%let yyyy=2014;
+    
+data mastm_&yyyy. / view=mastm_&yyyy.;
+    set taqmsec.mastm_2014:;
+    SYM_ROOT=symbol_root;
+    SYM_SUFFIX=symbol_suffix;
+run;
+
+proc sql;
+    create table mastm_crsp_&yyyy. as
+        select a.date, sym_root, sym_suffix, symbol_15, a.cusip,
+        b.permno, b.permco, shrcd, exchcd,
+        c.prc, c.ret, c.retx, c.shrout, c.vol
+        from mastm_&yyyy. a
+        left join
+        crspm.dsenames b
+        on substr(a.cusip,1,8) = substr(coalesce(b.ncusip, b.cusip),1,8)
+        and a.date between b.namedt and coalesce(b.nameendt, today())
+        left join
+        crsp.dsf c
+        on b.permno = c.permno
+        and a.date = c.date
+        order by a.date, sym_root, sym_suffix;
+run;
+
+proc sort data=taqmsec.wrds_iid_&yyyy.
+    out=wrds_iid_&yyyy.;
+    by date sym_root sym_suffix;
+run;
+
+proc datasets nolist;
+    contents data=crspm.dsf;
+run;quit;
+
+proc datasets nolist;
+    contents data=mastm_&yyyy.;
+run;quit;
+
+proc datasets nolist;
+    contents data=wrds_iid_&yyyy.;
+run;quit;
+
+data taqdf_&yyyy.;
+    merge wrds_iid_&yyyy.(keep=date sym_root sym_suffix
+        buynumtrades_lr sellnumtrades_lr oprc cprc ret_mkt_m
+        total_vol_m total_vol_b total_vol_a)
+        mastm_crsp_&yyyy.;
+    by date sym_root sym_suffix;
+    CCPrc = abs(coalesce(prc,cprc));
+    label CCPrc='Closing Price (CRSP or TAQ)';
+run;
+
+proc print data=taqdf_&yyyy.(obs=25) width=min;
+var date symbol_15 cusip permno buy: sell: ret: oprc ccprc total_vol_m shrcd exchcd;run;
+
+#+END_SRC
