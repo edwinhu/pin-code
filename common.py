@@ -3,6 +3,11 @@ from numpy import exp, log
 import numpy as np
 from scipy.special import gammaln
 
+try:
+    from itertools import imap
+except ImportError:
+    imap=map
+
 def lfact(x):
     '''Compute the log factorial using the scipy gammaln function.
 

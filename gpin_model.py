@@ -10,7 +10,6 @@ from numpy import log, exp, log1p
 from scipy.special import gamma, logsumexp
 from scipy.linalg import inv
 import scipy.optimize as op
-from itertools import imap
 
 # import common functions
 from common import *

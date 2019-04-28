@@ -8,7 +8,6 @@ from numpy import log, exp
 from scipy.special import gamma
 from scipy.misc import logsumexp
 import scipy.optimize as op
-from itertools import imap
 
 # import common functions
 from common import *

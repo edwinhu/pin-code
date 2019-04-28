@@ -10,7 +10,6 @@ import pandas as pd
 from numpy.linalg import det, inv
 from scipy.misc import logsumexp
 import scipy.optimize as op
-from itertools import imap
 
 # optimization
 from numba import jit
