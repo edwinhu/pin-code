@@ -110,7 +110,6 @@ def fit(n_buys, n_sells, starts=10, maxiter=100,
         a=None, r=None, p=None, eta=None, th=None, d=None, 
         se=None, winsorize_turn=False, **kwargs):
     import pandas as pd
-    import patsy as pt
     from statsmodels.regression.linear_model import OLS
     
     turn = n_buys + n_sells
@@ -130,10 +129,7 @@ def fit(n_buys, n_sells, starts=10, maxiter=100,
     p0 = p or (1-(n_buys+n_sells).mean()/(n_buys+n_sells).var())
     r0 = r or (1-p0)/p0*(n_buys+n_sells).mean()
     
-    df = pd.DataFrame({'n_buys':n_buys, 'n_sells':n_sells})
-    y,X = pt.dmatrices(r'n_sells ~ n_buys -1', df, 
-                       return_type='matrix')
-    results = OLS(y,X).fit()
+    results = OLS(n_sells,n_buys).fit()
     th0 = th or (1/(1+results.params[0]))
         
     res_final = [a0,p0,eta0,r0,d0,th0]
