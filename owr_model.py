@@ -51,8 +51,8 @@ def _qvmv(x,A):
     m,n = A.shape
     qsum = 0
     
-    for i in xrange(m):
-        for j in xrange(n):
+    for i in range(m):
+        for j in range(n):
             qsum += A[i,j] * x[i] * x[j]
             
     return qsum
@@ -71,7 +71,7 @@ def _compute_cov(a, su, sz, si, spd, spo):
 
 def _compute_alpha(x,a,dsd,isd):
     alphas = np.zeros(x.shape[1])
-    for i in xrange(x.shape[1]):
+    for i in range(x.shape[1]):
         alphas[i] = 1/(1 + (1-a)/a*exp(_lf(x[:,i],dsd,isd)))
     return alphas
 
@@ -110,7 +110,7 @@ def loglik(theta, oib, ret_d, ret_o):
     x = np.array([oib,ret_d,ret_o])
     t = x.shape[1]
     ll = np.zeros((2,t))
-    for i in xrange(t):
+    for i in range(t):
         ll[:,i] = log(a)+_lf(x[:,i],dse,ise), log(1-a)+_lf(x[:,i],dsn,isn)
     
     return sum(logsumexp(ll,axis=0))

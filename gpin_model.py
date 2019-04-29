@@ -131,7 +131,7 @@ def fit(n_buys, n_sells, starts=10, maxiter=100,
     r0 = r or (1-p0)/p0*(n_buys+n_sells).mean()
     
     df = pd.DataFrame({'n_buys':n_buys, 'n_sells':n_sells})
-    y,X = pt.dmatrices('n_sells ~ n_buys -1', df, 
+    y,X = pt.dmatrices(r'n_sells ~ n_buys -1', df, 
                        return_type='matrix')
     results = OLS(y,X).fit()
     th0 = th or (1/(1+results.params[0]))
