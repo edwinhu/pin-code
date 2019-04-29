@@ -14,6 +14,8 @@ import scipy.optimize as op
 # optimization
 from numba import jit
 
+from common import *
+
 class OWRModel(object):
     
     def __init__(self,a,su,sz,si,spd,spo,n=1,t=252):
