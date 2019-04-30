@@ -1,13 +1,92 @@
 #+BEGIN_SRC sas :dir /ssh:wrds:/home/sec/eddyhu/ 
-    
-%let yyyy=2014;
-    
-data mastm_&yyyy. / view=mastm_&yyyy.;
-    set taqmsec.mastm_2014:;
-    SYM_ROOT=symbol_root;
-    SYM_SUFFIX=symbol_suffix;
+
+%INCLUDE "~/git/sas/CC_LINK.sas";
+%CC_LINK(dsetin=comp.funda,
+    dsetout=compx,
+    datevar=datadate,
+    keep_vars=at lt);
+
+data crspm6;
+    set crspm.msf;
+    where month(date)=6;
+    ME6=abs(prc*shrout);
+    keep permno date ME6;
+data crspm;
+    set crspm.msf;
+    ME=abs(prc*shrout);
+    datadate=date;
+    keep permno datadate date ME;
 run;
 
+%MACRO MERGE_ASOF(a=,b=,
+    merged=,
+    idvar=permno,
+    datevar=date,
+    num_vars=,
+    char_vars=);
+    proc sort data=&a.;
+        by &idvar. &datevar.;
+    proc sort data=&b.;
+        by &idvar. &datevar.;        
+    data &merged.;
+        retain
+            %local i next_name;
+        %do i=1 %to %sysfunc(countw(&num_vars. &char_vars.));
+            %let next_name = %scan(&num_vars. &char_vars., &i);
+            &next_name._
+                %end;;
+            set &b.(in=b keep=&idvar. &datevar. &num_vars. &char_vars.)
+                &a.(in=a);
+            by &idvar. &datevar.;
+            if first.&idvar. then do;
+                %do i=1 %to %sysfunc(countw(&num_vars.));
+                    %let next_name = %scan(&num_vars., &i);
+                    &next_name._=.;
+                    %end;
+                %if %sysevalf(%superq(char_vars)=,boolean) %then %do;
+                    %end;%else %do;
+                        %do i=1 %to %sysfunc(countw(&char_vars.));
+                            %let next_name = %scan(&char_vars., &i);
+                            &next_name._='';
+                            %end;%end;
+                        end;    
+                    %do i=1 %to %sysfunc(countw(&num_vars. &char_vars.));
+                        %let next_name = %scan(&num_vars. &char_vars., &i);
+                        if not missing(&next_name.) then &next_name._=&next_name.;
+                        drop &next_name.;
+                        rename &next_name._=&next_name.;
+                        %end;
+                    format &datevar. yymmdd10.;
+                    if a then output;
+    run;
+    %MEND;
+%MERGE_ASOF(a=crspm,b=crspm6,
+    merged=crspm2,
+    datevar=date,
+    num_vars=ME6);
+%MERGE_ASOF(a=crspm2,b=compx,
+    merged=crspm3,
+    datevar=datadate,
+    num_vars=BE ME_COMP at lt gp);
+data crspm3;
+    set crspm3;
+    BM = BE/ME6;
+    bm_log = log(BM);
+    me_log = log(ME);
+run;
+
+proc print data=crspm3(obs=25) width=min;
+    where permno=11850 and year(date) between 1993 and 2018;;
+var permno date me: bm:;run;
+    
+%let yyyy=2016;
+
+%MACRO TAQ_OWR_GPIN(yyyy=2014);
+data mastm_&yyyy. / view=mastm_&yyyy.;
+    set taqmsec.mastm_&yyyy.:;
+    SYM_ROOT=coalescec(sym_root,symbol_root);
+    SYM_SUFFIX=coalescec(sym_suffix,symbol_suffix);
+run;
 proc sql;
     create table mastm_crsp_&yyyy. as
         select a.date, sym_root, sym_suffix, symbol_15, a.cusip,
@@ -27,25 +106,11 @@ proc sql;
         on c.permno = d.permno
         and c.date = d.paydt
         order by a.date, sym_root, sym_suffix;
-run;
-
+quit;
 proc sort data=taqmsec.wrds_iid_&yyyy.
     out=wrds_iid_&yyyy.;
     by date sym_root sym_suffix;
 run;
-
-proc datasets nolist;
-    contents data=crspm.dsf;
-run;quit;
-
-proc datasets nolist;
-    contents data=mastm_&yyyy.;
-run;quit;
-
-proc datasets nolist;
-    contents data=wrds_iid_&yyyy.;
-run;quit;
-
 data taqdf_&yyyy.;
     merge wrds_iid_&yyyy.(keep=date sym_root sym_suffix
         buynumtrades_lr sellnumtrades_lr oprc cprc ret_mkt_m
@@ -54,33 +119,105 @@ data taqdf_&yyyy.;
         mastm_crsp_&yyyy.;
     by date sym_root sym_suffix;
     CCPrc = abs(coalesce(prc,cprc));
-    label CCPrc='Closing Price (CRSP or TAQ)';
+    y_e = (buynumtrades_lr-sellnumtrades_lr)/(buynumtrades_lr+sellnumtrades_lr);
+    label CCPrc='Closing Price (CRSP or TAQ)' y_e='Order Imbalance (%)';
 run;
-
 proc sort data=taqdf_&yyyy. out=taqdf_&yyyy.x nodupkey;
     by permno date;
     where permno > .Z
         and shrcd in (10,11)
         and exchcd in (1,2,3,4);
 run;
+%MEND;
+
+%TAQ_OWR_GPIN(yyyy=2014);
+%TAQ_OWR_GPIN(yyyy=2015);
+%TAQ_OWR_GPIN(yyyy=2016);
+%TAQ_OWR_GPIN(yyyy=2017);
+%TAQ_OWR_GPIN(yyyy=2018);
+
+proc print data=mastm_2016(obs=25) width=min;
+var sym: date:;run;
+
+proc print data=taqdf_2016x(obs=25) width=min;run;
+
+data taqdf_1418;
+    set taqdf_2014x
+        taqdf_2015x
+        taqdf_2016x
+        taqdf_2017x
+        taqdf_2018x;
+run;
+
+proc datasets nolist;
+    contents data=crspm.dsiy;
+run;quit;
+
+proc sql;
+    create table taqdf_1418x1 as
+        select a.*, b.vwretd, b.vwretx
+        from taqdf_1418 a
+        left join crspm.dsiy b
+        on a.date = b.caldt
+        order by a.permno, a.date;
+quit;
+
+proc datasets nolist;
+    contents data=taqdf_1418x1;
+run;quit;
 
 proc printto log='/dev/null';run;
-proc expand data=taqdf_&yyyy.x
-    out=taqdf_&yyyy.x1
+proc expand data=taqdf_1418x1
+    out=taqdf_1418x2
     method=none;
     by permno;
+    convert y_e = y_eL1 / transformout = (lag 1);
     convert ccprc = CCPrcL1 / transformout = (lag 1);
     convert mid_after_open = omF1 / transformout = (lead 1);
 run;
-data taqdf_&yyyy.x1;
-    set taqdf_&yyyy.x1;
-    y_e = (buynumtrades_lr-sellnumtrades_lr)/(buynumtrades_lr+sellnumtrades_lr);
+proc printto;run;
+%put expand &syslast. done;
+
+data taqdf_1418x2;
+    set taqdf_1418x2;
+    yyyy=year(date);
     r_d = (vw_price_m-mid_after_open+coalesce(divamt,0))/mid_after_open;
     r_o = (omF1-vw_price_m)/mid_after_open;
     rename buynumtrades_lr=n_buys sellnumtrades_lr=n_sells;
 run;
-proc printto;run;
-%put expand &syslast. done;
+
+%MERGE_ASOF(a=taqdf_1418x2,b=crspm3,
+    merged=taqdf_1418x3,
+    datevar=date,
+    num_vars=bm_log me_log);
+
+proc reg data=taqdf_1418x2 outest=_beta
+    (drop=_: retx rename=(Intercept=alpha vwretx=beta)) noprint;
+    by permno yyyy;
+    model retx = vwretx;
+run;
+
+data taqdf_1418x4;
+    merge taqdf_1418x3 _beta;
+    by permno yyyy;
+run;
+
+proc print data=taqdf_2014x(obs=25) width=min;
+var permno date ret:;run;
+
+proc sort data=taqdf_1418x4 nodupkey;
+    by date permno;
+run;
+
+proc reg data=taqdf_1418x4 noprint;
+      model r_o r_d = beta me_log bm_log;
+      output out=_ret_resid(keep=permno date uret_o uret_d) r=ur_o ur_d;
+      model y_e = y_eL1 me_log;
+      output out=_oib_resid(keep=permno date uy_e) r=uy_e;
+      by date;
+run;
+
+proc print data=_oib_resid(obs=25) width=min;run;
 
 proc print data=taqdf_&yyyy.x1(obs=25) width=min;
 var date symbol_15 cusip permno n: r_: y_e total_vol_m;run;
@@ -91,6 +228,7 @@ var date symbol_15 cusip permno n: r_: y_e total_vol_m;run;
 import pandas as pd
 import ipyparallel as ipp
 import os
+from importlib import reload
 os.chdir('/home/sec/eddyhu/git/pin-code')
 import eo_model as eo
 import gpin_model as gpin
@@ -99,6 +237,7 @@ import owr_model as owr
 rc = ipp.Client()
 len(rc)
 
+# setup data
 df = pd.read_sas('/scratch/sec/hue/taqdf_2014x1.sas7bdat')
 df['date'] = pd.to_timedelta(df.DATE, unit='D') + pd.Timestamp('1960-1-1')
 df['permno'] = df.PERMNO.astype('int')
@@ -108,7 +247,7 @@ df['ticker n_buys n_sells r_d r_o y_e'.split()].to_hdf('/scratch/sec/hue/taqdf_2
 
 d = pd.read_hdf('/scratch/sec/hue/taqdf_2014.h5',where='permno==11850')
 
-eo.fit(d.n_buys,d.n_sells)
-gpin.fit(d.n_buys,d.n_sells)
-owr.fit(d.y_e,d.r_d,d.r_o)
+eo.fit(d.n_buys,d.n_sells,starts=1)
+gpin.fit(d.n_buys,d.n_sells,starts=1)
+owr.fit(d.y_e,d.r_d,d.r_o,starts=1)
 #+END_SRC
