@@ -4,7 +4,7 @@
 import numpy as np
 from numpy import log, exp
 
-from scipy.misc import logsumexp
+from scipy.special import logsumexp
 from scipy.linalg import inv
 import scipy.optimize as op
 

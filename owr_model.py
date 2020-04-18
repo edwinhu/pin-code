@@ -7,8 +7,7 @@ from numpy import log, exp
 
 import pandas as pd
 
-from numpy.linalg import det, inv
-from scipy.misc import logsumexp
+from scipy.special import logsumexp
 import scipy.optimize as op
 
 # optimization
@@ -30,8 +29,8 @@ class OWRModel(object):
         self.s_n, self.s_e = _compute_cov(a, su, sz, si, spd, spo)
 
         # pre-computing the dets and invs saves a lot of time
-        self.dsn, self.isn = det(self.s_n), inv(self.s_n)
-        self.dse, self.ise = det(self.s_e), inv(self.s_e)
+        self.dsn, self.isn = det3(self.s_n), inv3(self.s_n)
+        self.dse, self.ise = det3(self.s_e), inv3(self.s_e)
         self.dsd = self.dsn/self.dse
         self.isd = self.isn - self.ise
 
@@ -59,15 +58,37 @@ def _qvmv(x,A):
             
     return qsum
 
+def det2(a):
+    return (a[0][0] * a[1][1]) - (a[0][1] * a[1][0])
+
+def det3(a):
+    return (a[0][0] * (a[1][1] * a[2][2] - a[2][1] * a[1][2])
+           -a[1][0] * (a[0][1] * a[2][2] - a[2][1] * a[0][2])
+           +a[2][0] * (a[0][1] * a[1][2] - a[1][1] * a[0][2]))
+
+def inv3(a):
+    invdet = 1/det3(a)
+    m = np.zeros((3,3))
+    m[0, 0] = a[1, 1] * a[2, 2] - a[2, 1] * a[1, 2]
+    m[0, 1] = a[0, 2] * a[2, 1] - a[0, 1] * a[2, 2]
+    m[0, 2] = a[0, 1] * a[1, 2] - a[0, 2] * a[1, 1]
+    m[1, 0] = a[1, 2] * a[2, 0] - a[1, 0] * a[2, 2]
+    m[1, 1] = a[0, 0] * a[2, 2] - a[0, 2] * a[2, 0]
+    m[1, 2] = a[1, 0] * a[0, 2] - a[0, 0] * a[1, 2]
+    m[2, 0] = a[1, 0] * a[2, 1] - a[2, 0] * a[1, 1]
+    m[2, 1] = a[2, 0] * a[0, 1] - a[0, 0] * a[2, 1]
+    m[2, 2] = a[0, 0] * a[1, 1] - a[1, 0] * a[0, 1]
+    return m*invdet
+
 def _compute_cov(a, su, sz, si, spd, spo):
     # compute covariance matrices
-    s_n = [[su**2+sz**2, a**(0.5)*si*su/2, -a**(0.5)*si*su/2],
+    s_n = np.array([[su**2+sz**2, a**(0.5)*si*su/2, -a**(0.5)*si*su/2],
            [a**(0.5)*si*su/2, spd**2+a*si**2/4, -a*si**2/4],
-           [-a**(0.5)*si*su/2, -a*si**2/4, spo**2+(1+a)*si**2/4]]
+           [-a**(0.5)*si*su/2, -a*si**2/4, spo**2+(1+a)*si**2/4]])
 
-    s_e = [[(1+1/a)*su**2+sz**2, a**(-0.5)*si*su/2+a**(0.5)*si*su/2, a**(-0.5)*si*su/2 - a**(0.5)*si*su/2],
+    s_e = np.array([[(1+1/a)*su**2+sz**2, a**(-0.5)*si*su/2+a**(0.5)*si*su/2, a**(-0.5)*si*su/2 - a**(0.5)*si*su/2],
            [a**(-0.5)*si*su/2+a**(0.5)*si*su/2, spd**2+(1+a)*si**2/4, (1-a)*si**2/4],
-           [a**(-0.5)*si*su/2 - a**(0.5)*si*su/2, (1-a)*si**2/4, spo**2+(1+a)*si**2/4]]
+           [a**(-0.5)*si*su/2 - a**(0.5)*si*su/2, (1-a)*si**2/4, spo**2+(1+a)*si**2/4]])
     
     return s_n, s_e
 
@@ -91,8 +112,8 @@ def compute_alpha(oib, ret_d, ret_o, a, su, sz, si, spd, spo):
         spd = spd.tolist().pop()
         spo = spo.tolist().pop()
     s_n, s_e = _compute_cov(a, su, sz, si, spd, spo)
-    dsn, isn = det(s_n), inv(s_n)
-    dse, ise = det(s_e), inv(s_e)
+    dsn, isn = det3(s_n), inv3(s_n)
+    dse, ise = det3(s_e), inv3(s_e)
     dsd = dsn/dse
     isd = isn-ise
     
@@ -106,8 +127,8 @@ def _lf(x, det, inv):
 def loglik(theta, oib, ret_d, ret_o):
     a, su, sz, si, spd, spo = theta
     s_n, s_e = _compute_cov(a, su, sz, si, spd, spo)
-    dsn, isn = det(s_n), inv(s_n)
-    dse, ise = det(s_e), inv(s_e)
+    dsn, isn = det3(s_n), inv3(s_n)
+    dse, ise = det3(s_e), inv3(s_e)
     
     x = np.array([oib,ret_d,ret_o])
     t = x.shape[1]
@@ -125,7 +146,7 @@ def fit(oib, ret_d, ret_o, starts=10, maxiter=100,
     bounds = [(0.00001,0.99999)]+[(0.00001,np.inf)]*5
     ranges = [(0.00001,0.99999)]+[(0.00001,999)]*5
     
-    a0,su0,sz0,si0,spd0,spo0 = a or 0.5, su or 0.1, sz or 0.25, si or 0.05, spd or ret_d.std(), spo or ret_o.std()
+    a0,su0,sz0,si0,spd0,spo0 = a or 0.5, su or oib.std(), sz or 0.2, si or 0.02, spd or ret_d.std(), spo or ret_o.std()
     res_final = [a0,su0,sz0,si0,spd0,spo0]
     stderr = np.zeros_like(res_final)
     f = nll(res_final,oib,ret_d,ret_o)
@@ -145,14 +166,14 @@ def fit(oib, ret_d, ret_o, starts=10, maxiter=100,
         if (res['success']) & (res['fun'] <= f):
             f,rc = res['fun'],res['status']
             res_final = res['x'].tolist()
-            stderr = 1/np.sqrt(inv(res['hess_inv'].todense()).diagonal())
+            stderr = 1/np.sqrt(inv3(res['hess_inv'].todense()).diagonal())
     param_names = 'a,su,sz,si,spd,spo'.split(',')
     output = dict(zip(param_names+['f','rc'],
-                    res_final+[f,rc]))
+                    res_final+[-f,rc]))
     if se:
         output = {'params': dict(zip(param_names,res_final)),
                   'se': dict(zip(param_names,stderr)),
-                  'stats':{'f': f,'rc': rc}
+                  'stats':{'f': -f,'rc': rc}
                  } 
     return output
 
