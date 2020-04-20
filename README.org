@@ -10,6 +10,7 @@ Hu, and Young (2019) JFE]]. Unlike the paper, this data is based on the
 [[https://wrds-web.wharton.upenn.edu/wrds/query_forms/navigation.cfm?navId=524][WRDS Intraday Indicators]], but otherwise the variable construction and
 filtering are very similar.
 
+
 * Prepare Data
 
 This SAS code constructs the yearly stock-day files necessary to
@@ -426,6 +427,7 @@ and the likelihood functions.
 
 I will describe ~owr_model.py~ in detail as it involves quite a few
 optimization tricks.
+
 
 ** ~EOModel~
 
@@ -887,6 +889,7 @@ inverses.
 And that's pretty much it! The ~OWRModel~ has its own ~fit~ based on
 the specifics of the model, but there are no new tricks.
 
+
 * Estimation code
 
 In this section we go through the setup for estimating the models in
@@ -1019,4 +1022,11 @@ convenience functions that are not available in base
 wrapper for the grid engine:
 #+BEGIN_SRC sh
 qsub run_est.sh owr 2015
+#+END_SRC
+
+To collect the estimates we can run a quick jq script to make a csv file.
+
+#+BEGIN_SRC sh
+cd ~/git/pin-estimates/gpin
+jq -r '[.permno, .yyyy, .a, .p, .eta, .r, .d, .th] | @csv' *.json > gpin_1319.csv
 #+END_SRC
