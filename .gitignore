@@ -1,3 +1,7 @@
 *.sh.[eo]*
 __pycache__
 .ipynb_checkpoints
+data.py
+fix.py
+run_fix.sh
+pin-estimates.ipynb

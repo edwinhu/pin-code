@@ -1,6 +1,11 @@
 # Created 2020-04-18 Sat 19:48
 #+TITLE: [[https://www.sciencedirect.com/science/article/pii/S0304405X19301965][Duarte, Hu, and Young (2019) JFE]] Code
 #+AUTHOR: Edwin Hu
+#+PROPERTY: header-args :results output :exports both :eval no-export
+#+PROPERTY: header-args:sas :session *iESS[SAS]*
+#+PROPERTY: header-args:python :session *Python*
+#+PROPERTY: header-args:R :session *R*
+#+PROPERTY: header-args:stata :session *stata:iex*
 
 * PIN Code
 
@@ -22,7 +27,7 @@ order imbalance, volume, and intraday and overnight returns.
 
 The final file will be ~out.taqdfx_all6~.
 
-#+begin_src SAS
+#+begin_src sas
 
 /* this first piece merges CRSP/COMPUSTAT */
 
@@ -987,7 +992,7 @@ we finish all the stocks in a given year.
 #$ -cwd
 #$ -m abe
 #$ -pe onenode 4
-#$ -M eddyhu@gmail.com
+#$ -M [your@email.com]
 model=$1;shift
 year=$1;shift
 source ~/miniconda3/bin/activate
@@ -1003,7 +1008,7 @@ the job scheduler to start each worker in the current directory, which
 is where our scripts are stored. ~-m abe~ tells the scheduler to send
 a message in the event of a job abort, error, etc. ~-pe 4~ requests 4
 job nodes, which thanks to hyperthreading gives us 8 processes. ~-M
-eddyhu@gmail.com~ tells the scheduler to send status update emails to
+[your@email.com]~ tells the scheduler to send status update emails to
 me.
 
 In the actual body of the script we grab the arguments, load up our
