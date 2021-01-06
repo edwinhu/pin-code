@@ -200,9 +200,17 @@ gtag('config', 'UA-67919104-2');
 <div id="content" class="container">
 <div class="row"><div class="col-md-9"><h1 class="title">Duarte, Hu, and Young (2019) JFE Code</h1>
 
-<div id="outline-container-sec-" class="outline-2">
-<h2 id="sec-">PIN Code</h2>
-<div class="outline-text-2" id="text-">
+<div id="outline-container-pin-code" class="outline-2">
+<h2 id="pin-code"><a id="sec-" name="sec-"></a>PIN Code</h2>
+<div class="outline-text-2" id="text-pin-code">
+<p>
+<b>Note</b>: This code is provided as-is, and this write-up is for illustrative
+purposes. Since the publication of the paper we have received numerous requests
+for code in different languages, and I decided to revisit the code, update it
+for Python 3 and make it available for those that are interested in learning how
+the estimation works.
+</p>
+
 <p>
 This code runs on the <a href="https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/">WRDS Cloud</a> and prepares the data and does the
 estimation for the models of information asymmetry found in <a href="https://www.sciencedirect.com/science/article/pii/S0304405X19301965">Duarte,
@@ -214,12 +222,13 @@ filtering are very similar.
 </div>
 
 
-<div id="outline-container-sec-" class="outline-2">
-<h2 id="sec-">Prepare Data</h2>
-<div class="outline-text-2" id="text-">
+<div id="outline-container-data" class="outline-2">
+<h2 id="data"><a id="sec-" name="sec-"></a>Prepare Data</h2>
+<div class="outline-text-2" id="text-data">
 <p>
-This SAS code constructs the yearly stock-day files necessary to
-estimate the various structural models.
+This SAS code constructs the yearly stock-day files necessary to estimate the
+various structural models. To save time, I am using various SAS macros that can
+be found <a href="https://github.com/edwinhu/sas">here</a>.
 </p>
 
 <p>
@@ -632,9 +641,9 @@ owr.fit(d.uy_e,d.ur_d,d.ur_o,starts=<span style="color: #B5CEA8; font-weight: bo
 </div>
 
 
-<div id="outline-container-sec-" class="outline-2">
-<h2 id="sec-">Model code</h2>
-<div class="outline-text-2" id="text-">
+<div id="outline-container-models" class="outline-2">
+<h2 id="models"><a id="sec-" name="sec-"></a>Model code</h2>
+<div class="outline-text-2" id="text-models">
 <p>
 The model code includes <code>eo_model.py</code>, <code>dy_model.py</code>, <code>gpin_model.py</code>,
 and <code>owr_model.py</code>. These files also rely on some utility files like
@@ -656,9 +665,9 @@ optimization tricks.
 </div>
 
 
-<div id="outline-container-sec-" class="outline-3">
-<h3 id="sec-"><code>EOModel</code></h3>
-<div class="outline-text-3" id="text-">
+<div id="outline-container-eo-model" class="outline-3">
+<h3 id="eo-model"><a id="sec-" name="sec-"></a><code>EOModel</code></h3>
+<div class="outline-text-3" id="text-eo-model">
 <p>
 Let&rsquo;s start with the import statements. Because Python is a general
 purpose programming language, we will need to import the mathematical
@@ -992,9 +1001,9 @@ version of our paper but is useful for building intuition.
 </div>
 
 
-<div id="outline-container-sec-" class="outline-3">
-<h3 id="sec-"><code>OWRModel</code></h3>
-<div class="outline-text-3" id="text-">
+<div id="outline-container-owr-model" class="outline-3">
+<h3 id="owr-model"><a id="sec-" name="sec-"></a><code>OWRModel</code></h3>
+<div class="outline-text-3" id="text-owr-model">
 <p>
 Let&rsquo;s start again with the import statement.
 </p>
@@ -1214,9 +1223,9 @@ the specifics of the model, but there are no new tricks.
 </div>
 
 
-<div id="outline-container-sec-" class="outline-2">
-<h2 id="sec-">Estimation code</h2>
-<div class="outline-text-2" id="text-">
+<div id="outline-container-estimation" class="outline-2">
+<h2 id="estimation"><a id="sec-" name="sec-"></a>Estimation code</h2>
+<div class="outline-text-2" id="text-estimation">
 <p>
 In this section we go through the setup for estimating the models in
 parallel. The main estimation code, which will call a given model&rsquo;s
@@ -1396,15 +1405,15 @@ jq -r <span style="color: #DB8E73;">'[.permno, .yyyy, .a, .p, .eta, .r, .d, .th]
 </div><div class="col-md-3"><nav id="table-of-contents">
 <div id="text-table-of-contents" class="bs-docs-sidebar">
 <ul class="nav">
-<li><a href="#sec-">PIN Code</a></li>
-<li><a href="#sec-">Prepare Data</a></li>
-<li><a href="#sec-">Model code</a>
+<li><a href="#pin-code">PIN Code</a></li>
+<li><a href="#data">Prepare Data</a></li>
+<li><a href="#models">Model code</a>
 <ul class="nav">
-<li><a href="#sec-"><code>EOModel</code></a></li>
-<li><a href="#sec-"><code>OWRModel</code></a></li>
+<li><a href="#eo-model"><code>EOModel</code></a></li>
+<li><a href="#owr-model"><code>OWRModel</code></a></li>
 </ul>
 </li>
-<li><a href="#sec-">Estimation code</a></li>
+<li><a href="#estimation">Estimation code</a></li>
 </ul>
 </div>
 </nav>

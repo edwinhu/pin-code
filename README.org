@@ -17,6 +17,15 @@
 #+HTML_HEAD_EXTRA: </script>
 
 * PIN Code
+:PROPERTIES:
+:CUSTOM_ID: pin-code
+:END:
+
+*Note*: This code is provided as-is, and this write-up is for illustrative
+purposes. Since the publication of the paper we have received numerous requests
+for code in different languages, and I decided to revisit the code, update it
+for Python 3 and make it available for those that are interested in learning how
+the estimation works.
 
 This code runs on the [[https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/][WRDS Cloud]] and prepares the data and does the
 estimation for the models of information asymmetry found in [[https://www.sciencedirect.com/science/article/pii/S0304405X19301965][Duarte,
@@ -26,9 +35,13 @@ filtering are very similar.
 
 
 * Prepare Data
+:PROPERTIES:
+:CUSTOM_ID: data
+:END:
 
-This SAS code constructs the yearly stock-day files necessary to
-estimate the various structural models.
+This SAS code constructs the yearly stock-day files necessary to estimate the
+various structural models. To save time, I am using various SAS macros that can
+be found [[https://github.com/edwinhu/sas][here]].
 
 It requires access to CRSP (for market cap), COMPUSTAT (for book
 values), and TAQ---specifically the intraday indicators to get daily
@@ -428,6 +441,9 @@ owr.fit(d.uy_e,d.ur_d,d.ur_o,starts=1)
 
 
 * Model code
+:PROPERTIES:
+:CUSTOM_ID: models
+:END:
 
 The model code includes ~eo_model.py~, ~dy_model.py~, ~gpin_model.py~,
 and ~owr_model.py~. These files also rely on some utility files like
@@ -444,6 +460,9 @@ optimization tricks.
 
 
 ** ~EOModel~
+:PROPERTIES:
+:CUSTOM_ID: eo-model
+:END:
 
 Let's start with the import statements. Because Python is a general
 purpose programming language, we will need to import the mathematical
@@ -727,6 +746,9 @@ if __name__ == '__main__':
 
 
 ** ~OWRModel~
+:PROPERTIES:
+:CUSTOM_ID: owr-model
+:END:
 
 Let's start again with the import statement.
 
@@ -905,6 +927,9 @@ the specifics of the model, but there are no new tricks.
 
 
 * Estimation code
+:PROPERTIES:
+:CUSTOM_ID: estimation
+:END:
 
 In this section we go through the setup for estimating the models in
 parallel. The main estimation code, which will call a given model's
