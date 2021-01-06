@@ -1,11 +1,20 @@
 # Created 2020-04-18 Sat 19:48
-#+TITLE: [[https://www.sciencedirect.com/science/article/pii/S0304405X19301965][Duarte, Hu, and Young (2019) JFE]] Code
-#+AUTHOR: Edwin Hu
+#+TITLE: Duarte, Hu, and Young (2019) JFE Code
+#+AUTHOR: Jefferson Duarte, Edwin Hu, and Lance Young
 #+PROPERTY: header-args :results output :exports both :eval no-export
 #+PROPERTY: header-args:sas :session *iESS[SAS]*
 #+PROPERTY: header-args:python :session *Python*
 #+PROPERTY: header-args:R :session *R*
 #+PROPERTY: header-args:stata :session *stata:iex*
+#+OPTIONS: author:t creator:nil timestamp:nil ^:nil toc:t H:10 ':t num:nil
+#+HTML_HEAD_EXTRA: <!-- Global site tag (gtag.js) - Google Analytics -->
+#+HTML_HEAD_EXTRA: <script async src="https://www.googletagmanager.com/gtag/js?id=UA-67919104-2"></script>
+#+HTML_HEAD_EXTRA: <script>
+#+HTML_HEAD_EXTRA:   window.dataLayer = window.dataLayer || [];
+#+HTML_HEAD_EXTRA:   function gtag(){dataLayer.push(arguments);}
+#+HTML_HEAD_EXTRA:   gtag('js', new Date());
+#+HTML_HEAD_EXTRA:   gtag('config', 'UA-67919104-2');
+#+HTML_HEAD_EXTRA: </script>
 
 * PIN Code
 
