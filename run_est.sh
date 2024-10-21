@@ -3,7 +3,7 @@
 #$ -m abe
 #$ -pe onenode 8
 #$ -l m_mem_free=3G
-#$ -M eddyhu@gmail.com
+#$ -M YOUR@EMAIL.COM
 model=$1;shift
 year=$1;shift
 source ~/miniconda3/bin/activate
