@@ -1,193 +1,198 @@
-<!doctype html>
-<html lang="en">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Duarte, Hu, and Young (2019) JFE Code</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="Org-mode">
-<meta name="author" content="Jefferson Duarte, Edwin Hu, and Lance Young">
-
-<link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<meta name="author" content="Jefferson Duarte, Edwin Hu, and Lance Young" />
+<meta name="generator" content="Org Mode" />
 <style type="text/css">
-/* org mode styles on top of twbs */
-
-html {
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
     position: relative;
-    min-height: 100%;
-}
-
-body {
-    font-size: 18px;
-    margin-bottom: 105px;
-}
-
-footer {
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
     position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 101px;
-    background-color: #f5f5f5;
-}
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
 
-footer > div {
-    padding: 10px;
-}
-
-footer p {
-    margin: 0 0 5px;
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
     text-align: center;
-    font-size: 16px;
-}
-
-#table-of-contents {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-blockquote p {
-    font-size: 18px;
-}
-
-pre {
-    font-size: 16px;
-}
-
-.footpara {
-    display: inline-block;
-}
-
-figcaption {
-  font-size: 16px;
-  color: #666;
-  font-style: italic;
-  padding-bottom: 15px;
-}
-
-/* from twbs docs */
-
-.bs-docs-sidebar.affix {
-    position: static;
-}
-@media (min-width: 768px) {
-    .bs-docs-sidebar {
-        padding-left: 20px;
-    }
-}
-
-/* All levels of nav */
-.bs-docs-sidebar .nav > li > a {
-    display: block;
-    padding: 4px 20px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #999;
-}
-.bs-docs-sidebar .nav > li > a:hover,
-.bs-docs-sidebar .nav > li > a:focus {
-    padding-left: 19px;
-    color: #A1283B;
-    text-decoration: none;
-    background-color: transparent;
-    border-left: 1px solid #A1283B;
-}
-.bs-docs-sidebar .nav > .active > a,
-.bs-docs-sidebar .nav > .active:hover > a,
-.bs-docs-sidebar .nav > .active:focus > a {
-    padding-left: 18px;
-    font-weight: bold;
-    color: #A1283B;
-    background-color: transparent;
-    border-left: 2px solid #A1283B;
-}
-
-/* Nav: second level (shown on .active) */
-.bs-docs-sidebar .nav .nav {
-    display: none; /* Hide by default, but at >768px, show it */
-    padding-bottom: 10px;
-}
-.bs-docs-sidebar .nav .nav > li > a {
-    padding-top: 1px;
-    padding-bottom: 1px;
-    padding-left: 30px;
-    font-size: 12px;
-    font-weight: normal;
-}
-.bs-docs-sidebar .nav .nav > li > a:hover,
-.bs-docs-sidebar .nav .nav > li > a:focus {
-    padding-left: 29px;
-}
-.bs-docs-sidebar .nav .nav > .active > a,
-.bs-docs-sidebar .nav .nav > .active:hover > a,
-.bs-docs-sidebar .nav .nav > .active:focus > a {
-    padding-left: 28px;
-    font-weight: 500;
-}
-
-/* Nav: third level (shown on .active) */
-.bs-docs-sidebar .nav .nav .nav {
-    padding-bottom: 10px;
-}
-.bs-docs-sidebar .nav .nav .nav > li > a {
-    padding-top: 1px;
-    padding-bottom: 1px;
-    padding-left: 40px;
-    font-size: 12px;
-    font-weight: normal;
-}
-.bs-docs-sidebar .nav .nav .nav > li > a:hover,
-.bs-docs-sidebar .nav .nav .nav > li > a:focus {
-    padding-left: 39px;
-}
-.bs-docs-sidebar .nav .nav .nav > .active > a,
-.bs-docs-sidebar .nav .nav .nav > .active:hover > a,
-.bs-docs-sidebar .nav .nav .nav > .active:focus > a {
-    padding-left: 38px;
-    font-weight: 500;
-}
-
-/* Show and affix the side nav when space allows it */
-@media (min-width: 992px) {
-    .bs-docs-sidebar .nav > .active > ul {
-        display: block;
-    }
-    /* Widen the fixed sidebar */
-    .bs-docs-sidebar.affix,
-    .bs-docs-sidebar.affix-bottom {
-        width: 213px;
-    }
-    .bs-docs-sidebar.affix {
-        position: fixed; /* Undo the static from mobile first approach */
-        top: 20px;
-    }
-    .bs-docs-sidebar.affix-bottom {
-        position: absolute; /* Undo the static from mobile first approach */
-    }
-    .bs-docs-sidebar.affix .bs-docs-sidenav,.bs-docs-sidebar.affix-bottom .bs-docs-sidenav {
-        margin-top: 0;
-        margin-bottom: 0
-    }
-}
-@media (min-width: 1200px) {
-    /* Widen the fixed sidebar again */
-    .bs-docs-sidebar.affix-bottom,
-    .bs-docs-sidebar.affix {
-        width: 263px;
-    }
-}
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
 </style>
-<script type="text/javascript">
-$(function() {
-    'use strict';
-
-    $('.bs-docs-sidebar li').first().addClass('active');
-
-    $(document.body).scrollspy({target: '.bs-docs-sidebar'});
-
-    $('.bs-docs-sidebar').affix();
-});
-</script><!-- Global site tag (gtag.js) - Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-67919104-2"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -195,13 +200,29 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'UA-67919104-2');
 </script>
+<link rel="stylesheet" href="https://latex.vercel.app/style.css">
 </head>
 <body>
-<div id="content" class="container">
-<div class="row"><div class="col-md-9"><h1 class="title">Duarte, Hu, and Young (2019) JFE Code</h1>
-
+<div id="content" class="content">
+<h1 class="title">Duarte, Hu, and Young (2019) JFE Code</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#pin-code">PIN Code</a></li>
+<li><a href="#data">Prepare Data</a></li>
+<li><a href="#models">Model code</a>
+<ul>
+<li><a href="#eo-model"><code>EOModel</code></a></li>
+<li><a href="#owr-model"><code>OWRModel</code></a></li>
+</ul>
+</li>
+<li><a href="#estimation">Estimation code</a></li>
+</ul>
+</div>
+</div>
 <div id="outline-container-pin-code" class="outline-2">
-<h2 id="pin-code"><a id="sec-" name="sec-"></a>PIN Code</h2>
+<h2 id="pin-code">PIN Code</h2>
 <div class="outline-text-2" id="text-pin-code">
 <p>
 <b>Note</b>: This code is provided as-is, and this write-up is for illustrative
@@ -218,12 +239,34 @@ Hu, and Young (2019) JFE</a>. Unlike the paper, this data is based on the
 <a href="https://wrds-web.wharton.upenn.edu/wrds/query_forms/navigation.cfm?navId=524">WRDS Intraday Indicators</a>, but otherwise the variable construction and
 filtering are very similar.
 </p>
+
+<p>
+In order to make running your own versions of the code easier, I&rsquo;ve decided to
+prepackage a Python environment that has all of the dependencies for estimating
+all of the models, which you can find here:
+<a href="https://www.dropbox.com/scl/fi/m3u1i5aoejf7ltoo30tl6/environment.sh?rlkey=s44j5sbqn5m7ri5hlxhk67xlw&amp;st=fbxwbvxu&amp;dl=1">https://www.dropbox.com/scl/fi/m3u1i5aoejf7ltoo30tl6/environment.sh?rlkey=s44j5sbqn5m7ri5hlxhk67xlw&amp;st=fbxwbvxu&amp;dl=1</a>
+</p>
+
+<p>
+Put this script in your project directory and run the following commands:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ffc777;">chmod</span> a+x environment.sh
+<span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">this will install the environment</span>
+./environment.sh
+<span style="color: #ffc777;">chmod</span> a+x activate.sh
+<span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">load the environment</span>
+<span style="color: #c099ff;">source</span> ~/activate.sh
+
+<span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">to see if it is working you can try:</span>
+<span style="color: #c099ff;">which</span> ipcluster
+</pre>
 </div>
 </div>
-
-
+</div>
 <div id="outline-container-data" class="outline-2">
-<h2 id="data"><a id="sec-" name="sec-"></a>Prepare Data</h2>
+<h2 id="data">Prepare Data</h2>
 <div class="outline-text-2" id="text-data">
 <p>
 This SAS code constructs the yearly stock-day files necessary to estimate the
@@ -242,350 +285,350 @@ The final file will be <code>out.taqdfx_all6</code>.
 </p>
 
 <div class="org-src-container">
+<pre class="src src-sas">
+<span style="color: #7a88cf;">/*</span><span style="color: #7a88cf;"> this first piece merges CRSP/COMPUSTAT </span><span style="color: #7a88cf;">*/</span>
 
-<pre class="src src-sas"><span style="color: #579C4C;">/*</span><span style="color: #579C4C;"> this first piece merges CRSP/COMPUSTAT </span><span style="color: #579C4C;">*/</span>
-
-<span style="color: #339CDB;">%INCLUDE</span> <span style="color: #DB8E73;">"~/git/sas/CC_LINK.sas"</span>;
-<span style="color: #D9DAA2;">%CC_LINK(</span>dsetin=comp.funda,
+<span style="color: #ff995e;">%INCLUDE</span> <span style="color: #c3e88d;">"~/git/sas/CC_LINK.sas"</span>;
+<span style="color: #82aaff;">%CC_LINK(</span>dsetin=comp.funda,
     dsetout=compx,
     datevar=datadate,
     keep_vars=at lt);
 
-<span style="color: #339CDB;">data</span> crspm6;
-    <span style="color: #339CDB;">set</span> crsp.msf;
-    <span style="color: #339CDB;">where</span> <span style="color: #D9DAA2;">month(</span>date)=<span style="color: #B5CEA8; font-weight: bold;">6</span>;
-    ME6=<span style="color: #D9DAA2;">abs(</span>prc*shrout);
-    <span style="color: #339CDB;">keep</span> permno date ME6;
-<span style="color: #339CDB;">data</span> crspm;
-    <span style="color: #339CDB;">set</span> crsp.msf;
-    ME=<span style="color: #D9DAA2;">abs(</span>prc*shrout);
+<span style="color: #ff995e;">data</span> crspm6;
+    <span style="color: #c099ff;">set</span> crsp.msf;
+    <span style="color: #c099ff;">where</span> <span style="color: #82aaff;">month(</span>date)=<span style="color: #ff995e; font-weight: bold;">6</span>;
+    ME6=<span style="color: #82aaff;">abs(</span>prc*shrout);
+    <span style="color: #c099ff;">keep</span> permno date ME6;
+<span style="color: #ff995e;">data</span> crspm;
+    <span style="color: #c099ff;">set</span> crsp.msf;
+    ME=<span style="color: #82aaff;">abs(</span>prc*shrout);
     datadate=date;
-    <span style="color: #339CDB;">keep</span> permno datadate date ME;
-<span style="color: #339CDB;">run;</span>
+    <span style="color: #c099ff;">keep</span> permno datadate date ME;
+<span style="color: #ff995e;">run;</span>
 
-<span style="color: #579C4C;">/*</span><span style="color: #579C4C;"> MERGE_ASOF merges the most recent </span>
-<span style="color: #579C4C;">observation in dataset B into dataset A </span><span style="color: #579C4C;">*/</span>
-<span style="color: #339CDB;">%INCLUDE</span> <span style="color: #DB8E73;">"~/git/sas/MERGE_ASOF.sas"</span>;
-<span style="color: #D9DAA2;">%MERGE_ASOF(</span>a=crspm,b=crspm6,
+<span style="color: #7a88cf;">/*</span><span style="color: #7a88cf;"> MERGE_ASOF merges the most recent </span>
+<span style="color: #7a88cf;">observation in dataset B into dataset A </span><span style="color: #7a88cf;">*/</span>
+<span style="color: #ff995e;">%INCLUDE</span> <span style="color: #c3e88d;">"~/git/sas/MERGE_ASOF.sas"</span>;
+<span style="color: #82aaff;">%MERGE_ASOF(</span>a=crspm,b=crspm6,
     merged=crspm2,
     datevar=date,
     num_vars=ME6);
-<span style="color: #D9DAA2;">%MERGE_ASOF(</span>a=crspm2,b=compx,
+<span style="color: #82aaff;">%MERGE_ASOF(</span>a=crspm2,b=compx,
     merged=crspm3,
     datevar=datadate,
     num_vars=BE ME_COMP at lt gp);
-<span style="color: #339CDB;">data</span> crspm3;
-    <span style="color: #339CDB;">set</span> crspm3;
+<span style="color: #ff995e;">data</span> crspm3;
+    <span style="color: #c099ff;">set</span> crspm3;
     BM = BE/ME6;
-    bm_log = <span style="color: #D9DAA2;">log(</span>BM);
-    me_log = <span style="color: #D9DAA2;">log(</span>ME);
-<span style="color: #339CDB;">run;</span>
+    bm_log = <span style="color: #82aaff;">log(</span>BM);
+    me_log = <span style="color: #82aaff;">log(</span>ME);
+<span style="color: #ff995e;">run;</span>
 
-<span style="color: #339CDB;">proc print</span> <span style="color: #339CDB;">data=</span>crspm3(obs=<span style="color: #B5CEA8; font-weight: bold;">25</span>) width=min;
-    <span style="color: #339CDB;">where</span> permno=<span style="color: #B5CEA8; font-weight: bold;">11850</span> <span style="color: #339CDB;">and</span> <span style="color: #D9DAA2;">year(</span>date) <span style="color: #339CDB;">between</span> <span style="color: #B5CEA8; font-weight: bold;">1993</span> <span style="color: #339CDB;">and</span> <span style="color: #B5CEA8; font-weight: bold;">2018</span>;;
-<span style="color: #339CDB;">var</span> permno date me: bm:;<span style="color: #339CDB;">run;</span>
+<span style="color: #ff995e;">proc print</span> <span style="color: #c099ff;">data=</span>crspm3(obs=<span style="color: #ff995e; font-weight: bold;">25</span>) width=min;
+    <span style="color: #c099ff;">where</span> permno=<span style="color: #ff995e; font-weight: bold;">11850</span> <span style="color: #c099ff;">and</span> <span style="color: #82aaff;">year(</span>date) <span style="color: #c099ff;">between</span> <span style="color: #ff995e; font-weight: bold;">1993</span> <span style="color: #c099ff;">and</span> <span style="color: #ff995e; font-weight: bold;">2018</span>;;
+<span style="color: #c099ff;">var</span> permno date me: bm:;<span style="color: #ff995e;">run;</span>
 
-<span style="color: #579C4C;">/*</span><span style="color: #579C4C;"> This macro creates yearly stock-day files</span>
-<span style="color: #579C4C;">pulling from both master files and then WRDS IID </span>
-<span style="color: #579C4C;">for the second-level TAQ data </span><span style="color: #579C4C;">*/</span>
-<span style="color: #339CDB;">%MACRO</span> TAQ_OWR_GPIN(yyyy=<span style="color: #B5CEA8; font-weight: bold;">2004</span>);
-<span style="color: #339CDB;">data</span> work.mastm_&amp;yyyy. ;
-    <span style="color: #339CDB;">set</span> <span style="color: #339CDB;">%if</span> &amp;yyyy &gt; <span style="color: #B5CEA8; font-weight: bold;">1993</span>
-    <span style="color: #339CDB;">%then</span> <span style="color: #339CDB;">%do</span>;
-    taq.mast_<span style="color: #D9DAA2;">%SYSEVALF(</span>&amp;yyyy.-<span style="color: #B5CEA8; font-weight: bold;">1</span>):
-    <span style="color: #339CDB;">%end</span>;
+<span style="color: #7a88cf;">/*</span><span style="color: #7a88cf;"> This macro creates yearly stock-day files</span>
+<span style="color: #7a88cf;">pulling from both master files and then WRDS IID </span>
+<span style="color: #7a88cf;">for the second-level TAQ data </span><span style="color: #7a88cf;">*/</span>
+<span style="color: #ff995e;">%MACRO</span> TAQ_OWR_GPIN(yyyy=<span style="color: #ff995e; font-weight: bold;">2004</span>);
+<span style="color: #ff995e;">data</span> work.mastm_&amp;yyyy. ;
+    <span style="color: #c099ff;">set</span> <span style="color: #ff995e;">%if</span> &amp;yyyy &gt; <span style="color: #ff995e; font-weight: bold;">1993</span>
+    <span style="color: #ff995e;">%then</span> <span style="color: #ff995e;">%do</span>;
+    taq.mast_<span style="color: #82aaff;">%SYSEVALF(</span>&amp;yyyy.-<span style="color: #ff995e; font-weight: bold;">1</span>):
+    <span style="color: #ff995e;">%end</span>;
     taq.mast_&amp;yyyy.:
-    taq.mast_<span style="color: #D9DAA2;">%SYSEVALF(</span>&amp;yyyy.+<span style="color: #B5CEA8; font-weight: bold;">1</span>):;
-    SYM_ROOT=<span style="color: #D9DAA2;">scan(</span><span style="color: #339CDB;">SYMBOL</span>, <span style="color: #B5CEA8; font-weight: bold;">1</span>, <span style="color: #DB8E73;">' '</span>);
-    SYM_SUFFIX=<span style="color: #D9DAA2;">scan(</span><span style="color: #339CDB;">SYMBOL</span>, <span style="color: #B5CEA8; font-weight: bold;">2</span>, <span style="color: #DB8E73;">' '</span>);
+    taq.mast_<span style="color: #82aaff;">%SYSEVALF(</span>&amp;yyyy.+<span style="color: #ff995e; font-weight: bold;">1</span>):;
+    SYM_ROOT=<span style="color: #82aaff;">scan(</span><span style="color: #c099ff;">SYMBOL</span>, <span style="color: #ff995e; font-weight: bold;">1</span>, <span style="color: #c3e88d;">' '</span>);
+    SYM_SUFFIX=<span style="color: #82aaff;">scan(</span><span style="color: #c099ff;">SYMBOL</span>, <span style="color: #ff995e; font-weight: bold;">2</span>, <span style="color: #c3e88d;">' '</span>);
     DATE=coalesce(FDATE,DATEF);
-    <span style="color: #339CDB;">format</span> date yymmdd10.;
-<span style="color: #339CDB;">run;</span>
-<span style="color: #339CDB;">proc sort</span> <span style="color: #339CDB;">data=</span>work.mastm_&amp;yyyy. NODUPKEY;
-    <span style="color: #339CDB;">by</span> <span style="color: #339CDB;">SYMBOL</span> DATE;
-<span style="color: #339CDB;">run;</span>
-<span style="color: #339CDB;">proc sql</span>;
-    create <span style="color: #339CDB;">table</span> work.mastm_crsp_&amp;yyyy. as
-    <span style="color: #339CDB;">select</span> a.date, sym_root, sym_suffix, <span style="color: #339CDB;">symbol</span>,
-    <span style="color: #D9DAA2;">substr(</span>coalesce(b.ncusip, b.cusip),<span style="color: #B5CEA8; font-weight: bold;">1</span>,<span style="color: #B5CEA8; font-weight: bold;">8</span>) as cusip8,
+    <span style="color: #c099ff;">format</span> date yymmdd10.;
+<span style="color: #ff995e;">run;</span>
+<span style="color: #ff995e;">proc sort</span> <span style="color: #c099ff;">data=</span>work.mastm_&amp;yyyy. NODUPKEY;
+    <span style="color: #c099ff;">by</span> <span style="color: #c099ff;">SYMBOL</span> DATE;
+<span style="color: #ff995e;">run;</span>
+<span style="color: #ff995e;">proc sql</span>;
+    create <span style="color: #c099ff;">table</span> work.mastm_crsp_&amp;yyyy. as
+    <span style="color: #c099ff;">select</span> a.date, sym_root, sym_suffix, <span style="color: #c099ff;">symbol</span>,
+    <span style="color: #82aaff;">substr(</span>coalesce(b.ncusip, b.cusip),<span style="color: #ff995e; font-weight: bold;">1</span>,<span style="color: #ff995e; font-weight: bold;">8</span>) as cusip8,
     a.permno, a.permco, shrcd, exchcd,
     a.prc, a.ret, a.retx, a.shrout, a.vol, c.divamt, c.distcd,
-    coalesce(e.SP500,<span style="color: #B5CEA8; font-weight: bold;">0</span>) as SP500
+    coalesce(e.SP500,<span style="color: #ff995e; font-weight: bold;">0</span>) as SP500
     from crsp.dsf a
     left join
     crsp.dsenames b
     on a.permno = b.permno
-    <span style="color: #339CDB;">and</span> a.date <span style="color: #339CDB;">between</span> b.namedt <span style="color: #339CDB;">and</span> coalesce(b.nameendt, <span style="color: #D9DAA2;">today(</span>))
+    <span style="color: #c099ff;">and</span> a.date <span style="color: #c099ff;">between</span> b.namedt <span style="color: #c099ff;">and</span> coalesce(b.nameendt, <span style="color: #82aaff;">today(</span>))
     left join
     crsp.dsedist c
     on a.permno = c.permno
-    <span style="color: #339CDB;">and</span> a.date = c.paydt
+    <span style="color: #c099ff;">and</span> a.date = c.paydt
     left join
-    (<span style="color: #339CDB;">select</span> distinct cusip, sym_root, sym_suffix, <span style="color: #339CDB;">symbol</span>,
-    <span style="color: #D9DAA2;">min(</span>date) as mindt, <span style="color: #D9DAA2;">max(</span>date) as maxdt
+    (<span style="color: #c099ff;">select</span> distinct cusip, sym_root, sym_suffix, <span style="color: #c099ff;">symbol</span>,
+    <span style="color: #82aaff;">min(</span>date) as mindt, <span style="color: #82aaff;">max(</span>date) as maxdt
     from work.mastm_&amp;yyyy.
-    group <span style="color: #339CDB;">by</span> cusip, sym_root, sym_suffix, <span style="color: #339CDB;">symbol</span>) d
-    on <span style="color: #D9DAA2;">substr(</span>d.cusip,<span style="color: #B5CEA8; font-weight: bold;">1</span>,<span style="color: #B5CEA8; font-weight: bold;">8</span>) = <span style="color: #D9DAA2;">substr(</span>coalesce(b.ncusip, b.cusip),<span style="color: #B5CEA8; font-weight: bold;">1</span>,<span style="color: #B5CEA8; font-weight: bold;">8</span>)
-    <span style="color: #339CDB;">and</span> a.date ge d.mindt
-    <span style="color: #339CDB;">and</span> a.date le coalesce(d.maxdt,<span style="color: #D9DAA2;">today(</span>))
+    group <span style="color: #c099ff;">by</span> cusip, sym_root, sym_suffix, <span style="color: #c099ff;">symbol</span>) d
+    on <span style="color: #82aaff;">substr(</span>d.cusip,<span style="color: #ff995e; font-weight: bold;">1</span>,<span style="color: #ff995e; font-weight: bold;">8</span>) = <span style="color: #82aaff;">substr(</span>coalesce(b.ncusip, b.cusip),<span style="color: #ff995e; font-weight: bold;">1</span>,<span style="color: #ff995e; font-weight: bold;">8</span>)
+    <span style="color: #c099ff;">and</span> a.date ge d.mindt
+    <span style="color: #c099ff;">and</span> a.date le coalesce(d.maxdt,<span style="color: #82aaff;">today(</span>))
     left join
-    (<span style="color: #339CDB;">select</span> *, <span style="color: #B5CEA8; font-weight: bold;">1</span> as SP500 from crsp.dsp500list) e
+    (<span style="color: #c099ff;">select</span> *, <span style="color: #ff995e; font-weight: bold;">1</span> as SP500 from crsp.dsp500list) e
     on a.permno = e.permno
-    <span style="color: #339CDB;">and</span> a.date <span style="color: #339CDB;">between</span> e.start <span style="color: #339CDB;">and</span> e.ending
-    <span style="color: #339CDB;">where</span> <span style="color: #D9DAA2;">year(</span>a.date) = &amp;yyyy.
-    <span style="color: #339CDB;">and</span> <span style="color: #339CDB;">symbol</span> is <span style="color: #339CDB;">not</span> <span style="color: #339CDB;">null</span>
-    order <span style="color: #339CDB;">by</span> a.date, sym_root, sym_suffix;
-<span style="color: #339CDB;">quit;</span>
-<span style="color: #339CDB;">proc sort</span> <span style="color: #339CDB;">data=</span>work.mastm_crsp_&amp;yyyy. nodupkey;
-    <span style="color: #339CDB;">by</span> date sym_root sym_suffix;
-<span style="color: #339CDB;">run;</span>
-<span style="color: #339CDB;">proc sort</span> <span style="color: #339CDB;">data=</span>taq.wrds_iid_&amp;yyyy.
-    <span style="color: #339CDB;">out=</span>work.wrds_iid_&amp;yyyy.;
-    <span style="color: #339CDB;">by</span> date <span style="color: #339CDB;">symbol</span>;
-<span style="color: #339CDB;">run;</span>    
-<span style="color: #339CDB;">data</span> work.taqdf_&amp;yyyy.;
-    <span style="color: #339CDB;">length</span> date <span style="color: #B5CEA8; font-weight: bold;">8</span>;
-    <span style="color: #339CDB;">merge</span> work.wrds_iid_&amp;yyyy.(<span style="color: #339CDB;">keep</span>=date <span style="color: #339CDB;">symbol</span>
+    <span style="color: #c099ff;">and</span> a.date <span style="color: #c099ff;">between</span> e.start <span style="color: #c099ff;">and</span> e.ending
+    <span style="color: #c099ff;">where</span> <span style="color: #82aaff;">year(</span>a.date) = &amp;yyyy.
+    <span style="color: #c099ff;">and</span> <span style="color: #c099ff;">symbol</span> is <span style="color: #c099ff;">not</span> <span style="color: #c099ff;">null</span>
+    order <span style="color: #c099ff;">by</span> a.date, sym_root, sym_suffix;
+<span style="color: #ff995e;">quit;</span>
+<span style="color: #ff995e;">proc sort</span> <span style="color: #c099ff;">data=</span>work.mastm_crsp_&amp;yyyy. nodupkey;
+    <span style="color: #c099ff;">by</span> date sym_root sym_suffix;
+<span style="color: #ff995e;">run;</span>
+<span style="color: #ff995e;">proc sort</span> <span style="color: #c099ff;">data=</span>taq.wrds_iid_&amp;yyyy.
+    <span style="color: #c099ff;">out=</span>work.wrds_iid_&amp;yyyy.;
+    <span style="color: #c099ff;">by</span> date <span style="color: #c099ff;">symbol</span>;
+<span style="color: #ff995e;">run;</span>    
+<span style="color: #ff995e;">data</span> work.taqdf_&amp;yyyy.;
+    <span style="color: #c099ff;">length</span> date <span style="color: #ff995e; font-weight: bold;">8</span>;
+    <span style="color: #c099ff;">merge</span> work.wrds_iid_&amp;yyyy.(<span style="color: #c099ff;">keep</span>=date <span style="color: #c099ff;">symbol</span>
     buynumtrades_lri sellnumtrades_lri
     FPrice OPrice CPrc: ret_mkt_t
     vwap_m 
     SumVolume_m SumVolume_b SumVolume_a)
     work.mastm_crsp_&amp;yyyy.;
-    <span style="color: #339CDB;">by</span> date <span style="color: #339CDB;">symbol</span>;
-    <span style="color: #579C4C;">/*</span><span style="color: #579C4C;"> make names consistent with TAQMSEC </span><span style="color: #579C4C;">*/</span>
-    CCPrc = <span style="color: #D9DAA2;">abs(</span>coalesce(prc,cprc,cprc2));
-    mid_after_open = coalesce((oprice+fprice)/<span style="color: #B5CEA8; font-weight: bold;">2</span>,oprice,fprice);
+    <span style="color: #c099ff;">by</span> date <span style="color: #c099ff;">symbol</span>;
+    <span style="color: #7a88cf;">/*</span><span style="color: #7a88cf;"> make names consistent with TAQMSEC </span><span style="color: #7a88cf;">*/</span>
+    CCPrc = <span style="color: #82aaff;">abs(</span>coalesce(prc,cprc,cprc2));
+    mid_after_open = coalesce((oprice+fprice)/<span style="color: #ff995e; font-weight: bold;">2</span>,oprice,fprice);
     y_e = divide(buynumtrades_lri-sellnumtrades_lri,buynumtrades_lri+sellnumtrades_lri);
-    symbol_15=<span style="color: #339CDB;">symbol</span>;
-     <span style="color: #339CDB;">rename</span> buynumtrades_lri = n_buys
+    symbol_15=<span style="color: #c099ff;">symbol</span>;
+     <span style="color: #c099ff;">rename</span> buynumtrades_lri = n_buys
     sellnumtrades_lri = n_sells
     vwap_m = vw_price_m
     ret_mkt_t = ret_mkt_m
     SumVolume_m = total_vol_m
     SumVolume_b = total_vol_b
     SumVolume_a = total_vol_a;
-    <span style="color: #339CDB;">label</span> CCPrc=<span style="color: #DB8E73;">'Closing Price (CRSP or TAQ)'</span> y_e=<span style="color: #DB8E73;">'Order Imbalance (%)'</span>;
-<span style="color: #339CDB;">run;</span>
-<span style="color: #339CDB;">proc sort</span> <span style="color: #339CDB;">data=</span>work.taqdf_&amp;yyyy. <span style="color: #339CDB;">out=</span>taqdf_&amp;yyyy.x nodupkey;
-    <span style="color: #339CDB;">by</span> permno date;
-    <span style="color: #339CDB;">where</span> permno &gt; .Z
-    <span style="color: #339CDB;">and</span> shrcd in (<span style="color: #B5CEA8; font-weight: bold;">10</span>,<span style="color: #B5CEA8; font-weight: bold;">11</span>)
-    <span style="color: #339CDB;">and</span> exchcd in (<span style="color: #B5CEA8; font-weight: bold;">1</span>,<span style="color: #B5CEA8; font-weight: bold;">2</span>,<span style="color: #B5CEA8; font-weight: bold;">3</span>,<span style="color: #B5CEA8; font-weight: bold;">4</span>);
-<span style="color: #339CDB;">run;</span>
-<span style="color: #339CDB;">%MEND</span>;    
+    <span style="color: #c099ff;">label</span> CCPrc=<span style="color: #c3e88d;">'Closing Price (CRSP or TAQ)'</span> y_e=<span style="color: #c3e88d;">'Order Imbalance (%)'</span>;
+<span style="color: #ff995e;">run;</span>
+<span style="color: #ff995e;">proc sort</span> <span style="color: #c099ff;">data=</span>work.taqdf_&amp;yyyy. <span style="color: #c099ff;">out=</span>taqdf_&amp;yyyy.x nodupkey;
+    <span style="color: #c099ff;">by</span> permno date;
+    <span style="color: #c099ff;">where</span> permno &gt; .Z
+    <span style="color: #c099ff;">and</span> shrcd in (<span style="color: #ff995e; font-weight: bold;">10</span>,<span style="color: #ff995e; font-weight: bold;">11</span>)
+    <span style="color: #c099ff;">and</span> exchcd in (<span style="color: #ff995e; font-weight: bold;">1</span>,<span style="color: #ff995e; font-weight: bold;">2</span>,<span style="color: #ff995e; font-weight: bold;">3</span>,<span style="color: #ff995e; font-weight: bold;">4</span>);
+<span style="color: #ff995e;">run;</span>
+<span style="color: #ff995e;">%MEND</span>;    
 
-<span style="color: #579C4C;">/*</span><span style="color: #579C4C;"> This macro creates yearly stock-day files</span>
-<span style="color: #579C4C;">pulling from both master files and then WRDS IID </span>
-<span style="color: #579C4C;">for the millisecond-level TAQ data </span><span style="color: #579C4C;">*/</span>
-<span style="color: #339CDB;">%MACRO</span> TAQM_OWR_GPIN(yyyy=<span style="color: #B5CEA8; font-weight: bold;">2014</span>);
-<span style="color: #339CDB;">%let</span> sysyear= <span style="color: #D9DAA2;">%sysfunc(year(</span><span style="color: #DB8E73;">"&amp;sysdate"</span>d));    
-<span style="color: #339CDB;">data</span> work.mast1_&amp;yyyy.;
-    <span style="color: #339CDB;">length</span> date <span style="color: #B5CEA8; font-weight: bold;">8</span> sym_root $6 sym_suffix $10 symbol_15 $15;        
-    <span style="color: #339CDB;">set</span> taqmsec.mastm_<span style="color: #D9DAA2;">%SYSEVALF(</span>&amp;yyyy.-<span style="color: #B5CEA8; font-weight: bold;">1</span>):
+<span style="color: #7a88cf;">/*</span><span style="color: #7a88cf;"> This macro creates yearly stock-day files</span>
+<span style="color: #7a88cf;">pulling from both master files and then WRDS IID </span>
+<span style="color: #7a88cf;">for the millisecond-level TAQ data </span><span style="color: #7a88cf;">*/</span>
+<span style="color: #ff995e;">%MACRO</span> TAQM_OWR_GPIN(yyyy=<span style="color: #ff995e; font-weight: bold;">2014</span>);
+<span style="color: #ff995e;">%let</span> sysyear= <span style="color: #82aaff;">%sysfunc(year(</span><span style="color: #c3e88d;">"&amp;sysdate"</span>d));    
+<span style="color: #ff995e;">data</span> work.mast1_&amp;yyyy.;
+    <span style="color: #c099ff;">length</span> date <span style="color: #ff995e; font-weight: bold;">8</span> sym_root $6 sym_suffix $10 symbol_15 $15;        
+    <span style="color: #c099ff;">set</span> taqmsec.mastm_<span style="color: #82aaff;">%SYSEVALF(</span>&amp;yyyy.-<span style="color: #ff995e; font-weight: bold;">1</span>):
     taqmsec.mastm_&amp;yyyy.:
-    <span style="color: #339CDB;">%if</span> <span style="color: #D9DAA2;">%SYSEVALF(</span>&amp;yyyy.+<span style="color: #B5CEA8; font-weight: bold;">1</span>) &lt;= &amp;sysyear. <span style="color: #339CDB;">%then</span> <span style="color: #339CDB;">%do</span>;
-    taqmsec.mastm_<span style="color: #D9DAA2;">%SYSEVALF(</span>&amp;yyyy.+<span style="color: #B5CEA8; font-weight: bold;">1</span>):
-    <span style="color: #339CDB;">%end</span>;;
-    SYM_ROOT=<span style="color: #D9DAA2;">scan(</span>SYMBOL_15, <span style="color: #B5CEA8; font-weight: bold;">1</span>, <span style="color: #DB8E73;">' '</span>);
-    SYM_SUFFIX=<span style="color: #D9DAA2;">scan(</span>SYMBOL_15, <span style="color: #B5CEA8; font-weight: bold;">2</span>, <span style="color: #DB8E73;">' '</span>);
-    <span style="color: #339CDB;">keep</span> date cusip sym_root sym_suffix symbol_15;
-    <span style="color: #339CDB;">run;</span>
-<span style="color: #339CDB;">data</span> work.mast2_&amp;yyyy. ;
-    <span style="color: #339CDB;">length</span> date <span style="color: #B5CEA8; font-weight: bold;">8</span> sym_root $6 sym_suffix $10 symbol_15 $15;        
-    <span style="color: #339CDB;">set</span> taq.mast_<span style="color: #D9DAA2;">%SYSEVALF(</span>&amp;yyyy.-<span style="color: #B5CEA8; font-weight: bold;">1</span>):
+    <span style="color: #ff995e;">%if</span> <span style="color: #82aaff;">%SYSEVALF(</span>&amp;yyyy.+<span style="color: #ff995e; font-weight: bold;">1</span>) &lt;= &amp;sysyear. <span style="color: #ff995e;">%then</span> <span style="color: #ff995e;">%do</span>;
+    taqmsec.mastm_<span style="color: #82aaff;">%SYSEVALF(</span>&amp;yyyy.+<span style="color: #ff995e; font-weight: bold;">1</span>):
+    <span style="color: #ff995e;">%end</span>;;
+    SYM_ROOT=<span style="color: #82aaff;">scan(</span>SYMBOL_15, <span style="color: #ff995e; font-weight: bold;">1</span>, <span style="color: #c3e88d;">' '</span>);
+    SYM_SUFFIX=<span style="color: #82aaff;">scan(</span>SYMBOL_15, <span style="color: #ff995e; font-weight: bold;">2</span>, <span style="color: #c3e88d;">' '</span>);
+    <span style="color: #c099ff;">keep</span> date cusip sym_root sym_suffix symbol_15;
+    <span style="color: #ff995e;">run;</span>
+<span style="color: #ff995e;">data</span> work.mast2_&amp;yyyy. ;
+    <span style="color: #c099ff;">length</span> date <span style="color: #ff995e; font-weight: bold;">8</span> sym_root $6 sym_suffix $10 symbol_15 $15;        
+    <span style="color: #c099ff;">set</span> taq.mast_<span style="color: #82aaff;">%SYSEVALF(</span>&amp;yyyy.-<span style="color: #ff995e; font-weight: bold;">1</span>):
     taq.mast_&amp;yyyy.:
-    <span style="color: #339CDB;">%if</span> <span style="color: #D9DAA2;">%SYSEVALF(</span>&amp;yyyy.+<span style="color: #B5CEA8; font-weight: bold;">1</span>) &lt;= &amp;sysyear. <span style="color: #339CDB;">%then</span> <span style="color: #339CDB;">%do</span>;
-    taq.mast_<span style="color: #D9DAA2;">%SYSEVALF(</span>&amp;yyyy.+<span style="color: #B5CEA8; font-weight: bold;">1</span>):
-    <span style="color: #339CDB;">%end</span>;;        
-    SYM_ROOT=<span style="color: #D9DAA2;">scan(</span><span style="color: #339CDB;">SYMBOL</span>, <span style="color: #B5CEA8; font-weight: bold;">1</span>, <span style="color: #DB8E73;">' '</span>);
-    SYM_SUFFIX=<span style="color: #D9DAA2;">scan(</span><span style="color: #339CDB;">SYMBOL</span>, <span style="color: #B5CEA8; font-weight: bold;">2</span>, <span style="color: #DB8E73;">' '</span>);
+    <span style="color: #ff995e;">%if</span> <span style="color: #82aaff;">%SYSEVALF(</span>&amp;yyyy.+<span style="color: #ff995e; font-weight: bold;">1</span>) &lt;= &amp;sysyear. <span style="color: #ff995e;">%then</span> <span style="color: #ff995e;">%do</span>;
+    taq.mast_<span style="color: #82aaff;">%SYSEVALF(</span>&amp;yyyy.+<span style="color: #ff995e; font-weight: bold;">1</span>):
+    <span style="color: #ff995e;">%end</span>;;        
+    SYM_ROOT=<span style="color: #82aaff;">scan(</span><span style="color: #c099ff;">SYMBOL</span>, <span style="color: #ff995e; font-weight: bold;">1</span>, <span style="color: #c3e88d;">' '</span>);
+    SYM_SUFFIX=<span style="color: #82aaff;">scan(</span><span style="color: #c099ff;">SYMBOL</span>, <span style="color: #ff995e; font-weight: bold;">2</span>, <span style="color: #c3e88d;">' '</span>);
     DATE=coalesce(DATE,FDATE,DATEF);
-    SYMBOL_15=coalescec(SYMBOL_15,<span style="color: #339CDB;">SYMBOL</span>);
-    <span style="color: #339CDB;">keep</span> date cusip sym_root sym_suffix symbol_15;
-<span style="color: #339CDB;">run;</span>
-<span style="color: #339CDB;">data</span> work.mastm_&amp;yyyy.;
-    <span style="color: #339CDB;">length</span> date <span style="color: #B5CEA8; font-weight: bold;">8</span> cusip $12
+    SYMBOL_15=coalescec(SYMBOL_15,<span style="color: #c099ff;">SYMBOL</span>);
+    <span style="color: #c099ff;">keep</span> date cusip sym_root sym_suffix symbol_15;
+<span style="color: #ff995e;">run;</span>
+<span style="color: #ff995e;">data</span> work.mastm_&amp;yyyy.;
+    <span style="color: #c099ff;">length</span> date <span style="color: #ff995e; font-weight: bold;">8</span> cusip $12
     sym_root $6 sym_suffix $10 symbol_15 $15;    
-    <span style="color: #339CDB;">set</span> work.mast1_&amp;yyyy. work.mast2_&amp;yyyy.;
-<span style="color: #339CDB;">run;</span>
-<span style="color: #339CDB;">proc sort</span> <span style="color: #339CDB;">data=</span>work.mastm_&amp;yyyy. NODUPKEY;
-    <span style="color: #339CDB;">by</span> SYM_ROOT SYM_SUFFIX DATE;
-<span style="color: #339CDB;">run;</span>
-<span style="color: #339CDB;">proc sql</span>;
-    create <span style="color: #339CDB;">table</span> work.mastm_crsp_&amp;yyyy. as
-    <span style="color: #339CDB;">select</span> a.date, sym_root, sym_suffix, symbol_15,
-    <span style="color: #D9DAA2;">substr(</span>coalesce(b.ncusip, b.cusip),<span style="color: #B5CEA8; font-weight: bold;">1</span>,<span style="color: #B5CEA8; font-weight: bold;">8</span>) as cusip8,
+    <span style="color: #c099ff;">set</span> work.mast1_&amp;yyyy. work.mast2_&amp;yyyy.;
+<span style="color: #ff995e;">run;</span>
+<span style="color: #ff995e;">proc sort</span> <span style="color: #c099ff;">data=</span>work.mastm_&amp;yyyy. NODUPKEY;
+    <span style="color: #c099ff;">by</span> SYM_ROOT SYM_SUFFIX DATE;
+<span style="color: #ff995e;">run;</span>
+<span style="color: #ff995e;">proc sql</span>;
+    create <span style="color: #c099ff;">table</span> work.mastm_crsp_&amp;yyyy. as
+    <span style="color: #c099ff;">select</span> a.date, sym_root, sym_suffix, symbol_15,
+    <span style="color: #82aaff;">substr(</span>coalesce(b.ncusip, b.cusip),<span style="color: #ff995e; font-weight: bold;">1</span>,<span style="color: #ff995e; font-weight: bold;">8</span>) as cusip8,
     a.permno, a.permco, shrcd, exchcd,
     a.prc, a.ret, a.retx, a.shrout, a.vol, c.divamt, c.distcd,
-    coalesce(e.SP500,<span style="color: #B5CEA8; font-weight: bold;">0</span>) as SP500
+    coalesce(e.SP500,<span style="color: #ff995e; font-weight: bold;">0</span>) as SP500
     from crsp.dsf a
     left join
     crsp.dsenames b
     on a.permno = b.permno
-    <span style="color: #339CDB;">and</span> a.date <span style="color: #339CDB;">between</span> b.namedt <span style="color: #339CDB;">and</span> coalesce(b.nameendt, <span style="color: #D9DAA2;">today(</span>))
+    <span style="color: #c099ff;">and</span> a.date <span style="color: #c099ff;">between</span> b.namedt <span style="color: #c099ff;">and</span> coalesce(b.nameendt, <span style="color: #82aaff;">today(</span>))
     left join
     crsp.dsedist c
     on a.permno = c.permno
-    <span style="color: #339CDB;">and</span> a.date = c.paydt
+    <span style="color: #c099ff;">and</span> a.date = c.paydt
     left join
-    (<span style="color: #339CDB;">select</span> distinct cusip, sym_root, sym_suffix, symbol_15,
-    <span style="color: #D9DAA2;">min(</span>date) as mindt, <span style="color: #D9DAA2;">max(</span>date) as maxdt
+    (<span style="color: #c099ff;">select</span> distinct cusip, sym_root, sym_suffix, symbol_15,
+    <span style="color: #82aaff;">min(</span>date) as mindt, <span style="color: #82aaff;">max(</span>date) as maxdt
     from work.mastm_&amp;yyyy.
-    group <span style="color: #339CDB;">by</span> cusip, sym_root, sym_suffix, symbol_15) d
-    on <span style="color: #D9DAA2;">substr(</span>d.cusip,<span style="color: #B5CEA8; font-weight: bold;">1</span>,<span style="color: #B5CEA8; font-weight: bold;">8</span>) = <span style="color: #D9DAA2;">substr(</span>coalesce(b.ncusip, b.cusip),<span style="color: #B5CEA8; font-weight: bold;">1</span>,<span style="color: #B5CEA8; font-weight: bold;">8</span>)
-    <span style="color: #339CDB;">and</span> a.date ge d.mindt
-    <span style="color: #339CDB;">and</span> a.date le coalesce(d.maxdt,<span style="color: #D9DAA2;">today(</span>))
+    group <span style="color: #c099ff;">by</span> cusip, sym_root, sym_suffix, symbol_15) d
+    on <span style="color: #82aaff;">substr(</span>d.cusip,<span style="color: #ff995e; font-weight: bold;">1</span>,<span style="color: #ff995e; font-weight: bold;">8</span>) = <span style="color: #82aaff;">substr(</span>coalesce(b.ncusip, b.cusip),<span style="color: #ff995e; font-weight: bold;">1</span>,<span style="color: #ff995e; font-weight: bold;">8</span>)
+    <span style="color: #c099ff;">and</span> a.date ge d.mindt
+    <span style="color: #c099ff;">and</span> a.date le coalesce(d.maxdt,<span style="color: #82aaff;">today(</span>))
     left join
-    (<span style="color: #339CDB;">select</span> *, <span style="color: #B5CEA8; font-weight: bold;">1</span> as SP500 from crsp.dsp500list) e
+    (<span style="color: #c099ff;">select</span> *, <span style="color: #ff995e; font-weight: bold;">1</span> as SP500 from crsp.dsp500list) e
     on a.permno = e.permno
-    <span style="color: #339CDB;">and</span> a.date <span style="color: #339CDB;">between</span> e.start <span style="color: #339CDB;">and</span> e.ending
-    <span style="color: #339CDB;">where</span> <span style="color: #D9DAA2;">year(</span>a.date) = &amp;yyyy.
-    <span style="color: #339CDB;">and</span> symbol_15 is <span style="color: #339CDB;">not</span> <span style="color: #339CDB;">null</span>
-    order <span style="color: #339CDB;">by</span> a.date, sym_root, sym_suffix;
-<span style="color: #339CDB;">quit;</span>
-<span style="color: #339CDB;">proc sort</span> <span style="color: #339CDB;">data=</span>work.mastm_crsp_&amp;yyyy. nodupkey;
-    <span style="color: #339CDB;">by</span> date sym_root sym_suffix;
-<span style="color: #339CDB;">run;</span>
-<span style="color: #339CDB;">proc sort</span> <span style="color: #339CDB;">data=</span>taqmsec.wrds_iid_&amp;yyyy.
-    <span style="color: #339CDB;">out=</span>work.wrds_iid_&amp;yyyy.;
-    <span style="color: #339CDB;">by</span> date sym_root sym_suffix;
-<span style="color: #339CDB;">run;</span>        
-<span style="color: #339CDB;">data</span> work.taqdf_&amp;yyyy.;
-    <span style="color: #339CDB;">length</span> date <span style="color: #B5CEA8; font-weight: bold;">8</span> sym_root $6 sym_suffix $10;
-    <span style="color: #339CDB;">merge</span> work.wrds_iid_&amp;yyyy.(<span style="color: #339CDB;">keep</span>=date sym_root sym_suffix
+    <span style="color: #c099ff;">and</span> a.date <span style="color: #c099ff;">between</span> e.start <span style="color: #c099ff;">and</span> e.ending
+    <span style="color: #c099ff;">where</span> <span style="color: #82aaff;">year(</span>a.date) = &amp;yyyy.
+    <span style="color: #c099ff;">and</span> symbol_15 is <span style="color: #c099ff;">not</span> <span style="color: #c099ff;">null</span>
+    order <span style="color: #c099ff;">by</span> a.date, sym_root, sym_suffix;
+<span style="color: #ff995e;">quit;</span>
+<span style="color: #ff995e;">proc sort</span> <span style="color: #c099ff;">data=</span>work.mastm_crsp_&amp;yyyy. nodupkey;
+    <span style="color: #c099ff;">by</span> date sym_root sym_suffix;
+<span style="color: #ff995e;">run;</span>
+<span style="color: #ff995e;">proc sort</span> <span style="color: #c099ff;">data=</span>taqmsec.wrds_iid_&amp;yyyy.
+    <span style="color: #c099ff;">out=</span>work.wrds_iid_&amp;yyyy.;
+    <span style="color: #c099ff;">by</span> date sym_root sym_suffix;
+<span style="color: #ff995e;">run;</span>        
+<span style="color: #ff995e;">data</span> work.taqdf_&amp;yyyy.;
+    <span style="color: #c099ff;">length</span> date <span style="color: #ff995e; font-weight: bold;">8</span> sym_root $6 sym_suffix $10;
+    <span style="color: #c099ff;">merge</span> work.wrds_iid_&amp;yyyy.(<span style="color: #c099ff;">keep</span>=date sym_root sym_suffix
     buynumtrades_lr sellnumtrades_lr oprc cprc ret_mkt_m
     vw_price_m mid_after_open
     total_vol_m total_vol_b total_vol_a)
     work.mastm_crsp_&amp;yyyy.;
-    <span style="color: #339CDB;">by</span> date sym_root sym_suffix;
-    CCPrc = <span style="color: #D9DAA2;">abs(</span>coalesce(prc,cprc));
+    <span style="color: #c099ff;">by</span> date sym_root sym_suffix;
+    CCPrc = <span style="color: #82aaff;">abs(</span>coalesce(prc,cprc));
     y_e = divide(buynumtrades_lr-sellnumtrades_lr,buynumtrades_lr+sellnumtrades_lr);
-    <span style="color: #339CDB;">rename</span> buynumtrades_lr=n_buys sellnumtrades_lr=n_sells;
-    <span style="color: #339CDB;">label</span> CCPrc=<span style="color: #DB8E73;">'Closing Price (CRSP or TAQ)'</span> y_e=<span style="color: #DB8E73;">'Order Imbalance (%)'</span>;
-<span style="color: #339CDB;">run;</span>
-<span style="color: #339CDB;">proc sort</span> <span style="color: #339CDB;">data=</span>work.taqdf_&amp;yyyy. <span style="color: #339CDB;">out=</span>taqdf_&amp;yyyy.x nodupkey;
-    <span style="color: #339CDB;">by</span> permno date;
-    <span style="color: #339CDB;">where</span> permno &gt; .Z
-    <span style="color: #339CDB;">and</span> shrcd in (<span style="color: #B5CEA8; font-weight: bold;">10</span>,<span style="color: #B5CEA8; font-weight: bold;">11</span>)
-    <span style="color: #339CDB;">and</span> exchcd in (<span style="color: #B5CEA8; font-weight: bold;">1</span>,<span style="color: #B5CEA8; font-weight: bold;">2</span>,<span style="color: #B5CEA8; font-weight: bold;">3</span>,<span style="color: #B5CEA8; font-weight: bold;">4</span>);
-<span style="color: #339CDB;">run;</span>
-<span style="color: #339CDB;">%MEND</span>;
+    <span style="color: #c099ff;">rename</span> buynumtrades_lr=n_buys sellnumtrades_lr=n_sells;
+    <span style="color: #c099ff;">label</span> CCPrc=<span style="color: #c3e88d;">'Closing Price (CRSP or TAQ)'</span> y_e=<span style="color: #c3e88d;">'Order Imbalance (%)'</span>;
+<span style="color: #ff995e;">run;</span>
+<span style="color: #ff995e;">proc sort</span> <span style="color: #c099ff;">data=</span>work.taqdf_&amp;yyyy. <span style="color: #c099ff;">out=</span>taqdf_&amp;yyyy.x nodupkey;
+    <span style="color: #c099ff;">by</span> permno date;
+    <span style="color: #c099ff;">where</span> permno &gt; .Z
+    <span style="color: #c099ff;">and</span> shrcd in (<span style="color: #ff995e; font-weight: bold;">10</span>,<span style="color: #ff995e; font-weight: bold;">11</span>)
+    <span style="color: #c099ff;">and</span> exchcd in (<span style="color: #ff995e; font-weight: bold;">1</span>,<span style="color: #ff995e; font-weight: bold;">2</span>,<span style="color: #ff995e; font-weight: bold;">3</span>,<span style="color: #ff995e; font-weight: bold;">4</span>);
+<span style="color: #ff995e;">run;</span>
+<span style="color: #ff995e;">%MEND</span>;
 
-<span style="color: #D9DAA2;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">1993</span>);
-<span style="color: #D9DAA2;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">1994</span>);
-<span style="color: #D9DAA2;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">1995</span>);
-<span style="color: #D9DAA2;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">1996</span>);
-<span style="color: #D9DAA2;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">1997</span>);
-<span style="color: #D9DAA2;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">1998</span>);
-<span style="color: #D9DAA2;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">1999</span>);
-<span style="color: #D9DAA2;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">2000</span>);
-<span style="color: #D9DAA2;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">2001</span>);
-<span style="color: #D9DAA2;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">2002</span>);
-<span style="color: #D9DAA2;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">2003</span>);
-<span style="color: #D9DAA2;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">2004</span>);
-<span style="color: #D9DAA2;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">2005</span>);
-<span style="color: #D9DAA2;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">2006</span>);
-<span style="color: #579C4C;">/*</span><span style="color: #579C4C;"> NMS Implementation Feb 2007 </span><span style="color: #579C4C;">*/</span>
-<span style="color: #D9DAA2;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">2007</span>);
-<span style="color: #D9DAA2;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">2008</span>);
-<span style="color: #D9DAA2;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">2009</span>);
-<span style="color: #D9DAA2;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">2010</span>);
-<span style="color: #D9DAA2;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">2011</span>);
-<span style="color: #D9DAA2;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">2012</span>);
-<span style="color: #D9DAA2;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">2013</span>);
-<span style="color: #D9DAA2;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">2014</span>);
-<span style="color: #D9DAA2;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">2015</span>);
-<span style="color: #D9DAA2;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">2016</span>);
-<span style="color: #D9DAA2;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">2017</span>);
-<span style="color: #D9DAA2;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">2018</span>);
-<span style="color: #D9DAA2;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #B5CEA8; font-weight: bold;">2019</span>);
+<span style="color: #82aaff;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">1993</span>);
+<span style="color: #82aaff;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">1994</span>);
+<span style="color: #82aaff;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">1995</span>);
+<span style="color: #82aaff;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">1996</span>);
+<span style="color: #82aaff;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">1997</span>);
+<span style="color: #82aaff;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">1998</span>);
+<span style="color: #82aaff;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">1999</span>);
+<span style="color: #82aaff;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">2000</span>);
+<span style="color: #82aaff;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">2001</span>);
+<span style="color: #82aaff;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">2002</span>);
+<span style="color: #82aaff;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">2003</span>);
+<span style="color: #82aaff;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">2004</span>);
+<span style="color: #82aaff;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">2005</span>);
+<span style="color: #82aaff;">%TAQ_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">2006</span>);
+<span style="color: #7a88cf;">/*</span><span style="color: #7a88cf;"> NMS Implementation Feb 2007 </span><span style="color: #7a88cf;">*/</span>
+<span style="color: #82aaff;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">2007</span>);
+<span style="color: #82aaff;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">2008</span>);
+<span style="color: #82aaff;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">2009</span>);
+<span style="color: #82aaff;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">2010</span>);
+<span style="color: #82aaff;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">2011</span>);
+<span style="color: #82aaff;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">2012</span>);
+<span style="color: #82aaff;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">2013</span>);
+<span style="color: #82aaff;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">2014</span>);
+<span style="color: #82aaff;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">2015</span>);
+<span style="color: #82aaff;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">2016</span>);
+<span style="color: #82aaff;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">2017</span>);
+<span style="color: #82aaff;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">2018</span>);
+<span style="color: #82aaff;">%TAQM_OWR_GPIN(</span>yyyy=<span style="color: #ff995e; font-weight: bold;">2019</span>);
 
-<span style="color: #339CDB;">data</span> taqdfx_all;
-    <span style="color: #339CDB;">set</span> taqdf_:;
-<span style="color: #339CDB;">run;</span>
+<span style="color: #ff995e;">data</span> taqdfx_all;
+    <span style="color: #c099ff;">set</span> taqdf_:;
+<span style="color: #ff995e;">run;</span>
 
-<span style="color: #339CDB;">proc sql</span>;
-    create <span style="color: #339CDB;">table</span> taqdfx_all1 as
-    <span style="color: #339CDB;">select</span> a.*, b.vwretd, b.vwretx
+<span style="color: #ff995e;">proc sql</span>;
+    create <span style="color: #c099ff;">table</span> taqdfx_all1 as
+    <span style="color: #c099ff;">select</span> a.*, b.vwretd, b.vwretx
     from taqdfx_all a
     left join crsp.dsiy b
     on a.date = b.caldt
-    order <span style="color: #339CDB;">by</span> a.permno, a.date;
-<span style="color: #339CDB;">quit;</span>
+    order <span style="color: #c099ff;">by</span> a.permno, a.date;
+<span style="color: #ff995e;">quit;</span>
 
-<span style="color: #579C4C;">/*</span><span style="color: #579C4C;"> Compute and adjust OWR variables </span><span style="color: #579C4C;">*/</span>
-<span style="color: #339CDB;">proc printto</span> log=<span style="color: #DB8E73;">'/dev/null'</span>;<span style="color: #339CDB;">run;</span>
-<span style="color: #339CDB;">proc expand</span> <span style="color: #339CDB;">data=</span>taqdfx_all1
-    <span style="color: #339CDB;">out=</span>taqdfx_all2
+<span style="color: #7a88cf;">/*</span><span style="color: #7a88cf;"> Compute and adjust OWR variables </span><span style="color: #7a88cf;">*/</span>
+<span style="color: #ff995e;">proc printto</span> log=<span style="color: #c3e88d;">'/dev/null'</span>;<span style="color: #ff995e;">run;</span>
+<span style="color: #ff995e;">proc expand</span> <span style="color: #c099ff;">data=</span>taqdfx_all1
+    <span style="color: #c099ff;">out=</span>taqdfx_all2
     method=none;
-    <span style="color: #339CDB;">by</span> permno;
-    convert y_e = y_eL1 / transformout = (lag <span style="color: #B5CEA8; font-weight: bold;">1</span>);
-    convert ccprc = CCPrcL1 / transformout = (lag <span style="color: #B5CEA8; font-weight: bold;">1</span>);
-    convert mid_after_open = omF1 / transformout = (lead <span style="color: #B5CEA8; font-weight: bold;">1</span>);
-<span style="color: #339CDB;">run;</span>
-<span style="color: #339CDB;">proc printto</span>;<span style="color: #339CDB;">run;</span>
-<span style="color: #339CDB;">%put</span> expand &amp;syslast. done;
+    <span style="color: #c099ff;">by</span> permno;
+    convert y_e = y_eL1 / transformout = (lag <span style="color: #ff995e; font-weight: bold;">1</span>);
+    convert ccprc = CCPrcL1 / transformout = (lag <span style="color: #ff995e; font-weight: bold;">1</span>);
+    convert mid_after_open = omF1 / transformout = (lead <span style="color: #ff995e; font-weight: bold;">1</span>);
+<span style="color: #ff995e;">run;</span>
+<span style="color: #ff995e;">proc printto</span>;<span style="color: #ff995e;">run;</span>
+<span style="color: #ff995e;">%put</span> expand &amp;syslast. done;
 
-<span style="color: #339CDB;">data</span> taqdfx_all2;
-    <span style="color: #339CDB;">set</span> taqdfx_all2;
-    yyyy=<span style="color: #D9DAA2;">year(</span>date);
-    r_d = (vw_price_m-mid_after_open+coalesce(divamt,<span style="color: #B5CEA8; font-weight: bold;">0</span>))/mid_after_open;
+<span style="color: #ff995e;">data</span> taqdfx_all2;
+    <span style="color: #c099ff;">set</span> taqdfx_all2;
+    yyyy=<span style="color: #82aaff;">year(</span>date);
+    r_d = (vw_price_m-mid_after_open+coalesce(divamt,<span style="color: #ff995e; font-weight: bold;">0</span>))/mid_after_open;
     r_o = (omF1-vw_price_m)/mid_after_open;
-<span style="color: #339CDB;">run;</span>
+<span style="color: #ff995e;">run;</span>
 
-<span style="color: #D9DAA2;">%MERGE_ASOF(</span>a=taqdfx_all2,b=crspm3,
+<span style="color: #82aaff;">%MERGE_ASOF(</span>a=taqdfx_all2,b=crspm3,
     merged=taqdfx_all3,
     datevar=date,
     num_vars=bm_log me_log);
 
-<span style="color: #339CDB;">proc printto</span> log=<span style="color: #DB8E73;">'/dev/null'</span>;<span style="color: #339CDB;">run;</span>
-<span style="color: #339CDB;">proc reg</span> <span style="color: #339CDB;">data=</span>taqdfx_all3 outest=_beta
-    (<span style="color: #339CDB;">drop</span>=_: retx <span style="color: #339CDB;">rename</span>=(Intercept=alpha vwretx=beta)) noprint;
-    <span style="color: #339CDB;">by</span> permno yyyy;
-    <span style="color: #339CDB;">model</span> retx = vwretx;
-<span style="color: #339CDB;">run;</span>
-<span style="color: #339CDB;">proc printto</span>;<span style="color: #339CDB;">run;</span>
+<span style="color: #ff995e;">proc printto</span> log=<span style="color: #c3e88d;">'/dev/null'</span>;<span style="color: #ff995e;">run;</span>
+<span style="color: #ff995e;">proc reg</span> <span style="color: #c099ff;">data=</span>taqdfx_all3 outest=_beta
+    (<span style="color: #c099ff;">drop</span>=_: retx <span style="color: #c099ff;">rename</span>=(Intercept=alpha vwretx=beta)) noprint;
+    <span style="color: #c099ff;">by</span> permno yyyy;
+    <span style="color: #c099ff;">model</span> retx = vwretx;
+<span style="color: #ff995e;">run;</span>
+<span style="color: #ff995e;">proc printto</span>;<span style="color: #ff995e;">run;</span>
 
-<span style="color: #339CDB;">data</span> taqdfx_all4;
-    <span style="color: #339CDB;">merge</span> taqdfx_all3 _beta;
-    <span style="color: #339CDB;">by</span> permno yyyy;
-<span style="color: #339CDB;">run;</span>
-<span style="color: #339CDB;">proc sort</span> <span style="color: #339CDB;">data=</span>taqdfx_all4 nodupkey;
-    <span style="color: #339CDB;">by</span> date permno;
-<span style="color: #339CDB;">run;</span>
+<span style="color: #ff995e;">data</span> taqdfx_all4;
+    <span style="color: #c099ff;">merge</span> taqdfx_all3 _beta;
+    <span style="color: #c099ff;">by</span> permno yyyy;
+<span style="color: #ff995e;">run;</span>
+<span style="color: #ff995e;">proc sort</span> <span style="color: #c099ff;">data=</span>taqdfx_all4 nodupkey;
+    <span style="color: #c099ff;">by</span> date permno;
+<span style="color: #ff995e;">run;</span>
 
-<span style="color: #339CDB;">proc printto</span> log=<span style="color: #DB8E73;">'/dev/null'</span>;<span style="color: #339CDB;">run;</span>
-<span style="color: #339CDB;">proc reg</span> <span style="color: #339CDB;">data=</span>taqdfx_all4 noprint;
-      <span style="color: #339CDB;">model</span> r_o r_d = beta me_log bm_log;
-      <span style="color: #339CDB;">output</span> <span style="color: #339CDB;">out=</span>_ret_resid(<span style="color: #339CDB;">keep</span>=permno date ur_o ur_d) r=ur_o ur_d;
-      <span style="color: #339CDB;">model</span> y_e = y_eL1 me_log;
-      <span style="color: #339CDB;">output</span> <span style="color: #339CDB;">out=</span>_oib_resid(<span style="color: #339CDB;">keep</span>=permno date uy_e) r=uy_e;
-      <span style="color: #339CDB;">by</span> date;
-<span style="color: #339CDB;">run;</span>
-<span style="color: #339CDB;">proc printto</span>;<span style="color: #339CDB;">run;</span>
+<span style="color: #ff995e;">proc printto</span> log=<span style="color: #c3e88d;">'/dev/null'</span>;<span style="color: #ff995e;">run;</span>
+<span style="color: #ff995e;">proc reg</span> <span style="color: #c099ff;">data=</span>taqdfx_all4 noprint;
+      <span style="color: #c099ff;">model</span> r_o r_d = beta me_log bm_log;
+      <span style="color: #c099ff;">output</span> <span style="color: #c099ff;">out=</span>_ret_resid(<span style="color: #c099ff;">keep</span>=permno date ur_o ur_d) r=ur_o ur_d;
+      <span style="color: #c099ff;">model</span> y_e = y_eL1 me_log;
+      <span style="color: #c099ff;">output</span> <span style="color: #c099ff;">out=</span>_oib_resid(<span style="color: #c099ff;">keep</span>=permno date uy_e) r=uy_e;
+      <span style="color: #c099ff;">by</span> date;
+<span style="color: #ff995e;">run;</span>
+<span style="color: #ff995e;">proc printto</span>;<span style="color: #ff995e;">run;</span>
 
-<span style="color: #339CDB;">data</span> taqdfx_all5;
-    <span style="color: #339CDB;">merge</span> taqdfx_all4 _ret_resid _oib_resid;
-    <span style="color: #339CDB;">by</span> date permno;
-<span style="color: #339CDB;">run;</span>
+<span style="color: #ff995e;">data</span> taqdfx_all5;
+    <span style="color: #c099ff;">merge</span> taqdfx_all4 _ret_resid _oib_resid;
+    <span style="color: #c099ff;">by</span> date permno;
+<span style="color: #ff995e;">run;</span>
 
-<span style="color: #339CDB;">%INCLUDE</span> <span style="color: #DB8E73;">"~/git/sas/WINSORIZE_TRUNCATE.sas"</span>;
-<span style="color: #D9DAA2;">%WINSORIZE_TRUNCATE(</span>dsetin = taqdfx_all5, 
+<span style="color: #ff995e;">%INCLUDE</span> <span style="color: #c3e88d;">"~/git/sas/WINSORIZE_TRUNCATE.sas"</span>;
+<span style="color: #82aaff;">%WINSORIZE_TRUNCATE(</span>dsetin = taqdfx_all5, 
     dsetout = taqdfx_all6, 
     byvar = date, 
     vars = ur_o ur_d, 
     type = W, 
-    pctl = <span style="color: #B5CEA8; font-weight: bold;">1</span> <span style="color: #B5CEA8; font-weight: bold;">99</span>,
-    filter = <span style="color: #339CDB;">and</span> exchcd eq <span style="color: #B5CEA8; font-weight: bold;">1</span>);
+    pctl = <span style="color: #ff995e; font-weight: bold;">1</span> <span style="color: #ff995e; font-weight: bold;">99</span>,
+    filter = <span style="color: #c099ff;">and</span> exchcd eq <span style="color: #ff995e; font-weight: bold;">1</span>);
 
-<span style="color: #579C4C;">/*</span><span style="color: #579C4C;"> Output files </span><span style="color: #579C4C;">*/</span>
-<span style="color: #339CDB;">proc sort</span> <span style="color: #339CDB;">data=</span>taqdfx_all6
-    <span style="color: #339CDB;">out=</span>out.taqdfx_all6(<span style="color: #339CDB;">compress=</span>no) nodupkey;
-    <span style="color: #339CDB;">by</span> permno date;
-<span style="color: #339CDB;">proc sort</span> <span style="color: #339CDB;">data=</span>crspm3
-    <span style="color: #339CDB;">out=</span>out.crspm3 nodupkey;
-    <span style="color: #339CDB;">by</span> permno date;
-<span style="color: #339CDB;">run;</span>
+<span style="color: #7a88cf;">/*</span><span style="color: #7a88cf;"> Output files </span><span style="color: #7a88cf;">*/</span>
+<span style="color: #ff995e;">proc sort</span> <span style="color: #c099ff;">data=</span>taqdfx_all6
+    <span style="color: #c099ff;">out=</span>out.taqdfx_all6(<span style="color: #c099ff;">compress=</span>no) nodupkey;
+    <span style="color: #c099ff;">by</span> permno date;
+<span style="color: #ff995e;">proc sort</span> <span style="color: #c099ff;">data=</span>crspm3
+    <span style="color: #c099ff;">out=</span>out.crspm3 nodupkey;
+    <span style="color: #c099ff;">by</span> permno date;
+<span style="color: #ff995e;">run;</span>
 </pre>
 </div>
 
@@ -604,45 +647,42 @@ later after going through the model code.
 </p>
 
 <div class="org-src-container">
+<pre class="src src-python"><span style="color: #c099ff;">import</span> os
+<span style="color: #c099ff;">import</span> pandas <span style="color: #c099ff;">as</span> pd
+<span style="color: #c099ff;">from</span> importlib <span style="color: #c099ff;">import</span> <span style="color: #c099ff;">reload</span>
+os.chdir(<span style="color: #c3e88d;">'/home/nyu/eddyhu/git/pin-code'</span>)
+<span style="color: #c099ff;">import</span> eo_model <span style="color: #c099ff;">as</span> eo
+<span style="color: #c099ff;">import</span> gpin_model <span style="color: #c099ff;">as</span> gpin
+<span style="color: #c099ff;">import</span> owr_model <span style="color: #c099ff;">as</span> owr
 
-<pre class="src src-python"><span style="color: #339CDB;">import</span> os
-<span style="color: #339CDB;">import</span> pandas <span style="color: #339CDB;">as</span> pd
-<span style="color: #339CDB;">from</span> importlib <span style="color: #339CDB;">import</span> <span style="color: #C586C0;">reload</span>
-os.chdir(<span style="color: #DB8E73;">'/home/nyu/eddyhu/git/pin-code'</span>)
-<span style="color: #339CDB;">import</span> eo_model <span style="color: #339CDB;">as</span> eo
-<span style="color: #339CDB;">import</span> gpin_model <span style="color: #339CDB;">as</span> gpin
-<span style="color: #339CDB;">import</span> owr_model <span style="color: #339CDB;">as</span> owr
+<span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">setup data</span>
+<span style="color: #ff98a4;">df</span> = pd.read_sas(<span style="color: #c3e88d;">'/scratch/nyu/hue/taqdfx_all6.sas7bdat'</span>)
+<span style="color: #ff98a4;">df</span>[<span style="color: #c3e88d;">'yyyy'</span>] = df.yyyy.astype(<span style="color: #c3e88d;">'int'</span>)
+<span style="color: #ff98a4;">df</span>[<span style="color: #c3e88d;">'date'</span>] = df.DATE
+<span style="color: #ff98a4;">df</span>[<span style="color: #c3e88d;">'permno'</span>] = df.permno.astype(<span style="color: #c3e88d;">'int'</span>)
+<span style="color: #ff98a4;">df</span>[<span style="color: #c3e88d;">'ticker'</span>] = df.symbol_15.<span style="color: #c099ff;">str</span>.decode(<span style="color: #c3e88d;">'UTF-8'</span>)
+df.set_index(<span style="color: #c3e88d;">'permno yyyy'</span>.split(),inplace=<span style="color: #ff995e;">True</span>)
+<span style="color: #ff98a4;">c</span> = df.groupby(level=(<span style="color: #ff995e; font-weight: bold;">0</span>,<span style="color: #ff995e; font-weight: bold;">1</span>))\
+    [<span style="color: #c3e88d;">'n_buys n_sells ur_d ur_o uy_e'</span>.split()]\
+    .count().<span style="color: #c099ff;">min</span>(axis=<span style="color: #ff995e; font-weight: bold;">1</span>)
+c.<span style="color: #ff98a4;">name</span> = <span style="color: #c3e88d;">'count_min'</span>
+<span style="color: #ff98a4;">df1</span> = df.join(c)
+df1.loc[df1.count_min&gt;=<span style="color: #ff995e; font-weight: bold;">230</span>]\
+    [<span style="color: #c3e88d;">'date ticker n_buys n_sells ur_d ur_o uy_e'</span>.split()]\
+    .to_hdf(<span style="color: #c3e88d;">'/scratch/nyu/hue/taqdf_1319.h5'</span>,<span style="color: #c3e88d;">'data'</span>,<span style="color: #c099ff;">format</span>=<span style="color: #c3e88d;">'table'</span>)
 
-<span style="color: #579C4C;"># </span><span style="color: #579C4C;">setup data</span>
-<span style="color: #85DDFF;">df</span> = pd.read_sas(<span style="color: #DB8E73;">'/scratch/nyu/hue/taqdfx_all6.sas7bdat'</span>)
-<span style="color: #85DDFF;">df</span>[<span style="color: #DB8E73;">'yyyy'</span>] = df.yyyy.astype(<span style="color: #DB8E73;">'int'</span>)
-<span style="color: #85DDFF;">df</span>[<span style="color: #DB8E73;">'date'</span>] = df.DATE
-<span style="color: #85DDFF;">df</span>[<span style="color: #DB8E73;">'permno'</span>] = df.permno.astype(<span style="color: #DB8E73;">'int'</span>)
-<span style="color: #85DDFF;">df</span>[<span style="color: #DB8E73;">'ticker'</span>] = df.symbol_15.<span style="color: #C586C0;">str</span>.decode(<span style="color: #DB8E73;">'UTF-8'</span>)
-df.set_index(<span style="color: #DB8E73;">'permno yyyy'</span>.split(),inplace=<span style="color: #339CDB;">True</span>)
-<span style="color: #85DDFF;">c</span> = df.groupby(level=(<span style="color: #B5CEA8; font-weight: bold;">0</span>,<span style="color: #B5CEA8; font-weight: bold;">1</span>))\
-    [<span style="color: #DB8E73;">'n_buys n_sells ur_d ur_o uy_e'</span>.split()]\
-    .count().<span style="color: #C586C0;">min</span>(axis=<span style="color: #B5CEA8; font-weight: bold;">1</span>)
-<span style="color: #85DDFF;">c.name</span> = <span style="color: #DB8E73;">'count_min'</span>
-<span style="color: #85DDFF;">df1</span> = df.join(c)
-df1.loc[df1.count_min&gt;=<span style="color: #B5CEA8; font-weight: bold;">230</span>]\
-    [<span style="color: #DB8E73;">'date ticker n_buys n_sells ur_d ur_o uy_e'</span>.split()]\
-    .to_hdf(<span style="color: #DB8E73;">'/scratch/nyu/hue/taqdf_1319.h5'</span>,<span style="color: #DB8E73;">'data'</span>,<span style="color: #C586C0;">format</span>=<span style="color: #DB8E73;">'table'</span>)
+<span style="color: #ff98a4;">d</span> = pd.read_hdf(<span style="color: #c3e88d;">'/scratch/nyu/hue/taqdf_1319.h5'</span>,where=<span style="color: #c3e88d;">'permno==11850 &amp; yyyy==2015'</span>)
 
-<span style="color: #85DDFF;">d</span> = pd.read_hdf(<span style="color: #DB8E73;">'/scratch/nyu/hue/taqdf_1319.h5'</span>,where=<span style="color: #DB8E73;">'permno==11850 &amp; yyyy==2015'</span>)
-
-<span style="color: #579C4C;"># </span><span style="color: #579C4C;">rest run of each model</span>
-eo.fit(d.n_buys,d.n_sells,starts=<span style="color: #B5CEA8; font-weight: bold;">1</span>)
-gpin.fit(d.n_buys,d.n_sells,starts=<span style="color: #B5CEA8; font-weight: bold;">1</span>)
-owr.fit(d.uy_e,d.ur_d,d.ur_o,starts=<span style="color: #B5CEA8; font-weight: bold;">1</span>)
+<span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">rest run of each model</span>
+eo.fit(d.n_buys,d.n_sells,starts=<span style="color: #ff995e; font-weight: bold;">1</span>)
+gpin.fit(d.n_buys,d.n_sells,starts=<span style="color: #ff995e; font-weight: bold;">1</span>)
+owr.fit(d.uy_e,d.ur_d,d.ur_o,starts=<span style="color: #ff995e; font-weight: bold;">1</span>)
 </pre>
 </div>
 </div>
 </div>
-
-
 <div id="outline-container-models" class="outline-2">
-<h2 id="models"><a id="sec-" name="sec-"></a>Model code</h2>
+<h2 id="models">Model code</h2>
 <div class="outline-text-2" id="text-models">
 <p>
 The model code includes <code>eo_model.py</code>, <code>dy_model.py</code>, <code>gpin_model.py</code>,
@@ -663,10 +703,8 @@ I will describe <code>owr_model.py</code> in detail as it involves quite a few
 optimization tricks.
 </p>
 </div>
-
-
 <div id="outline-container-eo-model" class="outline-3">
-<h3 id="eo-model"><a id="sec-" name="sec-"></a><code>EOModel</code></h3>
+<h3 id="eo-model"><code>EOModel</code></h3>
 <div class="outline-text-3" id="text-eo-model">
 <p>
 Let&rsquo;s start with the import statements. Because Python is a general
@@ -677,20 +715,19 @@ factorial</code> using the <code>gammaln</code> function from scipy.
 </p>
 
 <div class="org-src-container">
+<pre class="src src-python"><span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">numpy for matrix algebra</span>
+<span style="color: #c099ff;">import</span> numpy <span style="color: #c099ff;">as</span> np
+<span style="color: #c099ff;">from</span> numpy <span style="color: #c099ff;">import</span> log, exp
 
-<pre class="src src-python"><span style="color: #579C4C;"># </span><span style="color: #579C4C;">numpy for matrix algebra</span>
-<span style="color: #339CDB;">import</span> numpy <span style="color: #339CDB;">as</span> np
-<span style="color: #339CDB;">from</span> numpy <span style="color: #339CDB;">import</span> log, exp
+<span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">some scipy special mathematical functions</span>
+<span style="color: #c099ff;">from</span> scipy.special <span style="color: #c099ff;">import</span> logsumexp
+<span style="color: #c099ff;">from</span> scipy.linalg <span style="color: #c099ff;">import</span> inv
 
-<span style="color: #579C4C;"># </span><span style="color: #579C4C;">some scipy special mathematical functions</span>
-<span style="color: #339CDB;">from</span> scipy.special <span style="color: #339CDB;">import</span> logsumexp
-<span style="color: #339CDB;">from</span> scipy.linalg <span style="color: #339CDB;">import</span> inv
+<span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">this is the main optimization library</span>
+<span style="color: #c099ff;">import</span> scipy.optimize <span style="color: #c099ff;">as</span> op
 
-<span style="color: #579C4C;"># </span><span style="color: #579C4C;">this is the main optimization library</span>
-<span style="color: #339CDB;">import</span> scipy.optimize <span style="color: #339CDB;">as</span> op
-
-<span style="color: #579C4C;"># </span><span style="color: #579C4C;">import common functions</span>
-<span style="color: #339CDB;">from</span> common <span style="color: #339CDB;">import</span> *
+<span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">import common functions</span>
+<span style="color: #c099ff;">from</span> common <span style="color: #c099ff;">import</span> *
 </pre>
 </div>
 
@@ -709,28 +746,27 @@ model Class. Let&rsquo;s take a look at the Class definition.
 </p>
 
 <div class="org-src-container">
+<pre class="src src-python"><span style="color: #c099ff;">class</span> <span style="color: #ffc777;">EOModel</span>(<span style="color: #c099ff;">object</span>): <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">because we are defining custom models, we are subclassing the most generic Python object</span>
 
-<pre class="src src-python"><span style="color: #339CDB;">class</span> <span style="color: #35CDAF;">EOModel</span>(<span style="color: #C586C0;">object</span>): <span style="color: #579C4C;"># </span><span style="color: #579C4C;">because we are defining custom models, we are subclassing the most generic Python object</span>
+    <span style="color: #c099ff;">def</span> <span style="color: #82aaff;">__init__</span>(<span style="color: #c099ff;">self</span>,a,d,es,eb,u,n=<span style="color: #ff995e; font-weight: bold;">1</span>,t=<span style="color: #ff995e; font-weight: bold;">252</span>): <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">here we describe the EOModel parameters</span>
+        <span style="color: #9ba5db;">"""Initializes parameters of an Easley and O'Hara Sequential Trade Model</span>
+<span style="color: #9ba5db;">        </span>
+<span style="color: #9ba5db;">        a : $</span><span style="color: #ff995e;">\a</span><span style="color: #9ba5db;">lpha$, the unconditional probability of an information event</span>
+<span style="color: #9ba5db;">        d : $\delta$, the unconditional probability of good news</span>
+<span style="color: #9ba5db;">        es : $\epsilon_s$, the average number of sells on a day with no news</span>
+<span style="color: #9ba5db;">        eb : $\epsilon_b$, the average number of buys on a day with no news</span>
+<span style="color: #9ba5db;">        u : $\mu$, the average number of (additional) trades on a day with news</span>
 
-    <span style="color: #339CDB;">def</span> <span style="color: #D9DAA2;">__init__</span>(<span style="color: #339CDB;">self</span>,a,d,es,eb,u,n=<span style="color: #B5CEA8; font-weight: bold;">1</span>,t=<span style="color: #B5CEA8; font-weight: bold;">252</span>): <span style="color: #579C4C;"># </span><span style="color: #579C4C;">here we describe the EOModel parameters</span>
-        <span style="color: #777778;">"""Initializes parameters of an Easley and O'Hara Sequential Trade Model</span>
-<span style="color: #777778;">        </span>
-<span style="color: #777778;">        a : $\alpha$, the unconditional probability of an information event</span>
-<span style="color: #777778;">        d : $\delta$, the unconditional probability of good news</span>
-<span style="color: #777778;">        es : $\epsilon_s$, the average number of sells on a day with no news</span>
-<span style="color: #777778;">        eb : $\epsilon_b$, the average number of buys on a day with no news</span>
-<span style="color: #777778;">        u : $\mu$, the average number of (additional) trades on a day with news</span>
+<span style="color: #9ba5db;">        n : the number of stocks to simulate, default 1</span>
+<span style="color: #9ba5db;">        t : the number of periods to simulate, default 252 (one trading year)</span>
+<span style="color: #9ba5db;">        """</span>
 
-<span style="color: #777778;">        n : the number of stocks to simulate, default 1</span>
-<span style="color: #777778;">        t : the number of periods to simulate, default 252 (one trading year)</span>
-<span style="color: #777778;">        """</span>
-
-        <span style="color: #579C4C;"># </span><span style="color: #579C4C;">Assign model parameters</span>
-        <span style="color: #339CDB;">self</span>.a, <span style="color: #339CDB;">self</span>.d, <span style="color: #339CDB;">self</span>.es, <span style="color: #339CDB;">self</span>.eb, <span style="color: #339CDB;">self</span>.u, <span style="color: #339CDB;">self</span>.N, <span style="color: #339CDB;">self</span>.T = a, d, es, eb, u, n, t
-        <span style="color: #339CDB;">self</span>.states = <span style="color: #339CDB;">self</span>._draw_states()
-        <span style="color: #339CDB;">self</span>.buys = np.random.poisson((eb+(<span style="color: #339CDB;">self</span>.states == <span style="color: #B5CEA8; font-weight: bold;">1</span>)*u))
-        <span style="color: #339CDB;">self</span>.sells = np.random.poisson((es+(<span style="color: #339CDB;">self</span>.states == -<span style="color: #B5CEA8; font-weight: bold;">1</span>)*u))
-        <span style="color: #339CDB;">self</span>.alpha = compute_alpha(a, d, eb, es, u, <span style="color: #339CDB;">self</span>.buys, <span style="color: #339CDB;">self</span>.sells)
+        <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">Assign model parameters</span>
+        <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">a</span>, <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">d</span>, <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">es</span>, <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">eb</span>, <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">u</span>, <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">N</span>, <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">T</span> = a, d, es, eb, u, n, t
+        <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">states</span> = <span style="color: #c099ff;">self</span>._draw_states()
+        <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">buys</span> = np.random.poisson((eb+(<span style="color: #c099ff;">self</span>.states == <span style="color: #ff995e; font-weight: bold;">1</span>)*u))
+        <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">sells</span> = np.random.poisson((es+(<span style="color: #c099ff;">self</span>.states == -<span style="color: #ff995e; font-weight: bold;">1</span>)*u))
+        <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">alpha</span> = compute_alpha(a, d, eb, es, u, <span style="color: #c099ff;">self</span>.buys, <span style="color: #c099ff;">self</span>.sells)
 
 </pre>
 </div>
@@ -746,17 +782,16 @@ We can initialize an <code>EOModel</code> like this:
 </p>
 
 <div class="org-src-container">
+<pre class="src src-python"><span style="color: #ff98a4;">a</span> = <span style="color: #ff995e; font-weight: bold;">0.41</span>
+<span style="color: #ff98a4;">d</span> = <span style="color: #ff995e; font-weight: bold;">0.58</span>
+<span style="color: #ff98a4;">es</span> = <span style="color: #ff995e; font-weight: bold;">2719</span>
+<span style="color: #ff98a4;">eb</span> = <span style="color: #ff995e; font-weight: bold;">2672</span>
+<span style="color: #ff98a4;">u</span> = <span style="color: #ff995e; font-weight: bold;">2700</span>
 
-<pre class="src src-python"><span style="color: #85DDFF;">a</span> = <span style="color: #B5CEA8; font-weight: bold;">0.41</span>
-<span style="color: #85DDFF;">d</span> = <span style="color: #B5CEA8; font-weight: bold;">0.58</span>
-<span style="color: #85DDFF;">es</span> = <span style="color: #B5CEA8; font-weight: bold;">2719</span>
-<span style="color: #85DDFF;">eb</span> = <span style="color: #B5CEA8; font-weight: bold;">2672</span>
-<span style="color: #85DDFF;">u</span> = <span style="color: #B5CEA8; font-weight: bold;">2700</span>
+<span style="color: #ff98a4;">N</span> = <span style="color: #ff995e; font-weight: bold;">1000</span>
+<span style="color: #ff98a4;">T</span> = <span style="color: #ff995e; font-weight: bold;">252</span>
 
-<span style="color: #85DDFF;">N</span> = <span style="color: #B5CEA8; font-weight: bold;">1000</span>
-<span style="color: #85DDFF;">T</span> = <span style="color: #B5CEA8; font-weight: bold;">252</span>
-
-<span style="color: #85DDFF;">model</span> = EOModel(a,d,es,eb,u,n=N,t=T)
+<span style="color: #ff98a4;">model</span> = EOModel(a,d,es,eb,u,n=N,t=T)
 </pre>
 </div>
 
@@ -771,27 +806,26 @@ nes &delta;.
 </p>
 
 <div class="org-src-container">
+<pre class="src src-python">    <span style="color: #c099ff;">def</span> <span style="color: #82aaff;">_draw_states</span>(<span style="color: #c099ff;">self</span>):
+        <span style="color: #9ba5db;">"""Draws the states for N stocks and T periods.</span>
 
-<pre class="src src-python">    <span style="color: #339CDB;">def</span> <span style="color: #D9DAA2;">_draw_states</span>(<span style="color: #339CDB;">self</span>):
-        <span style="color: #777778;">"""Draws the states for N stocks and T periods.</span>
+<span style="color: #9ba5db;">        In the Easley and O'Hara sequential trade model at the beginning of each period nature determines whether there is an information event with probability $</span><span style="color: #ff995e;">\a</span><span style="color: #9ba5db;">lpha$ (a). If there is information, nature determines whether the signal is good news with probability $\delta$ (d) or bad news $1-\delta$ (1-d).</span>
 
-<span style="color: #777778;">        In the Easley and O'Hara sequential trade model at the beginning of each period nature determines whether there is an information event with probability $\alpha$ (a). If there is information, nature determines whether the signal is good news with probability $\delta$ (d) or bad news $1-\delta$ (1-d).</span>
+<span style="color: #9ba5db;">        A quick way to implement this is to draw all of the event states at once as an `NxT` matrix from a binomial distribution with $p=</span><span style="color: #ff995e;">\a</span><span style="color: #9ba5db;">lpha$, and independently draw all of the news states as an `NxT` matrix from a binomial with $p=\delta$. </span>
+<span style="color: #9ba5db;">        </span>
+<span style="color: #9ba5db;">        An information event occurs for stock i on day t if `events[i][t]=1`, and zero otherwise. The news is good if `news[i][t]=1` and bad if `news[i][t]=-1`. </span>
 
-<span style="color: #777778;">        A quick way to implement this is to draw all of the event states at once as an `NxT` matrix from a binomial distribution with $p=\alpha$, and independently draw all of the news states as an `NxT` matrix from a binomial with $p=\delta$. </span>
-<span style="color: #777778;">        </span>
-<span style="color: #777778;">        An information event occurs for stock i on day t if `events[i][t]=1`, and zero otherwise. The news is good if `news[i][t]=1` and bad if `news[i][t]=-1`. </span>
+<span style="color: #9ba5db;">        The element-wise product of `events` with `news` gives a complete description of the states for the sequential trade model, where the state variable can take the values (-1,0,1) for bad news, no news, and good news respectively.</span>
 
-<span style="color: #777778;">        The element-wise product of `events` with `news` gives a complete description of the states for the sequential trade model, where the state variable can take the values (-1,0,1) for bad news, no news, and good news respectively.</span>
+<span style="color: #9ba5db;">        self : EOSequentialTradeModel instance which contains parameter definitions</span>
+<span style="color: #9ba5db;">        """</span>
+        <span style="color: #ff98a4;">events</span> = np.random.binomial(<span style="color: #ff995e; font-weight: bold;">1</span>, <span style="color: #c099ff;">self</span>.a, (<span style="color: #c099ff;">self</span>.N,<span style="color: #c099ff;">self</span>.T))
+        <span style="color: #ff98a4;">news</span> = np.random.binomial(<span style="color: #ff995e; font-weight: bold;">1</span>, <span style="color: #c099ff;">self</span>.d, (<span style="color: #c099ff;">self</span>.N,<span style="color: #c099ff;">self</span>.T))
+        <span style="color: #ff98a4;">news</span>[news == <span style="color: #ff995e; font-weight: bold;">0</span>] = -<span style="color: #ff995e; font-weight: bold;">1</span>
 
-<span style="color: #777778;">        self : EOSequentialTradeModel instance which contains parameter definitions</span>
-<span style="color: #777778;">        """</span>
-        <span style="color: #85DDFF;">events</span> = np.random.binomial(<span style="color: #B5CEA8; font-weight: bold;">1</span>, <span style="color: #339CDB;">self</span>.a, (<span style="color: #339CDB;">self</span>.N,<span style="color: #339CDB;">self</span>.T))
-        <span style="color: #85DDFF;">news</span> = np.random.binomial(<span style="color: #B5CEA8; font-weight: bold;">1</span>, <span style="color: #339CDB;">self</span>.d, (<span style="color: #339CDB;">self</span>.N,<span style="color: #339CDB;">self</span>.T))
-        <span style="color: #85DDFF;">news</span>[news == <span style="color: #B5CEA8; font-weight: bold;">0</span>] = -<span style="color: #B5CEA8; font-weight: bold;">1</span>
+        <span style="color: #ff98a4;">states</span> = events*news
 
-        <span style="color: #85DDFF;">states</span> = events*news
-
-        <span style="color: #339CDB;">return</span> states
+        <span style="color: #c099ff;">return</span> states
 </pre>
 </div>
 
@@ -802,31 +836,30 @@ likelihood function definitions.
 </p>
 
 <div class="org-src-container">
+<pre class="src src-python"><span style="color: #c099ff;">def</span> <span style="color: #82aaff;">_lf</span>(eb, es, n_buys, n_sells):
+    <span style="color: #c099ff;">return</span> -eb+n_buys*log(eb)-lfact(n_buys)-es+n_sells*log(es)-lfact(n_sells)
 
-<pre class="src src-python"><span style="color: #339CDB;">def</span> <span style="color: #D9DAA2;">_lf</span>(eb, es, n_buys, n_sells):
-    <span style="color: #339CDB;">return</span> -eb+n_buys*log(eb)-lfact(n_buys)-es+n_sells*log(es)-lfact(n_sells)
-
-<span style="color: #339CDB;">def</span> <span style="color: #D9DAA2;">_ll</span>(a, d, eb, es, u, n_buys, n_sells):
-    <span style="color: #339CDB;">return</span> np.array([log(a*(<span style="color: #B5CEA8; font-weight: bold;">1</span>-d))+_lf(eb,es+u,n_buys,n_sells), 
+<span style="color: #c099ff;">def</span> <span style="color: #82aaff;">_ll</span>(a, d, eb, es, u, n_buys, n_sells):
+    <span style="color: #c099ff;">return</span> np.array([log(a*(<span style="color: #ff995e; font-weight: bold;">1</span>-d))+_lf(eb,es+u,n_buys,n_sells), 
                    log(a*d)+_lf(eb+u,es,n_buys,n_sells), 
-                   log(<span style="color: #B5CEA8; font-weight: bold;">1</span>-a)+_lf(eb,es,n_buys,n_sells)])
+                   log(<span style="color: #ff995e; font-weight: bold;">1</span>-a)+_lf(eb,es,n_buys,n_sells)])
             
-<span style="color: #339CDB;">def</span> <span style="color: #D9DAA2;">compute_alpha</span>(a, d, eb, es, u, n_buys, n_sells):
-    <span style="color: #777778;">'''Compute the conditional alpha given parameters, buys, and sells.</span>
+<span style="color: #c099ff;">def</span> <span style="color: #82aaff;">compute_alpha</span>(a, d, eb, es, u, n_buys, n_sells):
+    <span style="color: #9ba5db;">'''Compute the conditional alpha given parameters, buys, and sells.</span>
 
-<span style="color: #777778;">    '''</span>
-    <span style="color: #85DDFF;">ll</span> = _ll(a, d, eb, es, u, n_buys, n_sells)    
-    <span style="color: #85DDFF;">llmax</span> = ll.<span style="color: #C586C0;">max</span>(axis=<span style="color: #B5CEA8; font-weight: bold;">0</span>)
-    <span style="color: #85DDFF;">y</span> = exp(ll-llmax)
-    <span style="color: #85DDFF;">alpha</span> = y[:-<span style="color: #B5CEA8; font-weight: bold;">1</span>].<span style="color: #C586C0;">sum</span>(axis=<span style="color: #B5CEA8; font-weight: bold;">0</span>)/y.<span style="color: #C586C0;">sum</span>(axis=<span style="color: #B5CEA8; font-weight: bold;">0</span>)
+<span style="color: #9ba5db;">    '''</span>
+    <span style="color: #ff98a4;">ll</span> = _ll(a, d, eb, es, u, n_buys, n_sells)    
+    <span style="color: #ff98a4;">llmax</span> = ll.<span style="color: #c099ff;">max</span>(axis=<span style="color: #ff995e; font-weight: bold;">0</span>)
+    <span style="color: #ff98a4;">y</span> = exp(ll-llmax)
+    <span style="color: #ff98a4;">alpha</span> = y[:-<span style="color: #ff995e; font-weight: bold;">1</span>].<span style="color: #c099ff;">sum</span>(axis=<span style="color: #ff995e; font-weight: bold;">0</span>)/y.<span style="color: #c099ff;">sum</span>(axis=<span style="color: #ff995e; font-weight: bold;">0</span>)
     
-    <span style="color: #339CDB;">return</span> alpha
+    <span style="color: #c099ff;">return</span> alpha
 
-<span style="color: #339CDB;">def</span> <span style="color: #D9DAA2;">loglik</span>(theta, n_buys, n_sells):
-    <span style="color: #85DDFF;">a</span>,<span style="color: #85DDFF;">d</span>,<span style="color: #85DDFF;">eb</span>,<span style="color: #85DDFF;">es</span>,<span style="color: #85DDFF;">u</span> = theta
-    <span style="color: #85DDFF;">ll</span> = _ll(a, d, eb, es, u, n_buys, n_sells)
+<span style="color: #c099ff;">def</span> <span style="color: #82aaff;">loglik</span>(theta, n_buys, n_sells):
+    <span style="color: #ff98a4;">a</span>,<span style="color: #ff98a4;">d</span>,<span style="color: #ff98a4;">eb</span>,<span style="color: #ff98a4;">es</span>,<span style="color: #ff98a4;">u</span> = theta
+    <span style="color: #ff98a4;">ll</span> = _ll(a, d, eb, es, u, n_buys, n_sells)
     
-    <span style="color: #339CDB;">return</span> <span style="color: #C586C0;">sum</span>(logsumexp(ll,axis=<span style="color: #B5CEA8; font-weight: bold;">0</span>))
+    <span style="color: #c099ff;">return</span> <span style="color: #c099ff;">sum</span>(logsumexp(ll,axis=<span style="color: #ff995e; font-weight: bold;">0</span>))
 </pre>
 </div>
 
@@ -877,60 +910,59 @@ optimization up to <code>maxiter=100</code> times.
 </p>
 
 <div class="org-src-container">
+<pre class="src src-python"><span style="color: #c099ff;">def</span> <span style="color: #82aaff;">fit</span>(n_buys, n_sells, starts=<span style="color: #ff995e; font-weight: bold;">10</span>, maxiter=<span style="color: #ff995e; font-weight: bold;">100</span>, 
+        a=<span style="color: #ff995e;">None</span>, d=<span style="color: #ff995e;">None</span>, eb=<span style="color: #ff995e;">None</span>, es=<span style="color: #ff995e;">None</span>, u=<span style="color: #ff995e;">None</span>,
+        se=<span style="color: #ff995e;">None</span>, **kwargs):
 
-<pre class="src src-python"><span style="color: #339CDB;">def</span> <span style="color: #D9DAA2;">fit</span>(n_buys, n_sells, starts=<span style="color: #B5CEA8; font-weight: bold;">10</span>, maxiter=<span style="color: #B5CEA8; font-weight: bold;">100</span>, 
-        a=<span style="color: #339CDB;">None</span>, d=<span style="color: #339CDB;">None</span>, eb=<span style="color: #339CDB;">None</span>, es=<span style="color: #339CDB;">None</span>, u=<span style="color: #339CDB;">None</span>,
-        se=<span style="color: #339CDB;">None</span>, **kwargs):
-
-    <span style="color: #85DDFF;">nll</span> = <span style="color: #339CDB;">lambda</span> *args: -loglik(*args) <span style="color: #579C4C;"># </span><span style="color: #579C4C;">define the negative log likelihood that we will minimize</span>
-    <span style="color: #85DDFF;">bounds</span> = [(<span style="color: #B5CEA8; font-weight: bold;">0.00001</span>,<span style="color: #B5CEA8; font-weight: bold;">0.99999</span>)]*<span style="color: #B5CEA8; font-weight: bold;">2</span>+[(<span style="color: #B5CEA8; font-weight: bold;">0.00001</span>,np.inf)]*<span style="color: #B5CEA8; font-weight: bold;">3</span> <span style="color: #579C4C;"># </span><span style="color: #579C4C;">we will do a constrained optimization</span>
-    <span style="color: #85DDFF;">ranges</span> = [(<span style="color: #B5CEA8; font-weight: bold;">0.00001</span>,<span style="color: #B5CEA8; font-weight: bold;">0.99999</span>)]*<span style="color: #B5CEA8; font-weight: bold;">2</span> <span style="color: #579C4C;"># </span><span style="color: #579C4C;">we will define the min-max range for our random guesses</span>
+    <span style="color: #ff98a4;">nll</span> = <span style="color: #c099ff;">lambda</span> *args: -loglik(*args) <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">define the negative log likelihood that we will minimize</span>
+    <span style="color: #ff98a4;">bounds</span> = [(<span style="color: #ff995e; font-weight: bold;">0.00001</span>,<span style="color: #ff995e; font-weight: bold;">0.99999</span>)]*<span style="color: #ff995e; font-weight: bold;">2</span>+[(<span style="color: #ff995e; font-weight: bold;">0.00001</span>,np.inf)]*<span style="color: #ff995e; font-weight: bold;">3</span> <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">we will do a constrained optimization</span>
+    <span style="color: #ff98a4;">ranges</span> = [(<span style="color: #ff995e; font-weight: bold;">0.00001</span>,<span style="color: #ff995e; font-weight: bold;">0.99999</span>)]*<span style="color: #ff995e; font-weight: bold;">2</span> <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">we will define the min-max range for our random guesses</span>
     
-    <span style="color: #579C4C;"># </span><span style="color: #579C4C;">if we do not have a prior on what the estimates are, we compute them here</span>
-    <span style="color: #85DDFF;">a0</span>,<span style="color: #85DDFF;">d0</span> = [x <span style="color: #339CDB;">or</span> <span style="color: #B5CEA8; font-weight: bold;">0.5</span> <span style="color: #339CDB;">for</span> x <span style="color: #339CDB;">in</span> (a,d)] <span style="color: #579C4C;"># </span><span style="color: #579C4C;">50% chance of information/news</span>
-    <span style="color: #85DDFF;">eb0</span>,<span style="color: #85DDFF;">es0</span> = eb <span style="color: #339CDB;">or</span> np.mean(n_buys), es <span style="color: #339CDB;">or</span> np.mean(n_sells) <span style="color: #579C4C;"># </span><span style="color: #579C4C;">expected buys/sells = mean of observed buy/sells</span>
-    <span style="color: #85DDFF;">oib</span> = n_buys - n_sells
-    <span style="color: #85DDFF;">u0</span> = u <span style="color: #339CDB;">or</span> np.mean(<span style="color: #C586C0;">abs</span>(oib)) <span style="color: #579C4C;"># </span><span style="color: #579C4C;">expected order imbalance = mean of absolute order imbalance</span>
+    <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">if we do not have a prior on what the estimates are, we compute them here</span>
+    <span style="color: #ff98a4;">a0</span>,<span style="color: #ff98a4;">d0</span> = [x <span style="color: #c099ff;">or</span> <span style="color: #ff995e; font-weight: bold;">0.5</span> <span style="color: #c099ff;">for</span> x <span style="color: #c099ff;">in</span> (a,d)] <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">50% chance of information/news</span>
+    <span style="color: #ff98a4;">eb0</span>,<span style="color: #ff98a4;">es0</span> = eb <span style="color: #c099ff;">or</span> np.mean(n_buys), es <span style="color: #c099ff;">or</span> np.mean(n_sells) <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">expected buys/sells = mean of observed buy/sells</span>
+    <span style="color: #ff98a4;">oib</span> = n_buys - n_sells
+    <span style="color: #ff98a4;">u0</span> = u <span style="color: #c099ff;">or</span> np.mean(<span style="color: #c099ff;">abs</span>(oib)) <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">expected order imbalance = mean of absolute order imbalance</span>
 
-    <span style="color: #85DDFF;">res_final</span> = [a0,d0,eb0,es0,u0] <span style="color: #579C4C;"># </span><span style="color: #579C4C;">define the vector that will hold all the parameters</span>
-    <span style="color: #85DDFF;">stderr</span> = np.zeros_like(res_final) <span style="color: #579C4C;"># </span><span style="color: #579C4C;">define the vector that will hold our standard errors</span>
-    <span style="color: #85DDFF;">f</span> = nll(res_final,n_buys,n_sells) <span style="color: #579C4C;"># </span><span style="color: #579C4C;">initialize the log likelihood function with the buys/sells data</span>
-    <span style="color: #339CDB;">for</span> i <span style="color: #339CDB;">in</span> <span style="color: #C586C0;">range</span>(starts):
-        <span style="color: #579C4C;"># </span><span style="color: #579C4C;">rc is going to be our return code</span>
-        <span style="color: #85DDFF;">rc</span> = -<span style="color: #B5CEA8; font-weight: bold;">1</span>
-        <span style="color: #85DDFF;">j</span> = <span style="color: #B5CEA8; font-weight: bold;">0</span>
-        <span style="color: #339CDB;">while</span> (rc != <span style="color: #B5CEA8; font-weight: bold;">0</span>) &amp; (j &lt;= maxiter):
-            <span style="color: #339CDB;">if</span> (<span style="color: #339CDB;">None</span> <span style="color: #339CDB;">in</span> (res_final)) <span style="color: #339CDB;">or</span> i:
-                <span style="color: #579C4C;"># </span><span style="color: #579C4C;">guess parameters</span>
-                <span style="color: #85DDFF;">a0</span>,<span style="color: #85DDFF;">d0</span> = [np.random.uniform(l,np.nan_to_num(h)) <span style="color: #339CDB;">for</span> (l,h) <span style="color: #339CDB;">in</span> ranges]
-                <span style="color: #85DDFF;">eb0</span>,<span style="color: #85DDFF;">es0</span>,<span style="color: #85DDFF;">u0</span> = np.random.poisson([eb,es,u])
-            <span style="color: #579C4C;"># </span><span style="color: #579C4C;">do actual optimization here</span>
-            <span style="color: #85DDFF;">res</span> = op.minimize(nll, [a0,d0,eb0,es0,u0], method=<span style="color: #339CDB;">None</span>,
+    <span style="color: #ff98a4;">res_final</span> = [a0,d0,eb0,es0,u0] <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">define the vector that will hold all the parameters</span>
+    <span style="color: #ff98a4;">stderr</span> = np.zeros_like(res_final) <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">define the vector that will hold our standard errors</span>
+    <span style="color: #ff98a4;">f</span> = nll(res_final,n_buys,n_sells) <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">initialize the log likelihood function with the buys/sells data</span>
+    <span style="color: #c099ff;">for</span> i <span style="color: #c099ff;">in</span> <span style="color: #c099ff;">range</span>(starts):
+        <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">rc is going to be our return code</span>
+        <span style="color: #ff98a4;">rc</span> = -<span style="color: #ff995e; font-weight: bold;">1</span>
+        <span style="color: #ff98a4;">j</span> = <span style="color: #ff995e; font-weight: bold;">0</span>
+        <span style="color: #c099ff;">while</span> (rc != <span style="color: #ff995e; font-weight: bold;">0</span>) &amp; (j &lt;= maxiter):
+            <span style="color: #c099ff;">if</span> (<span style="color: #ff995e;">None</span> <span style="color: #c099ff;">in</span> (res_final)) <span style="color: #c099ff;">or</span> i:
+                <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">guess parameters</span>
+                <span style="color: #ff98a4;">a0</span>,<span style="color: #ff98a4;">d0</span> = [np.random.uniform(l,np.nan_to_num(h)) <span style="color: #c099ff;">for</span> (l,h) <span style="color: #c099ff;">in</span> ranges]
+                <span style="color: #ff98a4;">eb0</span>,<span style="color: #ff98a4;">es0</span>,<span style="color: #ff98a4;">u0</span> = np.random.poisson([eb,es,u])
+            <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">do actual optimization here</span>
+            <span style="color: #ff98a4;">res</span> = op.minimize(nll, [a0,d0,eb0,es0,u0], method=<span style="color: #ff995e;">None</span>,
                               bounds=bounds, args=(n_buys,n_sells))
-            <span style="color: #85DDFF;">rc</span> = res[<span style="color: #DB8E73;">'status'</span>]
-            <span style="color: #579C4C;"># </span><span style="color: #579C4C;">see if the optimization step violated any constraints</span>
-            <span style="color: #85DDFF;">check_bounds</span> = <span style="color: #C586C0;">list</span>(imap(<span style="color: #339CDB;">lambda</span> x,y: x <span style="color: #339CDB;">in</span> y, res[<span style="color: #DB8E73;">'x'</span>], bounds))
-            <span style="color: #339CDB;">if</span> <span style="color: #C586C0;">any</span>(check_bounds):
-                <span style="color: #85DDFF;">rc</span> = <span style="color: #B5CEA8; font-weight: bold;">3</span>
-            <span style="color: #85DDFF;">j</span>+=<span style="color: #B5CEA8; font-weight: bold;">1</span>
-        <span style="color: #339CDB;">if</span> (res[<span style="color: #DB8E73;">'success'</span>]) &amp; (res[<span style="color: #DB8E73;">'fun'</span>] &lt;= f):
-            <span style="color: #579C4C;"># </span><span style="color: #579C4C;">if everything worked fine and we have a </span>
-            <span style="color: #579C4C;"># </span><span style="color: #579C4C;">smaller (negative) likelihood then store these parameters</span>
-            <span style="color: #85DDFF;">f</span>,<span style="color: #85DDFF;">rc</span> = res[<span style="color: #DB8E73;">'fun'</span>],res[<span style="color: #DB8E73;">'status'</span>]
-            <span style="color: #85DDFF;">res_final</span> = res[<span style="color: #DB8E73;">'x'</span>].tolist()
-            <span style="color: #579C4C;"># </span><span style="color: #579C4C;">and compute standard errors</span>
-            <span style="color: #85DDFF;">stderr</span> = <span style="color: #B5CEA8; font-weight: bold;">1</span>/np.sqrt(inv(res[<span style="color: #DB8E73;">'hess_inv'</span>].todense()).diagonal())
+            <span style="color: #ff98a4;">rc</span> = res[<span style="color: #c3e88d;">'status'</span>]
+            <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">see if the optimization step violated any constraints</span>
+            <span style="color: #ff98a4;">check_bounds</span> = <span style="color: #c099ff;">list</span>(imap(<span style="color: #c099ff;">lambda</span> x,y: x <span style="color: #c099ff;">in</span> y, res[<span style="color: #c3e88d;">'x'</span>], bounds))
+            <span style="color: #c099ff;">if</span> <span style="color: #c099ff;">any</span>(check_bounds):
+                <span style="color: #ff98a4;">rc</span> = <span style="color: #ff995e; font-weight: bold;">3</span>
+            <span style="color: #ff98a4;">j</span>+=<span style="color: #ff995e; font-weight: bold;">1</span>
+        <span style="color: #c099ff;">if</span> (res[<span style="color: #c3e88d;">'success'</span>]) &amp; (res[<span style="color: #c3e88d;">'fun'</span>] &lt;= f):
+            <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">if everything worked fine and we have a </span>
+            <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">smaller (negative) likelihood then store these parameters</span>
+            <span style="color: #ff98a4;">f</span>,<span style="color: #ff98a4;">rc</span> = res[<span style="color: #c3e88d;">'fun'</span>],res[<span style="color: #c3e88d;">'status'</span>]
+            <span style="color: #ff98a4;">res_final</span> = res[<span style="color: #c3e88d;">'x'</span>].tolist()
+            <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">and compute standard errors</span>
+            <span style="color: #ff98a4;">stderr</span> = <span style="color: #ff995e; font-weight: bold;">1</span>/np.sqrt(inv(res[<span style="color: #c3e88d;">'hess_inv'</span>].todense()).diagonal())
 
-    <span style="color: #579C4C;"># </span><span style="color: #579C4C;">output the final parameter estimates</span>
-    <span style="color: #85DDFF;">param_names</span> = [<span style="color: #DB8E73;">'a'</span>,<span style="color: #DB8E73;">'d'</span>,<span style="color: #DB8E73;">'eb'</span>,<span style="color: #DB8E73;">'es'</span>,<span style="color: #DB8E73;">'u'</span>]
-    <span style="color: #85DDFF;">output</span> = <span style="color: #C586C0;">dict</span>(<span style="color: #C586C0;">zip</span>(param_names+[<span style="color: #DB8E73;">'f'</span>,<span style="color: #DB8E73;">'rc'</span>],
+    <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">output the final parameter estimates</span>
+    <span style="color: #ff98a4;">param_names</span> = [<span style="color: #c3e88d;">'a'</span>,<span style="color: #c3e88d;">'d'</span>,<span style="color: #c3e88d;">'eb'</span>,<span style="color: #c3e88d;">'es'</span>,<span style="color: #c3e88d;">'u'</span>]
+    <span style="color: #ff98a4;">output</span> = <span style="color: #c099ff;">dict</span>(<span style="color: #c099ff;">zip</span>(param_names+[<span style="color: #c3e88d;">'f'</span>,<span style="color: #c3e88d;">'rc'</span>],
                     res_final+[f,rc]))
-    <span style="color: #339CDB;">if</span> se:
-        <span style="color: #85DDFF;">output</span> = {<span style="color: #DB8E73;">'params'</span>: <span style="color: #C586C0;">dict</span>(<span style="color: #C586C0;">zip</span>(param_names,res_final)),
-                  <span style="color: #DB8E73;">'se'</span>: <span style="color: #C586C0;">dict</span>(<span style="color: #C586C0;">zip</span>(param_names,stderr)),
-                  <span style="color: #DB8E73;">'stats'</span>:{<span style="color: #DB8E73;">'f'</span>: f,<span style="color: #DB8E73;">'rc'</span>: rc}
+    <span style="color: #c099ff;">if</span> se:
+        <span style="color: #ff98a4;">output</span> = {<span style="color: #c3e88d;">'params'</span>: <span style="color: #c099ff;">dict</span>(<span style="color: #c099ff;">zip</span>(param_names,res_final)),
+                  <span style="color: #c3e88d;">'se'</span>: <span style="color: #c099ff;">dict</span>(<span style="color: #c099ff;">zip</span>(param_names,stderr)),
+                  <span style="color: #c3e88d;">'stats'</span>:{<span style="color: #c3e88d;">'f'</span>: f,<span style="color: #c3e88d;">'rc'</span>: rc}
                  }
-    <span style="color: #339CDB;">return</span> output
+    <span style="color: #c099ff;">return</span> output
 </pre>
 </div>
 
@@ -941,11 +973,10 @@ average.
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-python"><span style="color: #339CDB;">def</span> <span style="color: #D9DAA2;">cpie_mech</span>(turn):
-    <span style="color: #85DDFF;">mech</span> = np.zeros_like(turn)
-    <span style="color: #85DDFF;">mech</span>[turn &gt; turn.mean()] = <span style="color: #B5CEA8; font-weight: bold;">1</span>
-    <span style="color: #339CDB;">return</span> mech
+<pre class="src src-python"><span style="color: #c099ff;">def</span> <span style="color: #82aaff;">cpie_mech</span>(turn):
+    <span style="color: #ff98a4;">mech</span> = np.zeros_like(turn)
+    <span style="color: #ff98a4;">mech</span>[turn &gt; turn.mean()] = <span style="color: #ff995e; font-weight: bold;">1</span>
+    <span style="color: #c099ff;">return</span> mech
 </pre>
 </div>
 
@@ -958,73 +989,69 @@ version of our paper but is useful for building intuition.
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-python"><span style="color: #339CDB;">if</span> <span style="color: #C586C0;">__name__</span> == <span style="color: #DB8E73;">'__main__'</span>:
+<pre class="src src-python"><span style="color: #c099ff;">if</span> <span style="color: #c099ff;">__name__</span> == <span style="color: #c3e88d;">'__main__'</span>:
     
-    <span style="color: #339CDB;">import</span> pandas <span style="color: #339CDB;">as</span> pd
-    <span style="color: #339CDB;">from</span> regressions <span style="color: #339CDB;">import</span> *
+    <span style="color: #c099ff;">import</span> pandas <span style="color: #c099ff;">as</span> pd
+    <span style="color: #c099ff;">from</span> regressions <span style="color: #c099ff;">import</span> *
 
-    <span style="color: #85DDFF;">a</span> = <span style="color: #B5CEA8; font-weight: bold;">0.41</span>
-    <span style="color: #85DDFF;">d</span> = <span style="color: #B5CEA8; font-weight: bold;">0.58</span>
-    <span style="color: #85DDFF;">es</span> = <span style="color: #B5CEA8; font-weight: bold;">2719</span>
-    <span style="color: #85DDFF;">eb</span> = <span style="color: #B5CEA8; font-weight: bold;">2672</span>
-    <span style="color: #85DDFF;">u</span> = <span style="color: #B5CEA8; font-weight: bold;">2700</span>
+    <span style="color: #ff98a4;">a</span> = <span style="color: #ff995e; font-weight: bold;">0.41</span>
+    <span style="color: #ff98a4;">d</span> = <span style="color: #ff995e; font-weight: bold;">0.58</span>
+    <span style="color: #ff98a4;">es</span> = <span style="color: #ff995e; font-weight: bold;">2719</span>
+    <span style="color: #ff98a4;">eb</span> = <span style="color: #ff995e; font-weight: bold;">2672</span>
+    <span style="color: #ff98a4;">u</span> = <span style="color: #ff995e; font-weight: bold;">2700</span>
 
-    <span style="color: #85DDFF;">N</span> = <span style="color: #B5CEA8; font-weight: bold;">1000</span>
-    <span style="color: #85DDFF;">T</span> = <span style="color: #B5CEA8; font-weight: bold;">252</span>
+    <span style="color: #ff98a4;">N</span> = <span style="color: #ff995e; font-weight: bold;">1000</span>
+    <span style="color: #ff98a4;">T</span> = <span style="color: #ff995e; font-weight: bold;">252</span>
 
-    <span style="color: #85DDFF;">model</span> = EOModel(a,d,es,eb,u,n=N,t=T)
+    <span style="color: #ff98a4;">model</span> = EOModel(a,d,es,eb,u,n=N,t=T)
 
-    <span style="color: #85DDFF;">buys</span> = to_series(model.buys)
-    <span style="color: #85DDFF;">sells</span> = to_series(model.sells)
+    <span style="color: #ff98a4;">buys</span> = to_series(model.buys)
+    <span style="color: #ff98a4;">sells</span> = to_series(model.sells)
     
-    <span style="color: #85DDFF;">aoib</span> = <span style="color: #C586C0;">abs</span>(buys-sells)
-    <span style="color: #85DDFF;">turn</span> = buys+sells
-    <span style="color: #85DDFF;">alpha</span> = to_series(model.alpha)
+    <span style="color: #ff98a4;">aoib</span> = <span style="color: #c099ff;">abs</span>(buys-sells)
+    <span style="color: #ff98a4;">turn</span> = buys+sells
+    <span style="color: #ff98a4;">alpha</span> = to_series(model.alpha)
 
-    <span style="color: #339CDB;">def</span> <span style="color: #D9DAA2;">run_regs</span>(df):
-        <span style="color: #579C4C;"># </span><span style="color: #579C4C;">run regression</span>
-        <span style="color: #85DDFF;">m</span> = []
-        m.append(partial_r2(df[<span style="color: #DB8E73;">'alpha'</span>],df[[<span style="color: #DB8E73;">'aoib'</span>,<span style="color: #DB8E73;">'aoib2'</span>]], df[[<span style="color: #DB8E73;">'aoib'</span>,<span style="color: #DB8E73;">'aoib2'</span>,<span style="color: #DB8E73;">'turn'</span>,<span style="color: #DB8E73;">'turn2'</span>]]))
-        <span style="color: #85DDFF;">out</span> = pd.DataFrame(m, columns=[<span style="color: #DB8E73;">'results'</span>])
-        <span style="color: #85DDFF;">out.index.names</span> = [<span style="color: #DB8E73;">'model'</span>]
-        <span style="color: #339CDB;">return</span> out
+    <span style="color: #c099ff;">def</span> <span style="color: #82aaff;">run_regs</span>(df):
+        <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">run regression</span>
+        <span style="color: #ff98a4;">m</span> = []
+        m.append(partial_r2(df[<span style="color: #c3e88d;">'alpha'</span>],df[[<span style="color: #c3e88d;">'aoib'</span>,<span style="color: #c3e88d;">'aoib2'</span>]], df[[<span style="color: #c3e88d;">'aoib'</span>,<span style="color: #c3e88d;">'aoib2'</span>,<span style="color: #c3e88d;">'turn'</span>,<span style="color: #c3e88d;">'turn2'</span>]]))
+        <span style="color: #ff98a4;">out</span> = pd.DataFrame(m, columns=[<span style="color: #c3e88d;">'results'</span>])
+        out.index.<span style="color: #ff98a4;">names</span> = [<span style="color: #c3e88d;">'model'</span>]
+        <span style="color: #c099ff;">return</span> out
 
-    <span style="color: #85DDFF;">regtab</span> = pd.DataFrame({<span style="color: #DB8E73;">'alpha'</span>:alpha,<span style="color: #DB8E73;">'aoib'</span>:aoib,<span style="color: #DB8E73;">'aoib2'</span>:aoib**<span style="color: #B5CEA8; font-weight: bold;">2</span>,<span style="color: #DB8E73;">'turn'</span>:turn,<span style="color: #DB8E73;">'turn2'</span>:turn**<span style="color: #B5CEA8; font-weight: bold;">2</span>})
+    <span style="color: #ff98a4;">regtab</span> = pd.DataFrame({<span style="color: #c3e88d;">'alpha'</span>:alpha,<span style="color: #c3e88d;">'aoib'</span>:aoib,<span style="color: #c3e88d;">'aoib2'</span>:aoib**<span style="color: #ff995e; font-weight: bold;">2</span>,<span style="color: #c3e88d;">'turn'</span>:turn,<span style="color: #c3e88d;">'turn2'</span>:turn**<span style="color: #ff995e; font-weight: bold;">2</span>})
     
-    <span style="color: #85DDFF;">res</span> = run_regs(regtab)
+    <span style="color: #ff98a4;">res</span> = run_regs(regtab)
 
-    <span style="color: #339CDB;">print</span>(est_tab(res.results, est=[<span style="color: #DB8E73;">'params'</span>,<span style="color: #DB8E73;">'tvalues'</span>], stats=[<span style="color: #DB8E73;">'rsquared'</span>,<span style="color: #DB8E73;">'rsquared_sp'</span>]))
+    <span style="color: #c099ff;">print</span>(est_tab(res.results, est=[<span style="color: #c3e88d;">'params'</span>,<span style="color: #c3e88d;">'tvalues'</span>], stats=[<span style="color: #c3e88d;">'rsquared'</span>,<span style="color: #c3e88d;">'rsquared_sp'</span>]))
 </pre>
 </div>
 </div>
 </div>
-
-
 <div id="outline-container-owr-model" class="outline-3">
-<h3 id="owr-model"><a id="sec-" name="sec-"></a><code>OWRModel</code></h3>
+<h3 id="owr-model"><code>OWRModel</code></h3>
 <div class="outline-text-3" id="text-owr-model">
 <p>
 Let&rsquo;s start again with the import statement.
 </p>
 
 <div class="org-src-container">
+<pre class="src src-python"><span style="color: #c099ff;">from</span> __future__ <span style="color: #c099ff;">import</span> division
 
-<pre class="src src-python"><span style="color: #339CDB;">from</span> __future__ <span style="color: #339CDB;">import</span> division
+<span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">numpy for matrix algebra</span>
+<span style="color: #c099ff;">import</span> numpy <span style="color: #c099ff;">as</span> np
+<span style="color: #c099ff;">from</span> numpy <span style="color: #c099ff;">import</span> log, exp
 
-<span style="color: #579C4C;"># </span><span style="color: #579C4C;">numpy for matrix algebra</span>
-<span style="color: #339CDB;">import</span> numpy <span style="color: #339CDB;">as</span> np
-<span style="color: #339CDB;">from</span> numpy <span style="color: #339CDB;">import</span> log, exp
+<span style="color: #c099ff;">import</span> pandas <span style="color: #c099ff;">as</span> pd
 
-<span style="color: #339CDB;">import</span> pandas <span style="color: #339CDB;">as</span> pd
+<span style="color: #c099ff;">from</span> scipy.special <span style="color: #c099ff;">import</span> logsumexp
+<span style="color: #c099ff;">import</span> scipy.optimize <span style="color: #c099ff;">as</span> op
 
-<span style="color: #339CDB;">from</span> scipy.special <span style="color: #339CDB;">import</span> logsumexp
-<span style="color: #339CDB;">import</span> scipy.optimize <span style="color: #339CDB;">as</span> op
+<span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">optimization</span>
+<span style="color: #c099ff;">from</span> numba <span style="color: #c099ff;">import</span> jit
 
-<span style="color: #579C4C;"># </span><span style="color: #579C4C;">optimization</span>
-<span style="color: #339CDB;">from</span> numba <span style="color: #339CDB;">import</span> jit
-
-<span style="color: #339CDB;">from</span> common <span style="color: #339CDB;">import</span> *
+<span style="color: #c099ff;">from</span> common <span style="color: #c099ff;">import</span> *
 </pre>
 </div>
 
@@ -1047,35 +1074,34 @@ multivariate normal distributions.
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-python"><span style="color: #339CDB;">class</span> <span style="color: #35CDAF;">OWRModel</span>(<span style="color: #C586C0;">object</span>):
+<pre class="src src-python"><span style="color: #c099ff;">class</span> <span style="color: #ffc777;">OWRModel</span>(<span style="color: #c099ff;">object</span>):
     
-    <span style="color: #339CDB;">def</span> <span style="color: #D9DAA2;">__init__</span>(<span style="color: #339CDB;">self</span>,a,su,sz,si,spd,spo,n=<span style="color: #B5CEA8; font-weight: bold;">1</span>,t=<span style="color: #B5CEA8; font-weight: bold;">252</span>):
-        <span style="color: #777778;">"""Initializes parameters of an Odders-White and Ready (2008) Sequential Trade Model</span>
+    <span style="color: #c099ff;">def</span> <span style="color: #82aaff;">__init__</span>(<span style="color: #c099ff;">self</span>,a,su,sz,si,spd,spo,n=<span style="color: #ff995e; font-weight: bold;">1</span>,t=<span style="color: #ff995e; font-weight: bold;">252</span>):
+        <span style="color: #9ba5db;">"""Initializes parameters of an Odders-White and Ready (2008) Sequential Trade Model</span>
 
-<span style="color: #777778;">        a: $\alpha$, the unconditional probability of an information event</span>
-<span style="color: #777778;">        ... #</span><span style="color: #D7BA7D; font-weight: bold;">TODO</span><span style="color: #777778;">#</span>
-<span style="color: #777778;">        """</span>
+<span style="color: #9ba5db;">        a: $</span><span style="color: #ff995e;">\a</span><span style="color: #9ba5db;">lpha$, the unconditional probability of an information event</span>
+<span style="color: #9ba5db;">        ... #</span><span style="color: #ffc777; font-weight: bold;">TODO</span><span style="color: #9ba5db;">#</span>
+<span style="color: #9ba5db;">        """</span>
 
-        <span style="color: #579C4C;"># </span><span style="color: #579C4C;">Assign model parameters</span>
-        <span style="color: #339CDB;">self</span>.a, <span style="color: #339CDB;">self</span>.su, <span style="color: #339CDB;">self</span>.sz, <span style="color: #339CDB;">self</span>.si, <span style="color: #339CDB;">self</span>.spd, <span style="color: #339CDB;">self</span>.spo, <span style="color: #339CDB;">self</span>.N, <span style="color: #339CDB;">self</span>.T = a, su, sz, si, spd, spo, n, t
-        <span style="color: #339CDB;">self</span>.s_n, <span style="color: #339CDB;">self</span>.s_e = _compute_cov(a, su, sz, si, spd, spo)
+        <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">Assign model parameters</span>
+        <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">a</span>, <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">su</span>, <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">sz</span>, <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">si</span>, <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">spd</span>, <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">spo</span>, <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">N</span>, <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">T</span> = a, su, sz, si, spd, spo, n, t
+        <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">s_n</span>, <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">s_e</span> = _compute_cov(a, su, sz, si, spd, spo)
 
-        <span style="color: #579C4C;"># </span><span style="color: #579C4C;">pre-computing the dets and invs saves a lot of time</span>
-        <span style="color: #339CDB;">self</span>.dsn, <span style="color: #339CDB;">self</span>.isn = det3(<span style="color: #339CDB;">self</span>.s_n), inv3(<span style="color: #339CDB;">self</span>.s_n)
-        <span style="color: #339CDB;">self</span>.dse, <span style="color: #339CDB;">self</span>.ise = det3(<span style="color: #339CDB;">self</span>.s_e), inv3(<span style="color: #339CDB;">self</span>.s_e)
-        <span style="color: #339CDB;">self</span>.dsd = <span style="color: #339CDB;">self</span>.dsn/<span style="color: #339CDB;">self</span>.dse
-        <span style="color: #339CDB;">self</span>.isd = <span style="color: #339CDB;">self</span>.isn - <span style="color: #339CDB;">self</span>.ise
+        <span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">pre-computing the dets and invs saves a lot of time</span>
+        <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">dsn</span>, <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">isn</span> = det3(<span style="color: #c099ff;">self</span>.s_n), inv3(<span style="color: #c099ff;">self</span>.s_n)
+        <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">dse</span>, <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">ise</span> = det3(<span style="color: #c099ff;">self</span>.s_e), inv3(<span style="color: #c099ff;">self</span>.s_e)
+        <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">dsd</span> = <span style="color: #c099ff;">self</span>.dsn/<span style="color: #c099ff;">self</span>.dse
+        <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">isd</span> = <span style="color: #c099ff;">self</span>.isn - <span style="color: #c099ff;">self</span>.ise
 
-        <span style="color: #339CDB;">self</span>.states = np.random.binomial(<span style="color: #B5CEA8; font-weight: bold;">1</span>, a, n*t)
+        <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">states</span> = np.random.binomial(<span style="color: #ff995e; font-weight: bold;">1</span>, a, n*t)
         
-        <span style="color: #85DDFF;">mean</span> = [<span style="color: #B5CEA8; font-weight: bold;">0</span>]*<span style="color: #B5CEA8; font-weight: bold;">3</span>
-        <span style="color: #85DDFF;">x_n</span> = np.random.multivariate_normal(mean,<span style="color: #339CDB;">self</span>.s_n,n*t).T
-        <span style="color: #85DDFF;">x_e</span> = np.random.multivariate_normal(mean,<span style="color: #339CDB;">self</span>.s_e,n*t).T
-        <span style="color: #339CDB;">self</span>.x = x_n*<span style="color: #339CDB;">self</span>.states+x_e+(<span style="color: #B5CEA8; font-weight: bold;">1</span>-<span style="color: #339CDB;">self</span>.states)
-        <span style="color: #339CDB;">self</span>.oib, <span style="color: #339CDB;">self</span>.ret_d, <span style="color: #339CDB;">self</span>.ret_o = <span style="color: #339CDB;">self</span>.x.reshape(<span style="color: #B5CEA8; font-weight: bold;">3</span>,n,t)
-        <span style="color: #339CDB;">self</span>.alpha = _compute_alpha(<span style="color: #339CDB;">self</span>.x,
-                                    <span style="color: #339CDB;">self</span>.a,<span style="color: #339CDB;">self</span>.dsd,<span style="color: #339CDB;">self</span>.isd)\
+        <span style="color: #ff98a4;">mean</span> = [<span style="color: #ff995e; font-weight: bold;">0</span>]*<span style="color: #ff995e; font-weight: bold;">3</span>
+        <span style="color: #ff98a4;">x_n</span> = np.random.multivariate_normal(mean,<span style="color: #c099ff;">self</span>.s_n,n*t).T
+        <span style="color: #ff98a4;">x_e</span> = np.random.multivariate_normal(mean,<span style="color: #c099ff;">self</span>.s_e,n*t).T
+        <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">x</span> = x_n*<span style="color: #c099ff;">self</span>.states+x_e+(<span style="color: #ff995e; font-weight: bold;">1</span>-<span style="color: #c099ff;">self</span>.states)
+        <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">oib</span>, <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">ret_d</span>, <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">ret_o</span> = <span style="color: #c099ff;">self</span>.x.reshape(<span style="color: #ff995e; font-weight: bold;">3</span>,n,t)
+        <span style="color: #c099ff;">self</span>.<span style="color: #ff98a4;">alpha</span> = _compute_alpha(<span style="color: #c099ff;">self</span>.x,
+                                    <span style="color: #c099ff;">self</span>.a,<span style="color: #c099ff;">self</span>.dsd,<span style="color: #c099ff;">self</span>.isd)\
                                     .reshape((n,t))
 </pre>
 </div>
@@ -1099,28 +1125,27 @@ you will realize how quickly the computation time can add up.
 </p>
 
 <div class="org-src-container">
+<pre class="src src-python"><span style="color: #c099ff;">def</span> <span style="color: #82aaff;">det2</span>(a):
+    <span style="color: #c099ff;">return</span> (a[<span style="color: #ff995e; font-weight: bold;">0</span>][<span style="color: #ff995e; font-weight: bold;">0</span>] * a[<span style="color: #ff995e; font-weight: bold;">1</span>][<span style="color: #ff995e; font-weight: bold;">1</span>]) - (a[<span style="color: #ff995e; font-weight: bold;">0</span>][<span style="color: #ff995e; font-weight: bold;">1</span>] * a[<span style="color: #ff995e; font-weight: bold;">1</span>][<span style="color: #ff995e; font-weight: bold;">0</span>])
 
-<pre class="src src-python"><span style="color: #339CDB;">def</span> <span style="color: #D9DAA2;">det2</span>(a):
-    <span style="color: #339CDB;">return</span> (a[<span style="color: #B5CEA8; font-weight: bold;">0</span>][<span style="color: #B5CEA8; font-weight: bold;">0</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">1</span>][<span style="color: #B5CEA8; font-weight: bold;">1</span>]) - (a[<span style="color: #B5CEA8; font-weight: bold;">0</span>][<span style="color: #B5CEA8; font-weight: bold;">1</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">1</span>][<span style="color: #B5CEA8; font-weight: bold;">0</span>])
+<span style="color: #c099ff;">def</span> <span style="color: #82aaff;">det3</span>(a):
+    <span style="color: #c099ff;">return</span> (a[<span style="color: #ff995e; font-weight: bold;">0</span>][<span style="color: #ff995e; font-weight: bold;">0</span>] * (a[<span style="color: #ff995e; font-weight: bold;">1</span>][<span style="color: #ff995e; font-weight: bold;">1</span>] * a[<span style="color: #ff995e; font-weight: bold;">2</span>][<span style="color: #ff995e; font-weight: bold;">2</span>] - a[<span style="color: #ff995e; font-weight: bold;">2</span>][<span style="color: #ff995e; font-weight: bold;">1</span>] * a[<span style="color: #ff995e; font-weight: bold;">1</span>][<span style="color: #ff995e; font-weight: bold;">2</span>])
+           -a[<span style="color: #ff995e; font-weight: bold;">1</span>][<span style="color: #ff995e; font-weight: bold;">0</span>] * (a[<span style="color: #ff995e; font-weight: bold;">0</span>][<span style="color: #ff995e; font-weight: bold;">1</span>] * a[<span style="color: #ff995e; font-weight: bold;">2</span>][<span style="color: #ff995e; font-weight: bold;">2</span>] - a[<span style="color: #ff995e; font-weight: bold;">2</span>][<span style="color: #ff995e; font-weight: bold;">1</span>] * a[<span style="color: #ff995e; font-weight: bold;">0</span>][<span style="color: #ff995e; font-weight: bold;">2</span>])
+           +a[<span style="color: #ff995e; font-weight: bold;">2</span>][<span style="color: #ff995e; font-weight: bold;">0</span>] * (a[<span style="color: #ff995e; font-weight: bold;">0</span>][<span style="color: #ff995e; font-weight: bold;">1</span>] * a[<span style="color: #ff995e; font-weight: bold;">1</span>][<span style="color: #ff995e; font-weight: bold;">2</span>] - a[<span style="color: #ff995e; font-weight: bold;">1</span>][<span style="color: #ff995e; font-weight: bold;">1</span>] * a[<span style="color: #ff995e; font-weight: bold;">0</span>][<span style="color: #ff995e; font-weight: bold;">2</span>]))
 
-<span style="color: #339CDB;">def</span> <span style="color: #D9DAA2;">det3</span>(a):
-    <span style="color: #339CDB;">return</span> (a[<span style="color: #B5CEA8; font-weight: bold;">0</span>][<span style="color: #B5CEA8; font-weight: bold;">0</span>] * (a[<span style="color: #B5CEA8; font-weight: bold;">1</span>][<span style="color: #B5CEA8; font-weight: bold;">1</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">2</span>][<span style="color: #B5CEA8; font-weight: bold;">2</span>] - a[<span style="color: #B5CEA8; font-weight: bold;">2</span>][<span style="color: #B5CEA8; font-weight: bold;">1</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">1</span>][<span style="color: #B5CEA8; font-weight: bold;">2</span>])
-           -a[<span style="color: #B5CEA8; font-weight: bold;">1</span>][<span style="color: #B5CEA8; font-weight: bold;">0</span>] * (a[<span style="color: #B5CEA8; font-weight: bold;">0</span>][<span style="color: #B5CEA8; font-weight: bold;">1</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">2</span>][<span style="color: #B5CEA8; font-weight: bold;">2</span>] - a[<span style="color: #B5CEA8; font-weight: bold;">2</span>][<span style="color: #B5CEA8; font-weight: bold;">1</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">0</span>][<span style="color: #B5CEA8; font-weight: bold;">2</span>])
-           +a[<span style="color: #B5CEA8; font-weight: bold;">2</span>][<span style="color: #B5CEA8; font-weight: bold;">0</span>] * (a[<span style="color: #B5CEA8; font-weight: bold;">0</span>][<span style="color: #B5CEA8; font-weight: bold;">1</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">1</span>][<span style="color: #B5CEA8; font-weight: bold;">2</span>] - a[<span style="color: #B5CEA8; font-weight: bold;">1</span>][<span style="color: #B5CEA8; font-weight: bold;">1</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">0</span>][<span style="color: #B5CEA8; font-weight: bold;">2</span>]))
-
-<span style="color: #339CDB;">def</span> <span style="color: #D9DAA2;">inv3</span>(a):
-    <span style="color: #85DDFF;">invdet</span> = <span style="color: #B5CEA8; font-weight: bold;">1</span>/det3(a)
-    <span style="color: #85DDFF;">m</span> = np.zeros((<span style="color: #B5CEA8; font-weight: bold;">3</span>,<span style="color: #B5CEA8; font-weight: bold;">3</span>))
-    <span style="color: #85DDFF;">m</span>[<span style="color: #B5CEA8; font-weight: bold;">0</span>, <span style="color: #B5CEA8; font-weight: bold;">0</span>] = a[<span style="color: #B5CEA8; font-weight: bold;">1</span>, <span style="color: #B5CEA8; font-weight: bold;">1</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">2</span>, <span style="color: #B5CEA8; font-weight: bold;">2</span>] - a[<span style="color: #B5CEA8; font-weight: bold;">2</span>, <span style="color: #B5CEA8; font-weight: bold;">1</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">1</span>, <span style="color: #B5CEA8; font-weight: bold;">2</span>]
-    <span style="color: #85DDFF;">m</span>[<span style="color: #B5CEA8; font-weight: bold;">0</span>, <span style="color: #B5CEA8; font-weight: bold;">1</span>] = a[<span style="color: #B5CEA8; font-weight: bold;">0</span>, <span style="color: #B5CEA8; font-weight: bold;">2</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">2</span>, <span style="color: #B5CEA8; font-weight: bold;">1</span>] - a[<span style="color: #B5CEA8; font-weight: bold;">0</span>, <span style="color: #B5CEA8; font-weight: bold;">1</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">2</span>, <span style="color: #B5CEA8; font-weight: bold;">2</span>]
-    <span style="color: #85DDFF;">m</span>[<span style="color: #B5CEA8; font-weight: bold;">0</span>, <span style="color: #B5CEA8; font-weight: bold;">2</span>] = a[<span style="color: #B5CEA8; font-weight: bold;">0</span>, <span style="color: #B5CEA8; font-weight: bold;">1</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">1</span>, <span style="color: #B5CEA8; font-weight: bold;">2</span>] - a[<span style="color: #B5CEA8; font-weight: bold;">0</span>, <span style="color: #B5CEA8; font-weight: bold;">2</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">1</span>, <span style="color: #B5CEA8; font-weight: bold;">1</span>]
-    <span style="color: #85DDFF;">m</span>[<span style="color: #B5CEA8; font-weight: bold;">1</span>, <span style="color: #B5CEA8; font-weight: bold;">0</span>] = a[<span style="color: #B5CEA8; font-weight: bold;">1</span>, <span style="color: #B5CEA8; font-weight: bold;">2</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">2</span>, <span style="color: #B5CEA8; font-weight: bold;">0</span>] - a[<span style="color: #B5CEA8; font-weight: bold;">1</span>, <span style="color: #B5CEA8; font-weight: bold;">0</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">2</span>, <span style="color: #B5CEA8; font-weight: bold;">2</span>]
-    <span style="color: #85DDFF;">m</span>[<span style="color: #B5CEA8; font-weight: bold;">1</span>, <span style="color: #B5CEA8; font-weight: bold;">1</span>] = a[<span style="color: #B5CEA8; font-weight: bold;">0</span>, <span style="color: #B5CEA8; font-weight: bold;">0</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">2</span>, <span style="color: #B5CEA8; font-weight: bold;">2</span>] - a[<span style="color: #B5CEA8; font-weight: bold;">0</span>, <span style="color: #B5CEA8; font-weight: bold;">2</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">2</span>, <span style="color: #B5CEA8; font-weight: bold;">0</span>]
-    <span style="color: #85DDFF;">m</span>[<span style="color: #B5CEA8; font-weight: bold;">1</span>, <span style="color: #B5CEA8; font-weight: bold;">2</span>] = a[<span style="color: #B5CEA8; font-weight: bold;">1</span>, <span style="color: #B5CEA8; font-weight: bold;">0</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">0</span>, <span style="color: #B5CEA8; font-weight: bold;">2</span>] - a[<span style="color: #B5CEA8; font-weight: bold;">0</span>, <span style="color: #B5CEA8; font-weight: bold;">0</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">1</span>, <span style="color: #B5CEA8; font-weight: bold;">2</span>]
-    <span style="color: #85DDFF;">m</span>[<span style="color: #B5CEA8; font-weight: bold;">2</span>, <span style="color: #B5CEA8; font-weight: bold;">0</span>] = a[<span style="color: #B5CEA8; font-weight: bold;">1</span>, <span style="color: #B5CEA8; font-weight: bold;">0</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">2</span>, <span style="color: #B5CEA8; font-weight: bold;">1</span>] - a[<span style="color: #B5CEA8; font-weight: bold;">2</span>, <span style="color: #B5CEA8; font-weight: bold;">0</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">1</span>, <span style="color: #B5CEA8; font-weight: bold;">1</span>]
-    <span style="color: #85DDFF;">m</span>[<span style="color: #B5CEA8; font-weight: bold;">2</span>, <span style="color: #B5CEA8; font-weight: bold;">1</span>] = a[<span style="color: #B5CEA8; font-weight: bold;">2</span>, <span style="color: #B5CEA8; font-weight: bold;">0</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">0</span>, <span style="color: #B5CEA8; font-weight: bold;">1</span>] - a[<span style="color: #B5CEA8; font-weight: bold;">0</span>, <span style="color: #B5CEA8; font-weight: bold;">0</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">2</span>, <span style="color: #B5CEA8; font-weight: bold;">1</span>]
-    <span style="color: #85DDFF;">m</span>[<span style="color: #B5CEA8; font-weight: bold;">2</span>, <span style="color: #B5CEA8; font-weight: bold;">2</span>] = a[<span style="color: #B5CEA8; font-weight: bold;">0</span>, <span style="color: #B5CEA8; font-weight: bold;">0</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">1</span>, <span style="color: #B5CEA8; font-weight: bold;">1</span>] - a[<span style="color: #B5CEA8; font-weight: bold;">1</span>, <span style="color: #B5CEA8; font-weight: bold;">0</span>] * a[<span style="color: #B5CEA8; font-weight: bold;">0</span>, <span style="color: #B5CEA8; font-weight: bold;">1</span>]
-    <span style="color: #339CDB;">return</span> m*invdet
+<span style="color: #c099ff;">def</span> <span style="color: #82aaff;">inv3</span>(a):
+    <span style="color: #ff98a4;">invdet</span> = <span style="color: #ff995e; font-weight: bold;">1</span>/det3(a)
+    <span style="color: #ff98a4;">m</span> = np.zeros((<span style="color: #ff995e; font-weight: bold;">3</span>,<span style="color: #ff995e; font-weight: bold;">3</span>))
+    <span style="color: #ff98a4;">m</span>[<span style="color: #ff995e; font-weight: bold;">0</span>, <span style="color: #ff995e; font-weight: bold;">0</span>] = a[<span style="color: #ff995e; font-weight: bold;">1</span>, <span style="color: #ff995e; font-weight: bold;">1</span>] * a[<span style="color: #ff995e; font-weight: bold;">2</span>, <span style="color: #ff995e; font-weight: bold;">2</span>] - a[<span style="color: #ff995e; font-weight: bold;">2</span>, <span style="color: #ff995e; font-weight: bold;">1</span>] * a[<span style="color: #ff995e; font-weight: bold;">1</span>, <span style="color: #ff995e; font-weight: bold;">2</span>]
+    <span style="color: #ff98a4;">m</span>[<span style="color: #ff995e; font-weight: bold;">0</span>, <span style="color: #ff995e; font-weight: bold;">1</span>] = a[<span style="color: #ff995e; font-weight: bold;">0</span>, <span style="color: #ff995e; font-weight: bold;">2</span>] * a[<span style="color: #ff995e; font-weight: bold;">2</span>, <span style="color: #ff995e; font-weight: bold;">1</span>] - a[<span style="color: #ff995e; font-weight: bold;">0</span>, <span style="color: #ff995e; font-weight: bold;">1</span>] * a[<span style="color: #ff995e; font-weight: bold;">2</span>, <span style="color: #ff995e; font-weight: bold;">2</span>]
+    <span style="color: #ff98a4;">m</span>[<span style="color: #ff995e; font-weight: bold;">0</span>, <span style="color: #ff995e; font-weight: bold;">2</span>] = a[<span style="color: #ff995e; font-weight: bold;">0</span>, <span style="color: #ff995e; font-weight: bold;">1</span>] * a[<span style="color: #ff995e; font-weight: bold;">1</span>, <span style="color: #ff995e; font-weight: bold;">2</span>] - a[<span style="color: #ff995e; font-weight: bold;">0</span>, <span style="color: #ff995e; font-weight: bold;">2</span>] * a[<span style="color: #ff995e; font-weight: bold;">1</span>, <span style="color: #ff995e; font-weight: bold;">1</span>]
+    <span style="color: #ff98a4;">m</span>[<span style="color: #ff995e; font-weight: bold;">1</span>, <span style="color: #ff995e; font-weight: bold;">0</span>] = a[<span style="color: #ff995e; font-weight: bold;">1</span>, <span style="color: #ff995e; font-weight: bold;">2</span>] * a[<span style="color: #ff995e; font-weight: bold;">2</span>, <span style="color: #ff995e; font-weight: bold;">0</span>] - a[<span style="color: #ff995e; font-weight: bold;">1</span>, <span style="color: #ff995e; font-weight: bold;">0</span>] * a[<span style="color: #ff995e; font-weight: bold;">2</span>, <span style="color: #ff995e; font-weight: bold;">2</span>]
+    <span style="color: #ff98a4;">m</span>[<span style="color: #ff995e; font-weight: bold;">1</span>, <span style="color: #ff995e; font-weight: bold;">1</span>] = a[<span style="color: #ff995e; font-weight: bold;">0</span>, <span style="color: #ff995e; font-weight: bold;">0</span>] * a[<span style="color: #ff995e; font-weight: bold;">2</span>, <span style="color: #ff995e; font-weight: bold;">2</span>] - a[<span style="color: #ff995e; font-weight: bold;">0</span>, <span style="color: #ff995e; font-weight: bold;">2</span>] * a[<span style="color: #ff995e; font-weight: bold;">2</span>, <span style="color: #ff995e; font-weight: bold;">0</span>]
+    <span style="color: #ff98a4;">m</span>[<span style="color: #ff995e; font-weight: bold;">1</span>, <span style="color: #ff995e; font-weight: bold;">2</span>] = a[<span style="color: #ff995e; font-weight: bold;">1</span>, <span style="color: #ff995e; font-weight: bold;">0</span>] * a[<span style="color: #ff995e; font-weight: bold;">0</span>, <span style="color: #ff995e; font-weight: bold;">2</span>] - a[<span style="color: #ff995e; font-weight: bold;">0</span>, <span style="color: #ff995e; font-weight: bold;">0</span>] * a[<span style="color: #ff995e; font-weight: bold;">1</span>, <span style="color: #ff995e; font-weight: bold;">2</span>]
+    <span style="color: #ff98a4;">m</span>[<span style="color: #ff995e; font-weight: bold;">2</span>, <span style="color: #ff995e; font-weight: bold;">0</span>] = a[<span style="color: #ff995e; font-weight: bold;">1</span>, <span style="color: #ff995e; font-weight: bold;">0</span>] * a[<span style="color: #ff995e; font-weight: bold;">2</span>, <span style="color: #ff995e; font-weight: bold;">1</span>] - a[<span style="color: #ff995e; font-weight: bold;">2</span>, <span style="color: #ff995e; font-weight: bold;">0</span>] * a[<span style="color: #ff995e; font-weight: bold;">1</span>, <span style="color: #ff995e; font-weight: bold;">1</span>]
+    <span style="color: #ff98a4;">m</span>[<span style="color: #ff995e; font-weight: bold;">2</span>, <span style="color: #ff995e; font-weight: bold;">1</span>] = a[<span style="color: #ff995e; font-weight: bold;">2</span>, <span style="color: #ff995e; font-weight: bold;">0</span>] * a[<span style="color: #ff995e; font-weight: bold;">0</span>, <span style="color: #ff995e; font-weight: bold;">1</span>] - a[<span style="color: #ff995e; font-weight: bold;">0</span>, <span style="color: #ff995e; font-weight: bold;">0</span>] * a[<span style="color: #ff995e; font-weight: bold;">2</span>, <span style="color: #ff995e; font-weight: bold;">1</span>]
+    <span style="color: #ff98a4;">m</span>[<span style="color: #ff995e; font-weight: bold;">2</span>, <span style="color: #ff995e; font-weight: bold;">2</span>] = a[<span style="color: #ff995e; font-weight: bold;">0</span>, <span style="color: #ff995e; font-weight: bold;">0</span>] * a[<span style="color: #ff995e; font-weight: bold;">1</span>, <span style="color: #ff995e; font-weight: bold;">1</span>] - a[<span style="color: #ff995e; font-weight: bold;">1</span>, <span style="color: #ff995e; font-weight: bold;">0</span>] * a[<span style="color: #ff995e; font-weight: bold;">0</span>, <span style="color: #ff995e; font-weight: bold;">1</span>]
+    <span style="color: #c099ff;">return</span> m*invdet
 
 </pre>
 </div>
@@ -1131,22 +1156,21 @@ function, along with its corresponding speed-up trick.
 </p>
 
 <div class="org-src-container">
+<pre class="src src-python"><span style="color: #c099ff;">def</span> <span style="color: #82aaff;">_lf</span>(x, det, inv):
+    <span style="color: #c099ff;">return</span> -<span style="color: #ff995e; font-weight: bold;">0.5</span>*log(det)-<span style="color: #ff995e; font-weight: bold;">0.5</span>*_qvmv(x,inv)
 
-<pre class="src src-python"><span style="color: #339CDB;">def</span> <span style="color: #D9DAA2;">_lf</span>(x, det, inv):
-    <span style="color: #339CDB;">return</span> -<span style="color: #B5CEA8; font-weight: bold;">0.5</span>*log(det)-<span style="color: #B5CEA8; font-weight: bold;">0.5</span>*_qvmv(x,inv)
-
-<span style="color: #35CDAF;">@jit</span>
-<span style="color: #339CDB;">def</span> <span style="color: #D9DAA2;">_qvmv</span>(x,A):
-    <span style="color: #777778;">"""Computes x'Ax.</span>
-<span style="color: #777778;">    """</span>
-    <span style="color: #85DDFF;">m</span>,<span style="color: #85DDFF;">n</span> = A.shape
-    <span style="color: #85DDFF;">qsum</span> = <span style="color: #B5CEA8; font-weight: bold;">0</span>
+<span style="color: #ffc777;">@jit</span>
+<span style="color: #c099ff;">def</span> <span style="color: #82aaff;">_qvmv</span>(x,A):
+    <span style="color: #9ba5db;">"""Computes x'Ax.</span>
+<span style="color: #9ba5db;">    """</span>
+    <span style="color: #ff98a4;">m</span>,<span style="color: #ff98a4;">n</span> = A.shape
+    <span style="color: #ff98a4;">qsum</span> = <span style="color: #ff995e; font-weight: bold;">0</span>
     
-    <span style="color: #339CDB;">for</span> i <span style="color: #339CDB;">in</span> <span style="color: #C586C0;">range</span>(m):
-        <span style="color: #339CDB;">for</span> j <span style="color: #339CDB;">in</span> <span style="color: #C586C0;">range</span>(n):
-            <span style="color: #85DDFF;">qsum</span> += A[i,j] * x[i] * x[j]
+    <span style="color: #c099ff;">for</span> i <span style="color: #c099ff;">in</span> <span style="color: #c099ff;">range</span>(m):
+        <span style="color: #c099ff;">for</span> j <span style="color: #c099ff;">in</span> <span style="color: #c099ff;">range</span>(n):
+            <span style="color: #ff98a4;">qsum</span> += A[i,j] * x[i] * x[j]
             
-    <span style="color: #339CDB;">return</span> qsum
+    <span style="color: #c099ff;">return</span> qsum
 </pre>
 </div>
 
@@ -1190,20 +1214,19 @@ Finally, to see how everything comes together, let&rsquo;s look at <code>loglik(
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-python"><span style="color: #339CDB;">def</span> <span style="color: #D9DAA2;">loglik</span>(theta, oib, ret_d, ret_o):
-    <span style="color: #85DDFF;">a</span>, <span style="color: #85DDFF;">su</span>, <span style="color: #85DDFF;">sz</span>, <span style="color: #85DDFF;">si</span>, <span style="color: #85DDFF;">spd</span>, <span style="color: #85DDFF;">spo</span> = theta
-    <span style="color: #85DDFF;">s_n</span>, <span style="color: #85DDFF;">s_e</span> = _compute_cov(a, su, sz, si, spd, spo)
-    <span style="color: #85DDFF;">dsn</span>, <span style="color: #85DDFF;">isn</span> = det3(s_n), inv3(s_n)
-    <span style="color: #85DDFF;">dse</span>, <span style="color: #85DDFF;">ise</span> = det3(s_e), inv3(s_e)
+<pre class="src src-python"><span style="color: #c099ff;">def</span> <span style="color: #82aaff;">loglik</span>(theta, oib, ret_d, ret_o):
+    <span style="color: #ff98a4;">a</span>, <span style="color: #ff98a4;">su</span>, <span style="color: #ff98a4;">sz</span>, <span style="color: #ff98a4;">si</span>, <span style="color: #ff98a4;">spd</span>, <span style="color: #ff98a4;">spo</span> = theta
+    <span style="color: #ff98a4;">s_n</span>, <span style="color: #ff98a4;">s_e</span> = _compute_cov(a, su, sz, si, spd, spo)
+    <span style="color: #ff98a4;">dsn</span>, <span style="color: #ff98a4;">isn</span> = det3(s_n), inv3(s_n)
+    <span style="color: #ff98a4;">dse</span>, <span style="color: #ff98a4;">ise</span> = det3(s_e), inv3(s_e)
     
-    <span style="color: #85DDFF;">x</span> = np.array([oib,ret_d,ret_o])
-    <span style="color: #85DDFF;">t</span> = x.shape[<span style="color: #B5CEA8; font-weight: bold;">1</span>]
-    <span style="color: #85DDFF;">ll</span> = np.zeros((<span style="color: #B5CEA8; font-weight: bold;">2</span>,t))
-    <span style="color: #339CDB;">for</span> i <span style="color: #339CDB;">in</span> <span style="color: #C586C0;">range</span>(t):
-        <span style="color: #85DDFF;">ll</span>[:,i] = log(a)+_lf(x[:,i],dse,ise), log(<span style="color: #B5CEA8; font-weight: bold;">1</span>-a)+_lf(x[:,i],dsn,isn)
+    <span style="color: #ff98a4;">x</span> = np.array([oib,ret_d,ret_o])
+    <span style="color: #ff98a4;">t</span> = x.shape[<span style="color: #ff995e; font-weight: bold;">1</span>]
+    <span style="color: #ff98a4;">ll</span> = np.zeros((<span style="color: #ff995e; font-weight: bold;">2</span>,t))
+    <span style="color: #c099ff;">for</span> i <span style="color: #c099ff;">in</span> <span style="color: #c099ff;">range</span>(t):
+        <span style="color: #ff98a4;">ll</span>[:,i] = log(a)+_lf(x[:,i],dse,ise), log(<span style="color: #ff995e; font-weight: bold;">1</span>-a)+_lf(x[:,i],dsn,isn)
     
-    <span style="color: #339CDB;">return</span> <span style="color: #C586C0;">sum</span>(logsumexp(ll,axis=<span style="color: #B5CEA8; font-weight: bold;">0</span>))
+    <span style="color: #c099ff;">return</span> <span style="color: #c099ff;">sum</span>(logsumexp(ll,axis=<span style="color: #ff995e; font-weight: bold;">0</span>))
 </pre>
 </div>
 
@@ -1221,10 +1244,8 @@ the specifics of the model, but there are no new tricks.
 </div>
 </div>
 </div>
-
-
 <div id="outline-container-estimation" class="outline-2">
-<h2 id="estimation"><a id="sec-" name="sec-"></a>Estimation code</h2>
+<h2 id="estimation">Estimation code</h2>
 <div class="outline-text-2" id="text-estimation">
 <p>
 In this section we go through the setup for estimating the models in
@@ -1244,12 +1265,11 @@ without having to write additional code.
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-python"><span style="color: #339CDB;">import</span> ipyparallel <span style="color: #339CDB;">as</span> ipp
-<span style="color: #339CDB;">import</span> pandas <span style="color: #339CDB;">as</span> pd
-<span style="color: #339CDB;">import</span> tables <span style="color: #339CDB;">as</span> tb
-<span style="color: #339CDB;">import</span> os
-<span style="color: #339CDB;">import</span> argparse
+<pre class="src src-python"><span style="color: #c099ff;">import</span> ipyparallel <span style="color: #c099ff;">as</span> ipp
+<span style="color: #c099ff;">import</span> pandas <span style="color: #c099ff;">as</span> pd
+<span style="color: #c099ff;">import</span> tables <span style="color: #c099ff;">as</span> tb
+<span style="color: #c099ff;">import</span> os
+<span style="color: #c099ff;">import</span> argparse
 </pre>
 </div>
 
@@ -1259,12 +1279,11 @@ comes first, then the year.
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-python"><span style="color: #85DDFF;">parser</span> = argparse.ArgumentParser(description=<span style="color: #DB8E73;">'Model and year to estimate.'</span>)
-parser.add_argument(<span style="color: #DB8E73;">'model'</span>, <span style="color: #C586C0;">type</span>=<span style="color: #C586C0;">str</span>, nargs=<span style="color: #DB8E73;">'?'</span>, default=<span style="color: #DB8E73;">'gpin'</span>)
-parser.add_argument(<span style="color: #DB8E73;">'year'</span>, <span style="color: #C586C0;">type</span>=<span style="color: #C586C0;">int</span>, nargs=<span style="color: #DB8E73;">'?'</span>, default=<span style="color: #B5CEA8; font-weight: bold;">2014</span>)
-<span style="color: #85DDFF;">args</span> = parser.parse_args()
-<span style="color: #339CDB;">print</span>(<span style="color: #C586C0;">vars</span>(args))
+<pre class="src src-python"><span style="color: #ff98a4;">parser</span> = argparse.ArgumentParser(description=<span style="color: #c3e88d;">'Model and year to estimate.'</span>)
+parser.add_argument(<span style="color: #c3e88d;">'model'</span>, <span style="color: #c099ff;">type</span>=<span style="color: #c099ff;">str</span>, nargs=<span style="color: #c3e88d;">'?'</span>, default=<span style="color: #c3e88d;">'gpin'</span>)
+parser.add_argument(<span style="color: #c3e88d;">'year'</span>, <span style="color: #c099ff;">type</span>=<span style="color: #c099ff;">int</span>, nargs=<span style="color: #c3e88d;">'?'</span>, default=<span style="color: #ff995e; font-weight: bold;">2014</span>)
+<span style="color: #ff98a4;">args</span> = parser.parse_args()
+<span style="color: #c099ff;">print</span>(<span style="color: #c099ff;">vars</span>(args))
 </pre>
 </div>
 
@@ -1277,16 +1296,15 @@ overhead.
 </p>
 
 <div class="org-src-container">
+<pre class="src src-python"><span style="color: #ff98a4;">rc</span> = ipp.Client(cluster_id=<span style="color: #c3e88d;">"{0}-{1}"</span>.<span style="color: #c099ff;">format</span>(args.model,args.year))
+<span style="color: #c099ff;">print</span>(<span style="color: #c099ff;">len</span>(rc))
+<span style="color: #ff98a4;">dv</span> = rc[:]
+dv.push(<span style="color: #c099ff;">vars</span>(args))
+<span style="color: #ff98a4;">lv</span> = rc.load_balanced_view()
 
-<pre class="src src-python"><span style="color: #85DDFF;">rc</span> = ipp.Client(cluster_id=<span style="color: #DB8E73;">"{0}-{1}"</span>.<span style="color: #C586C0;">format</span>(args.model,args.year))
-<span style="color: #339CDB;">print</span>(<span style="color: #C586C0;">len</span>(rc))
-<span style="color: #85DDFF;">dv</span> = rc[:]
-dv.push(<span style="color: #C586C0;">vars</span>(args))
-<span style="color: #85DDFF;">lv</span> = rc.load_balanced_view()
-
-<span style="color: #85DDFF;">h5</span> = tb.open_file(<span style="color: #DB8E73;">'/scratch/nyu/hue/taqdf_1319.h5'</span>, mode=<span style="color: #DB8E73;">'r'</span>)
-<span style="color: #85DDFF;">df</span> = h5.get_node(<span style="color: #DB8E73;">'/data/table'</span>)
-<span style="color: #85DDFF;">idx</span> = <span style="color: #C586C0;">list</span>(<span style="color: #C586C0;">set</span>(<span style="color: #C586C0;">filter</span>(<span style="color: #339CDB;">lambda</span> x: x[<span style="color: #B5CEA8; font-weight: bold;">1</span>]==args.year, <span style="color: #C586C0;">zip</span>(df.col(<span style="color: #DB8E73;">'permno'</span>),df.col(<span style="color: #DB8E73;">'yyyy'</span>)))))
+<span style="color: #ff98a4;">h5</span> = tb.open_file(<span style="color: #c3e88d;">'/scratch/nyu/hue/taqdf_1319.h5'</span>, mode=<span style="color: #c3e88d;">'r'</span>)
+<span style="color: #ff98a4;">df</span> = h5.get_node(<span style="color: #c3e88d;">'/data/table'</span>)
+<span style="color: #ff98a4;">idx</span> = <span style="color: #c099ff;">list</span>(<span style="color: #c099ff;">set</span>(<span style="color: #c099ff;">filter</span>(<span style="color: #c099ff;">lambda</span> x: x[<span style="color: #ff995e; font-weight: bold;">1</span>]==args.year, <span style="color: #c099ff;">zip</span>(df.col(<span style="color: #c3e88d;">'permno'</span>),df.col(<span style="color: #c3e88d;">'yyyy'</span>)))))
 </pre>
 </div>
 
@@ -1298,35 +1316,34 @@ is call the right <code>fit()</code> function, and write the resulting parameter
 estimates to disk.
 </p>
 <div class="org-src-container">
+<pre class="src src-python"><span style="color: #ffc777;">@ipp.interactive</span>
+<span style="color: #c099ff;">def</span> <span style="color: #82aaff;">est</span>(x):
+    <span style="color: #c099ff;">import</span> os
+    <span style="color: #c099ff;">import</span> pandas <span style="color: #c099ff;">as</span> pd
+    <span style="color: #c099ff;">import</span> tables <span style="color: #c099ff;">as</span> tb
+    <span style="color: #c099ff;">import</span> json
+    os.chdir(<span style="color: #c3e88d;">'/home/nyu/eddyhu/git/pin-code'</span>)
 
-<pre class="src src-python"><span style="color: #35CDAF;">@ipp.interactive</span>
-<span style="color: #339CDB;">def</span> <span style="color: #D9DAA2;">est</span>(x):
-    <span style="color: #339CDB;">import</span> os
-    <span style="color: #339CDB;">import</span> pandas <span style="color: #339CDB;">as</span> pd
-    <span style="color: #339CDB;">import</span> tables <span style="color: #339CDB;">as</span> tb
-    <span style="color: #339CDB;">import</span> json
-    os.chdir(<span style="color: #DB8E73;">'/home/nyu/eddyhu/git/pin-code'</span>)
-
-    <span style="color: #339CDB;">import</span> eo_model <span style="color: #339CDB;">as</span> eo
-    <span style="color: #339CDB;">import</span> gpin_model <span style="color: #339CDB;">as</span> gpin
-    <span style="color: #339CDB;">import</span> owr_model <span style="color: #339CDB;">as</span> owr
+    <span style="color: #c099ff;">import</span> eo_model <span style="color: #c099ff;">as</span> eo
+    <span style="color: #c099ff;">import</span> gpin_model <span style="color: #c099ff;">as</span> gpin
+    <span style="color: #c099ff;">import</span> owr_model <span style="color: #c099ff;">as</span> owr
     
-    <span style="color: #85DDFF;">d</span> = pd.read_hdf(<span style="color: #DB8E73;">'/scratch/nyu/hue/taqdf_1319.h5'</span>,
-                    where=<span style="color: #DB8E73;">'permno=={permno} &amp; yyyy=={yyyy}'</span>.<span style="color: #C586C0;">format</span>(permno=x[<span style="color: #B5CEA8; font-weight: bold;">0</span>], yyyy=x[<span style="color: #B5CEA8; font-weight: bold;">1</span>]))
-    <span style="color: #85DDFF;">d</span> = d.dropna()
-    <span style="color: #339CDB;">if</span> model == <span style="color: #DB8E73;">'eo'</span>:
-        <span style="color: #85DDFF;">r</span> = eo.fit(d.n_buys, d.n_sells, starts=<span style="color: #B5CEA8; font-weight: bold;">1</span>)
-    <span style="color: #339CDB;">if</span> model == <span style="color: #DB8E73;">'gpin'</span>:
-        <span style="color: #85DDFF;">r</span> = gpin.fit(d.n_buys, d.n_sells, starts=<span style="color: #B5CEA8; font-weight: bold;">1</span>)
-    <span style="color: #339CDB;">if</span> model == <span style="color: #DB8E73;">'owr'</span>:
-        <span style="color: #85DDFF;">r</span> = owr.fit(d.uy_e, d.ur_d, d.ur_o, starts=<span style="color: #B5CEA8; font-weight: bold;">5</span>)
-    r.update({<span style="color: #DB8E73;">'permno'</span>:<span style="color: #C586C0;">int</span>(x[<span style="color: #B5CEA8; font-weight: bold;">0</span>]),<span style="color: #DB8E73;">'yyyy'</span>:<span style="color: #C586C0;">int</span>(x[<span style="color: #B5CEA8; font-weight: bold;">1</span>])})
-    <span style="color: #85DDFF;">fname</span> = <span style="color: #DB8E73;">'/home/nyu/eddyhu/pin-estimates/{model}/{permno}-{yyyy}.json'</span>.<span style="color: #C586C0;">format</span>(model=model, permno=x[<span style="color: #B5CEA8; font-weight: bold;">0</span>], yyyy=x[<span style="color: #B5CEA8; font-weight: bold;">1</span>])
-    <span style="color: #339CDB;">with</span> <span style="color: #C586C0;">open</span>(fname, <span style="color: #DB8E73;">'w'</span>) <span style="color: #339CDB;">as</span> outfile:
+    <span style="color: #ff98a4;">d</span> = pd.read_hdf(<span style="color: #c3e88d;">'/scratch/nyu/hue/taqdf_1319.h5'</span>,
+                    where=<span style="color: #c3e88d;">'permno=={permno} &amp; yyyy=={yyyy}'</span>.<span style="color: #c099ff;">format</span>(permno=x[<span style="color: #ff995e; font-weight: bold;">0</span>], yyyy=x[<span style="color: #ff995e; font-weight: bold;">1</span>]))
+    <span style="color: #ff98a4;">d</span> = d.dropna()
+    <span style="color: #c099ff;">if</span> model == <span style="color: #c3e88d;">'eo'</span>:
+        <span style="color: #ff98a4;">r</span> = eo.fit(d.n_buys, d.n_sells, starts=<span style="color: #ff995e; font-weight: bold;">1</span>)
+    <span style="color: #c099ff;">if</span> model == <span style="color: #c3e88d;">'gpin'</span>:
+        <span style="color: #ff98a4;">r</span> = gpin.fit(d.n_buys, d.n_sells, starts=<span style="color: #ff995e; font-weight: bold;">1</span>)
+    <span style="color: #c099ff;">if</span> model == <span style="color: #c3e88d;">'owr'</span>:
+        <span style="color: #ff98a4;">r</span> = owr.fit(d.uy_e, d.ur_d, d.ur_o, starts=<span style="color: #ff995e; font-weight: bold;">5</span>)
+    r.update({<span style="color: #c3e88d;">'permno'</span>:<span style="color: #c099ff;">int</span>(x[<span style="color: #ff995e; font-weight: bold;">0</span>]),<span style="color: #c3e88d;">'yyyy'</span>:<span style="color: #c099ff;">int</span>(x[<span style="color: #ff995e; font-weight: bold;">1</span>])})
+    <span style="color: #ff98a4;">fname</span> = <span style="color: #c3e88d;">'/home/nyu/eddyhu/pin-estimates/{model}/{permno}-{yyyy}.json'</span>.<span style="color: #c099ff;">format</span>(model=model, permno=x[<span style="color: #ff995e; font-weight: bold;">0</span>], yyyy=x[<span style="color: #ff995e; font-weight: bold;">1</span>])
+    <span style="color: #c099ff;">with</span> <span style="color: #c099ff;">open</span>(fname, <span style="color: #c3e88d;">'w'</span>) <span style="color: #c099ff;">as</span> outfile:
         json.dump(r, outfile)
-    <span style="color: #339CDB;">return</span> r
+    <span style="color: #c099ff;">return</span> r
 
-<span style="color: #85DDFF;">res</span> = lv.map_async(est, idx)
+<span style="color: #ff98a4;">res</span> = lv.map_async(est, idx)
 res.wait()
 </pre>
 </div>
@@ -1337,18 +1354,18 @@ The final piece is <code>run_est.sh</code>: a shell script which starts the
 we finish all the stocks in a given year.
 </p>
 <div class="org-src-container">
-
-<pre class="src src-sh"><span style="color: #579C4C;">#</span><span style="color: #579C4C;">!/bin/</span><span style="color: #339CDB;">bash</span>
-<span style="color: #579C4C;">#</span><span style="color: #579C4C;">$ -cwd</span>
-<span style="color: #579C4C;">#</span><span style="color: #579C4C;">$ -m abe</span>
-<span style="color: #579C4C;">#</span><span style="color: #579C4C;">$ -pe onenode 4</span>
-<span style="color: #579C4C;">#</span><span style="color: #579C4C;">$ -M [your@email.com]</span>
-<span style="color: #85DDFF;">model</span>=$<span style="color: #B5CEA8; font-weight: bold;">1</span>;<span style="color: #C586C0;">shift</span>
-<span style="color: #85DDFF;">year</span>=$<span style="color: #B5CEA8; font-weight: bold;">1</span>;<span style="color: #C586C0;">shift</span>
-<span style="color: #C586C0;">source</span> ~/miniconda3/bin/activate
-ipcluster start -n <span style="color: #B5CEA8; font-weight: bold;">7</span> --cluster-id=<span style="color: #DB8E73;">"</span><span style="color: #339CDB;">$</span><span style="color: #85DDFF;">model</span><span style="color: #DB8E73;">-</span><span style="color: #339CDB;">$</span><span style="color: #85DDFF;">year</span><span style="color: #DB8E73;">"</span> &amp;
-<span style="color: #35CDAF;">sleep</span> <span style="color: #B5CEA8; font-weight: bold;">45</span>
-ipython est.py $<span style="color: #85DDFF;">model</span> $<span style="color: #85DDFF;">year</span>
+<pre class="src src-sh"><span style="color: #7a88cf;">#</span><span style="color: #7a88cf;">!/bin/</span><span style="color: #c099ff;">bash</span>
+<span style="color: #7a88cf;">#</span><span style="color: #7a88cf;">$ -cwd</span>
+<span style="color: #7a88cf;">#</span><span style="color: #7a88cf;">$ -m abe</span>
+<span style="color: #7a88cf;">#</span><span style="color: #7a88cf;">$ -pe onenode 4</span>
+<span style="color: #7a88cf;">#</span><span style="color: #7a88cf;">$ -M [your@email.com]</span>
+<span style="color: #ff98a4;">model</span>=$<span style="color: #ff995e; font-weight: bold;">1</span>;<span style="color: #c099ff;">shift</span>
+<span style="color: #ff98a4;">year</span>=$<span style="color: #ff995e; font-weight: bold;">1</span>;<span style="color: #c099ff;">shift</span>
+<span style="color: #7a88cf;"># </span><span style="color: #7a88cf;">I'm assuming you have the environment set up from above</span>
+<span style="color: #c099ff;">source</span> activate.sh
+ipcluster start -n <span style="color: #ff995e; font-weight: bold;">7</span> --cluster-id=<span style="color: #c3e88d;">"</span><span style="color: #ff995e;">$</span><span style="color: #ff98a4;">model</span><span style="color: #c3e88d;">-</span><span style="color: #ff995e;">$</span><span style="color: #ff98a4;">year</span><span style="color: #c3e88d;">"</span> &amp;
+<span style="color: #ffc777;">sleep</span> <span style="color: #ff995e; font-weight: bold;">45</span>
+ipython est.py $<span style="color: #ff98a4;">model</span> $<span style="color: #ff98a4;">year</span>
 ipcluster stop
 </pre>
 </div>
@@ -1385,8 +1402,7 @@ convenience functions that are not available in base
 wrapper for the grid engine:
 </p>
 <div class="org-src-container">
-
-<pre class="src src-sh">qsub run_est.sh owr <span style="color: #B5CEA8; font-weight: bold;">2015</span>
+<pre class="src src-sh">qsub run_est.sh owr <span style="color: #ff995e; font-weight: bold;">2015</span>
 </pre>
 </div>
 
@@ -1395,32 +1411,15 @@ To collect the estimates we can run a quick jq script to make a csv file.
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-sh"><span style="color: #35CDAF;">cd</span> ~/git/pin-estimates/gpin
-jq -r <span style="color: #DB8E73;">'[.permno, .yyyy, .a, .p, .eta, .r, .d, .th] | @csv'</span> *.json &gt; gpin_1319.csv
+<pre class="src src-sh"><span style="color: #ffc777;">cd</span> ~/git/pin-estimates/gpin
+jq -r <span style="color: #c3e88d;">'[.permno, .yyyy, .a, .p, .eta, .r, .d, .th] | @csv'</span> *.json &gt; gpin_1319.csv
 </pre>
 </div>
 </div>
 </div>
-</div><div class="col-md-3"><nav id="table-of-contents">
-<div id="text-table-of-contents" class="bs-docs-sidebar">
-<ul class="nav">
-<li><a href="#pin-code">PIN Code</a></li>
-<li><a href="#data">Prepare Data</a></li>
-<li><a href="#models">Model code</a>
-<ul class="nav">
-<li><a href="#eo-model"><code>EOModel</code></a></li>
-<li><a href="#owr-model"><code>OWRModel</code></a></li>
-</ul>
-</li>
-<li><a href="#estimation">Estimation code</a></li>
-</ul>
 </div>
-</nav>
-</div></div></div>
-<footer id="postamble" class="">
-<div><p class="author">Author: Jefferson Duarte, Edwin Hu, and Lance Young</p>
+<div id="postamble" class="status">
+<p class="author">Author: Jefferson Duarte, Edwin Hu, and Lance Young</p>
 </div>
-</footer>
 </body>
 </html>
