@@ -6,7 +6,7 @@
 #$ -M YOUR@EMAIL.COM
 model=$1;shift
 year=$1;shift
-source ~/miniconda3/bin/activate
+source activate.sh
 ipcluster start -n 15 --cluster-id="$model-$year" &
 sleep 45
 ipython est.py $model $year

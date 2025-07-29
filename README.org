@@ -15,6 +15,7 @@
 #+HTML_HEAD_EXTRA:   gtag('js', new Date());
 #+HTML_HEAD_EXTRA:   gtag('config', 'UA-67919104-2');
 #+HTML_HEAD_EXTRA: </script>
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" href="https://latex.vercel.app/style.css">
 
 * PIN Code
 :PROPERTIES:
@@ -33,6 +34,24 @@ Hu, and Young (2019) JFE]]. Unlike the paper, this data is based on the
 [[https://wrds-web.wharton.upenn.edu/wrds/query_forms/navigation.cfm?navId=524][WRDS Intraday Indicators]], but otherwise the variable construction and
 filtering are very similar.
 
+In order to make running your own versions of the code easier, I've decided to
+prepackage a Python environment that has all of the dependencies for estimating
+all of the models, which you can find here:
+https://www.dropbox.com/scl/fi/m3u1i5aoejf7ltoo30tl6/environment.sh?rlkey=s44j5sbqn5m7ri5hlxhk67xlw&st=fbxwbvxu&dl=1
+
+Put this script in your project directory and run the following commands:
+
+#+begin_src bash
+chmod a+x environment.sh
+# this will install the environment
+./environment.sh
+chmod a+x activate.sh
+# load the environment
+source ~/activate.sh
+
+# to see if it is working you can try:
+which ipcluster
+#+end_src
 
 * Prepare Data
 :PROPERTIES:
@@ -1029,7 +1048,8 @@ we finish all the stocks in a given year.
 #$ -M [your@email.com]
 model=$1;shift
 year=$1;shift
-source ~/miniconda3/bin/activate
+# I'm assuming you have the environment set up from above
+source activate.sh
 ipcluster start -n 7 --cluster-id="$model-$year" &
 sleep 45
 ipython est.py $model $year
