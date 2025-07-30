@@ -16,6 +16,9 @@
 #+HTML_HEAD_EXTRA:   gtag('config', 'UA-67919104-2');
 #+HTML_HEAD_EXTRA: </script>
 #+HTML_HEAD_EXTRA: <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+#+HTML_HEAD: <style type="text/css">
+#+HTML_HEAD: body { max-width: 120ch !important; }
+#+HTML_HEAD: </style>
 
 * PIN Code
 :PROPERTIES:

@@ -5,3 +5,10 @@ data.py
 fix.py
 run_fix.sh
 pin-estimates.ipynb
+
+# Pixi environment files
+activate.sh
+environment.sh
+pixi.lock
+pixi.toml
+env/
